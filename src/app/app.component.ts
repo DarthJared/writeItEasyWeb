@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  options = {
+    toolbarButtons: ['bold', 'italic', 'underline', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', '|', 'paragraphFormat', 'align', 'outdent', 'indent', 'insertLink', 'insertImage', 'insertTable', 'specialCharacters', 'selectAll', 'clearFormatting', '|', 'spellChecker', '|', 'undo', 'redo'],
+    toolbarButtonsMD: ['bold', 'italic', 'underline'],
+    toolbarButtonsSM: ['bold', 'italic', 'underline']
+  }
 }
