@@ -1,3 +1,12 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div [froalaEditor]="options">Hello, Froala!</div>
+<!-- <div [froalaEditor]="options">Hello, Froala!</div> -->
 
+
+<!-- <md-input-container class="example-full-width">
+    <input mdInput placeholder="Company (disabled)" value="Google">
+</md-input-container> -->
+
+<config-bar (configObj)="updateConfig($event)"></config-bar>
+<content-enter #content [configOptions]="configOptions"></content-enter>
+<format-bar (boldEvent)="content.bold()" (italicsEvent)="content.italic()" (underlineEvent)="content.underline()" (fontChangeEvent)="content.fontChange($event)" (fontSizeChangeEvent)="content.fontSizeChange($event)" (indentEvent)="content.indent()" (reverseIndentEvent)="content.reverseIndent()" (addReferenceEvent)="content.insertReference()"></format-bar>
+<write-button [configOptions]="configOptions" (sectionAdded)="content.addSection($event)" (subsectionAdded)="content.addSubsection($event)" (subsubsectionAdded)="content.addSubsubsection($event)"></write-button>

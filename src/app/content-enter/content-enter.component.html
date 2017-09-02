@@ -1,0 +1,601 @@
+<div class="backDrop opened">
+  <div class="innerWrap">
+      <!--Title Page-->
+      <div *ngIf="configOptions.includeTitle && configOptions.titleInfoPos === 'titleInfoSeparatePage'" class="paperBack">
+          <ng-container *ngIf="configOptions.includeHeader">
+              <div>
+                  <div class="titleLabelLabel">
+                      {{configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent ? "First Page " : ""}}Header
+                  </div>
+                  <div class="titleInfoTopWrap">
+                      <div class="headerLabelEnter" id="editting" style="width: calc(100% - 24px);">
+                          <ng-container *ngIf="(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && configOptions.headerFirstLeft == 'headerFirstLeftPageNumber') || (!configOptions.headerMoreDifferent && configOptions.headerLeft == 'headerLeftPageNumber')">
+                              <div *ngIf="configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHeader" class="runningHead">Running head:&nbsp;</div>
+                              <div class="headerEnter headerLeft" title="Inserted when paper is generated">
+                                  Page number
+                              </div>
+                          </ng-container>
+                          <ng-container *ngIf="(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && configOptions.headerFirstLeft != 'headerFirstLeftPageNumber' && configOptions.headerFirstLeft !== 'headerFirstLeftEmpty') || (!configOptions.headerMoreDifferent && configOptions.headerLeft != 'headerLeftPageNumber' && configOptions.headerLeft !== 'headerLeftEmpty')">
+                              <div *ngIf="configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHeader" class="runningHead">Running head:&nbsp;</div>
+                              <div class="headerEnter headerLeft" contenteditable="true" #left (blur)="updateHeaderInfo(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent ? 'firstLeft' : 'left', left.innerHTML)" [innerHTML]="getHeaderInfo(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent ? 'firstPage' : 'default', 'Left')">
+                                  <!--{{configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHeader ? "Running head: " : ""}}-->
+                              </div>
+                          </ng-container>
+                          <ng-container *ngIf="(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && configOptions.headerFirstRight == 'headerFirstRightPageNumber') || (!configOptions.headerMoreDifferent && configOptions.headerRight == 'headerRightPageNumber')">
+                              <div class="headerEnter headerRight" title="Inserted when paper is generated">
+                                  Page number
+                              </div>
+                          </ng-container>
+                          <ng-container *ngIf="(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && configOptions.headerFirstRight != 'headerFirstRightPageNumber' && configOptions.headerFirstRight !== 'headerFirstRightEmpty') || (!configOptions.headerMoreDifferent && configOptions.headerRight != 'headerRightPageNumber' && configOptions.headerRight !== 'headerRightEmpty')">
+                              <div class="headerEnter headerRight" contenteditable="true" #right (blur)="updateHeaderInfo(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent ? 'firstRight' : 'right', right.innerHTML)" [innerHTML]="getHeaderInfo(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent ? 'firstPage' : 'default', 'Right')">
+                                  
+                              </div>
+                          </ng-container>
+                      </div>
+                      <div class="labelOptions">
+                          ...
+                      </div>
+                  </div>
+              </div>
+          </ng-container>
+          <div [ngClass]="{'alignCenter': configOptions.titleInfoAlign === 'titleInfoAlignCenter', 'alignRight': configOptions.titleInfoAlign === 'titleInfoAlignRight'}" class="titlePageWrap">
+              <ng-container *ngFor="let index of [0, 1, 2, 3, 4, 5]; let i = index">
+                  <div *ngIf="configOptions.titleInfoIncludeClassIndex === i && configOptions.titleInfoIncludeClass" >
+                      <div class="titleLabelLabel">
+                          Class
+                      </div>
+                      <div class="titleInfoWrap">
+                          <div contenteditable="true" class="labelEnter" id="editting" #classEnter (blur)="updateTitleInfo('Class', classEnter.innerHTML)" [innerHTML]="getTitleField('Class')"></div>
+                          <div class="labelOptions">
+                              ...
+                          </div>
+                      </div>
+                  </div>
+                  <div *ngIf="configOptions.titleInfoIncludeNameIndex === i  && configOptions.titleInfoIncludeName" >
+                      <div class="titleLabelLabel">
+                          Name
+                      </div>
+                      <div class="titleInfoWrap">
+                          <div contenteditable="true" class="labelEnter" id="editting" #nameEnter (blur)="updateTitleInfo('Name', nameEnter.innerHTML)" [innerHTML]="getTitleField('Name')"></div>
+                          <div class="labelOptions">
+                              ...
+                          </div>
+                      </div>
+                  </div>
+                  <div *ngIf="configOptions.titleInfoIncludeOtherTextIndex === i && configOptions.titleInfoIncludeOtherText" >
+                      <div class="titleLabelLabel">
+                          Other
+                      </div>
+                      <div class="titleInfoWrap">
+                          <div contenteditable="true" class="labelEnter" id="editting" #otherEnter (blur)="updateTitleInfo('Other', otherEnter.innerHTML)" [innerHTML]="getTitleField('Other')"></div>
+                          <div class="labelOptions">
+                              ...
+                          </div>
+                      </div>
+                  </div>
+                  <div *ngIf="configOptions.titleInfoIncludeProfessorIndex === i && configOptions.titleInfoIncludeProfessor" >
+                      <div class="titleLabelLabel">
+                          Professor
+                      </div>
+                      <div class="titleInfoWrap">
+                          <div contenteditable="true" class="labelEnter" id="editting" #profEnter (blur)="updateTitleInfo('Professor', profEnter.innerHTML)" [innerHTML]="getTitleField('Professor')"></div>
+                          <div class="labelOptions">
+                              ...
+                          </div>
+                      </div>
+                  </div>
+                  <div *ngIf="configOptions.titleInfoIncludeSchoolIndex === i && configOptions.titleInfoIncludeSchool" >
+                      <div class="titleLabelLabel">
+                          School
+                      </div>
+                      <div class="titleInfoWrap">
+                          <div contenteditable="true" class="labelEnter" id="editting" #schoolEnter (blur)="updateTitleInfo('School', schoolEnter.innerHTML)" [innerHTML]="getTitleField('School')"></div>
+                          <div class="labelOptions">
+                              ...
+                          </div>
+                      </div>
+                  </div>
+                  <div *ngIf="configOptions.titleInfoIncludeTitleIndex === i && configOptions.titleInfoIncludeTitle" >
+                      <div class="titleLabelLabel">
+                          Title
+                      </div>
+                      <div class="titleInfoWrap">
+                          <div contenteditable="true" class="labelEnter" id="editting" #titleEnter (blur)="updateTitleInfo('Title', titleEnter.innerHTML)" [innerHTML]="getTitleField('Title')"></div>
+                          <div class="labelOptions">
+                              ...
+                          </div>
+                      </div>
+                  </div>
+              </ng-container>
+          </div>
+      </div>
+      <!--Summary Page && Title and Summary Page && Summary and Body Page && Title, Summary, and Body Page && Summary, Body, and Conclusion Page && Title, Summary, Body, and Conclusion Page && Title and Body Page && Title, Body, and Conclusion Page-->
+      <div class="paperBack" *ngIf="(configOptions.includeAbstractSummary) || (configOptions.includeTitle && configOptions.titleInfoPos !== 'titleInfoSeparatePage' && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage')">
+          <ng-container *ngIf="configOptions.includeHeader">
+              <div>
+                  <div class="titleLabelLabel">
+                      {{configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') ? "First Page " : ""}}Header
+                  </div>
+                  <div class="titleInfoTopWrap">
+                      <div class="headerLabelEnter" id="editting" style="width: calc(100% - 24px);">
+                          <ng-container *ngIf="((!configOptions.includeTitle || (configOptions.includeTitle && configOptions.titleInfoPos !== 'titleInfoSeparatePage')) && configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && configOptions.headerFirstLeft == 'headerFirstLeftPageNumber') || (((configOptions.includeTitle && configOptions.titleInfoPos == 'titleInfoSeparatePage') || !configOptions.headerMoreDifferent) && configOptions.headerLeft == 'headerLeftPageNumber')">
+                              <div *ngIf="configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHeader && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage')" class="runningHead">Running head:&nbsp;</div>
+                              <div class="headerEnter headerLeft" title="Inserted when paper is generated">
+                                  <!--{{configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHeader && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') ? "Running head: " : ""}}-->
+                                  Page number
+                              </div>
+                          </ng-container>
+                          <ng-container *ngIf="((!configOptions.includeTitle || (configOptions.includeTitle && configOptions.titleInfoPos !== 'titleInfoSeparatePage')) && configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && configOptions.headerFirstLeft !== 'headerFirstLeftPageNumber' && configOptions.headerFirstLeft !== 'headerFirstLeftEmpty') || (((configOptions.includeTitle && configOptions.titleInfoPos == 'titleInfoSeparatePage') || !configOptions.headerMoreDifferent) && configOptions.headerLeft !== 'headerLeftPageNumber' && configOptions.headerLeft !== 'headerLeftEmpty')">
+                              <div *ngIf="configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHeader && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage')" class="runningHead">Running head:&nbsp;</div>
+                              <div *ngIf="configOptions.headerLeft !== 'headerLeftEmpty'" class="headerEnter headerLeft" contenteditable="true" #left (blur)="updateHeaderInfo(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') ? 'firstLeft' : 'left', left.innerHTML)" [innerHTML]="getHeaderInfo(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') ? 'firstPage' : 'default', 'Left')">
+                                  <!--{{configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHeader && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') ? "Running head: " : ""}}-->
+                              </div>
+                          </ng-container>
+                          <ng-container *ngIf="((!configOptions.includeTitle || (configOptions.includeTitle && configOptions.titleInfoPos !== 'titleInfoSeparatePage')) && configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && configOptions.headerFirstRight == 'headerFirstRightPageNumber') || (((configOptions.includeTitle && configOptions.titleInfoPos == 'titleInfoSeparatePage') || !configOptions.headerMoreDifferent) && configOptions.headerRight == 'headerRightPageNumber')">
+                              <div *ngIf="configOptions.headerRight !== 'headerRightEmpty'" class="headerEnter headerRight" title="Inserted when paper is generated">
+                                  Page number
+                              </div>
+                          </ng-container>
+                          <ng-container *ngIf="((!configOptions.includeTitle || (configOptions.includeTitle && configOptions.titleInfoPos !== 'titleInfoSeparatePage')) && configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && configOptions.headerFirstRight !== 'headerFirstRightPageNumber' && configOptions.headerFirstRight !== 'headerFirstRightEmpty') || (((configOptions.includeTitle && configOptions.titleInfoPos == 'titleInfoSeparatePage') || !configOptions.headerMoreDifferent) && configOptions.headerRight !== 'headerRightPageNumber' && configOptions.headerRight !== 'headerRightEmpty')">
+                              <div class="headerEnter headerRight" contenteditable="true" #right (blur)="updateHeaderInfo(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') ? 'firstRight' : 'right', right.innerHTML)" [innerHTML]="getHeaderInfo(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') ? 'firstPage' : 'default', 'Right')">
+                              </div>
+                          </ng-container>
+                      </div>
+                      <div class="labelOptions">
+                          ...
+                      </div>
+                  </div>
+              </div>
+          </ng-container>
+          <ng-container *ngIf="configOptions.includeTitle && configOptions.titleInfoPos !== 'titleInfoSeparatePage'">
+              <div [ngClass]="{'alignCenter': configOptions.titleInfoAlign === 'titleInfoAlignCenter', 'alignRight': configOptions.titleInfoAlign === 'titleInfoAlignRight'}" class="titlePageTopWrap">
+                  <ng-container *ngFor="let index of [0, 1, 2, 3, 4, 5]; let i = index">
+                      <div *ngIf="configOptions.titleInfoIncludeClassIndex === i && configOptions.titleInfoIncludeClass" >
+                          <div class="titleLabelLabel">
+                              Class
+                          </div>
+                          <div class="titleInfoTopWrap">
+                              <div contenteditable="true" class="labelEnter" id="editting" #classEnter (blur)="updateTitleInfo('Class', classEnter.innerHTML)" [innerHTML]="getTitleField('Class')"></div>
+                              <div class="labelOptions">
+                                  ...
+                              </div>
+                          </div>
+                      </div>
+                      <div *ngIf="configOptions.titleInfoIncludeNameIndex === i  && configOptions.titleInfoIncludeName" >
+                          <div class="titleLabelLabel">
+                              Name
+                          </div>
+                          <div class="titleInfoTopWrap">
+                              <div contenteditable="true" class="labelEnter" id="editting" #nameEnter (blur)="updateTitleInfo('Name', nameEnter.innerHTML)" [innerHTML]="getTitleField('Name')"></div>
+                              <div class="labelOptions">
+                                  ...
+                              </div>
+                          </div>
+                      </div>
+                      <div *ngIf="configOptions.titleInfoIncludeOtherTextIndex === i && configOptions.titleInfoIncludeOtherText" >
+                          <div class="titleLabelLabel">
+                              Other
+                          </div>
+                          <div class="titleInfoTopWrap">
+                              <div contenteditable="true" class="labelEnter" id="editting" #otherEnter (blur)="updateTitleInfo('Other', otherEnter.innerHTML)" [innerHTML]="getTitleField('Other')"></div>
+                              <div class="labelOptions">
+                                  ...
+                              </div>
+                          </div>
+                      </div>
+                      <div *ngIf="configOptions.titleInfoIncludeProfessorIndex === i && configOptions.titleInfoIncludeProfessor" >
+                          <div class="titleLabelLabel">
+                              Professor
+                          </div>
+                          <div class="titleInfoTopWrap">
+                              <div contenteditable="true" class="labelEnter" id="editting" #profEnter (blur)="updateTitleInfo('Professor', profEnter.innerHTML)" [innerHTML]="getTitleField('Professor')"></div>
+                              <div class="labelOptions">
+                                  ...
+                              </div>
+                          </div>
+                      </div>
+                      <div *ngIf="configOptions.titleInfoIncludeSchoolIndex === i && configOptions.titleInfoIncludeSchool" >
+                          <div class="titleLabelLabel">
+                              School
+                          </div>
+                          <div class="titleInfoTopWrap">
+                              <div contenteditable="true" class="labelEnter" id="editting" #schoolEnter (blur)="updateTitleInfo('School', schoolEnter.innerHTML)" [innerHTML]="getTitleField('School')"></div>
+                              <div class="labelOptions">
+                                  ...
+                              </div>
+                          </div>
+                      </div>
+                      <div *ngIf="configOptions.titleInfoIncludeTitleIndex === i && configOptions.titleInfoIncludeTitle" >
+                          <div class="titleLabelLabel">
+                              Title
+                          </div>
+                          <div class="titleInfoTopWrap">
+                              <div contenteditable="true" class="labelEnter" id="editting" #titleEnter (blur)="updateTitleInfo('Title', titleEnter.innerHTML)" [innerHTML]="getTitleField('Title')"></div>
+                              <div class="labelOptions">
+                                  ...
+                              </div>
+                          </div>
+                      </div>
+                  </ng-container>
+              </div>     
+              <br />
+              <br />           
+          </ng-container>
+          <!--Summary Page-->
+          <ng-container *ngIf="configOptions.includeAbstractSummary">   
+              <div class="topLabelWrap" [ngClass]="{'alignCenter': configOptions.summarySectionLabelAlign === 'summarySectionLabelCenter', 'alignRight': configOptions.summarySectionLabelAlign === 'summarySectionLabelRight'}" *ngIf="configOptions.summaryIncludeSectionLabel">             
+                  <div class="labelLabel">
+                      Abstract / Summary Label
+                  </div>
+                  <div class="firstLabelWrap">
+                      <div contenteditable="true" class="labelEnter" id="editting" #sumLabel (blur)="setLabel('summary', sumLabel.innerHTML)" [innerHTML]="getLabel('summary')"></div>
+                      <div class="labelOptions">
+                          ...
+                      </div>
+                  </div>
+              </div>
+              <div [ngClass]="{'inputWrap': !configOptions.summaryIncludeSectionLabel, 'inputWrapShort': configOptions.summaryIncludeSectionLabel}">
+                  <div class="contentLabel">
+                      Abstract / Summary
+                  </div>
+                  <div class="contentOptions" style="margin-right: 4px;">
+                      ...
+                  </div>
+                  <div [froalaEditor]="summaryOptions" style="margin-top: 50px; width: calc(100% - 22px);"></div>
+                  <!-- <div class="contentEnterWrap">                        
+                      <div #sum contenteditable="true" (blur)="setSelection(sum, 'summary'); parseSummary(sum.innerHTML);" class="contentEnter" id="editting" [innerHtml]="getSummary()"></div>		
+                  </div> -->
+              </div>
+          </ng-container>
+          <!--Body Sections-->
+          <ng-container *ngIf="configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && (!configOptions.summaryOwnPage || !configOptions.includeAbstractSummary)">
+              <ng-container *ngFor="let section of contentObj.bodySections; let index = index;">
+                  <div class="topLabelWrap" [ngClass]="{'alignCenter': (configOptions.bodySectionLabelAlign === 'bodySectionLabelCenter' && section.sectionLevel === 1) || (configOptions.bodySubsectionLabelAlign === 'bodySubsectionLabelCenter' && section.sectionLevel === 2) || (configOptions.bodySubsubsectionLabelAlign === 'bodySubsubsectionLabelCenter' && section.sectionLevel === 3), 'alignRight': (configOptions.bodySectionLabelAlign === 'bodySectionLabelRight' && section.sectionLevel === 1) || (configOptions.bodySubsectionLabelAlign === 'bodySubsectionLabelRight' && section.sectionLevel === 2) || (configOptions.bodySubsubsectionLabelAlign === 'bodySubsubsectionLabelRight' && section.sectionLevel === 3)}" *ngIf="(section.sectionLevel === 1 && configOptions.bodyIncludeSectionLabels) || (section.sectionLevel === 2 && configOptions.bodyIncludeSubsectionLabels) || (section.sectionLevel === 3 && configOptions.bodyIncludeSubsubsectionLabels)">             
+                      <div class="labelLabel">
+                          S{{section.sectionLevel === 3 ? 'ubsubs' : section.sectionLevel === 2 ? 'ubs' : section.sectionLevel === 1 ? '' : ''}}ection Label
+                      </div>
+                      <div class="deleteSectionButton" (click)="deleteSection(section)" *ngIf="contentObj.bodySections.length > 1">
+                          x
+                      </div>
+                      <div class="firstLabelWrap" *ngIf="(section.sectionLevel === 1 && configOptions.bodyIncludeSectionLabels) || (section.sectionLevel === 2 && configOptions.bodyIncludeSubsectionLabels) || (section.sectionLevel === 3 && configOptions.bodyIncludeSubsubsectionLabels)">
+                          <div contenteditable="true" class="labelEnter" id="editting" #sectionLabelContent (blur)="setSectionLabel(section, sectionLabelContent.innerHTML)" [innerHTML]="getSectionLabel(section)"></div>
+                          <div class="labelOptions">
+                              ...
+                          </div>
+                      </div>
+                  </div>
+                  <div class="contentLabel" style="margin-top: 34px;">
+                      S{{section.sectionLevel === 3 ? 'ubsubs' : section.sectionLevel === 2 ? 'ubs' : section.sectionLevel === 1 ? '' : ''}}ection
+                  </div>
+                  <div class="contentOptions" [style.margin-right]="section.sectionLevel === 1 ? '-66px' : section.sectionLevel === 2 ? '-80px' : section.sectionLevel === 3 ? '-100px' : null" style="margin-top: 50px;">
+                      ...
+                  </div>
+                  <div [froalaEditor]="sectionsOptions" style="margin-top: 50px; width: calc(100% - 22px);"></div>
+                  <!-- <div class="contentEnterWrap">
+                      <div contenteditable="true" class="contentEnter" id="editting" #sectionContent (blur)="parseSectionContent(section, sectionContent.innerHTML)" [innerHTML]="getSectionContent(section)"></div>		
+                  </div> -->
+              </ng-container>
+              <!--Conclusion-->
+              <ng-container *ngIf="configOptions.includeConclusion && !configOptions.conclusionOwnPage">
+                  <div class="topLabelWrap" [ngClass]="{'alignCenter': configOptions.conclusionSectionLabelAlign === 'conclusionSectionLabelCenter', 'alignRight': configOptions.conclusionSectionLabelAlign === 'conclusionSectionLabelRight'}" *ngIf="configOptions.conclusionIncludeLabel">
+                      <div class="labelLabel">
+                          Conclusion Label
+                      </div>
+                      <div class="firstLabelWrap">
+                          <div contenteditable="true" class="labelEnter" id="editting" #concLabel (blur)="setLabel('conclusion', concLabel.innerHTML)" [innerHTML]="getLabel('conclusion')"></div>
+                          <div class="labelOptions">
+                              ...
+                          </div>
+                      </div>
+                  </div>
+                  <div class="contentLabel" style="margin-top: 34px;">
+                      Conclusion
+                  </div>
+                  <div class="contentOptions" style="margin-right: -87px; margin-top: 50px;">
+                      ...
+                  </div>
+                  <div [froalaEditor]="conclusionOptions" style="margin-top: 50px; width: calc(100% - 22px);"></div>
+                  <!-- <div class="contentEnterWrap">
+                      <div #conc contenteditable="true" (blur)="parseConclusion(conc.innerHTML)" [innerHtml]="getConclusion()" class="contentEnter" id="editting">
+                      </div>		
+                  </div> -->
+              </ng-container>
+          </ng-container>            
+      </div>
+      <!--Body Pages-->
+      <ng-container *ngIf="configOptions.bodyBetweenSections === 'bodyEachSectionOwnPage'">                 
+          <div *ngFor="let section of contentObj.bodySections; let index = index;" class="paperBack">  
+              <ng-container *ngIf="configOptions.includeHeader">
+                  <div>
+                      <div class="titleLabelLabel">
+                          {{configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && !configOptions.includeAbstractSummary ? "First Page " : ""}}Header
+                      </div>
+                      <div class="titleInfoTopWrap">
+                          <div class="headerLabelEnter" id="editting" style="width: calc(100% - 24px);">
+                              <ng-container *ngIf="((!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && !configOptions.includeAbstractSummary && index === 0 && configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && configOptions.headerFirstLeft == 'headerFirstLeftPageNumber') || (((configOptions.includeTitle && configOptions.titleInfoPos == 'titleInfoSeparatePage') || configOptions.includeAbstractSummary || index !== 0 || !configOptions.headerDifferentFirstPage || !configOptions.headerMoreDifferent) && configOptions.headerLeft == 'headerLeftPageNumber')">
+                                  <div *ngIf="configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHeader && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && !configOptions.includeAbstractSummary" class="runningHead">Running head:&nbsp;</div>
+                                  <div class="headerEnter headerLeft" title="Inserted when paper is generated">
+                                      <!--{{configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHeader && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && !configOptions.includeAbstractSummary ? "Running head: " : ""}}-->
+                                      Page number
+                                  </div>
+                              </ng-container>
+                              <ng-container *ngIf="((!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && !configOptions.includeAbstractSummary && index === 0 && configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && configOptions.headerFirstLeft !== 'headerFirstLeftPageNumber' && configOptions.headerFirstLeft !== 'headerFirstLeftEmpty') || (((configOptions.includeTitle && configOptions.titleInfoPos == 'titleInfoSeparatePage') || configOptions.includeAbstractSummary || index !== 0 || !configOptions.headerDifferentFirstPage || !configOptions.headerMoreDifferent) && configOptions.headerLeft !== 'headerLeftPageNumber' && configOptions.headerLeft !== 'headerLeftEmpty')">
+                                  <div *ngIf="configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHeader && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && !configOptions.includeAbstractSummary" class="runningHead">Running head:&nbsp;</div>
+                                  <div class="headerEnter headerLeft" contenteditable="true" #left (blur)="updateHeaderInfo(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && !configOptions.includeAbstractSummary ? 'firstLeft' : 'left', left.innerHTML)" [innerHTML]="getHeaderInfo(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && !configOptions.includeAbstractSummary ? 'firstPage' : 'default', 'Left')">
+                                      <!--{{configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHeader && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && !configOptions.includeAbstractSummary ? "Running head: " : ""}}-->
+                                  </div>
+                              </ng-container>
+                              <ng-container *ngIf="((!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && !configOptions.includeAbstractSummary && index === 0 && configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && configOptions.headerFirstRight == 'headerFirstRightPageNumber') || (((configOptions.includeTitle && configOptions.titleInfoPos == 'titleInfoSeparatePage') || configOptions.includeAbstractSummary ||index !== 0 || !configOptions.headerDifferentFirstPage || !configOptions.headerMoreDifferent) && configOptions.headerRight == 'headerRightPageNumber')">
+                                  <div class="headerEnter headerRight" title="Inserted when paper is generated">
+                                      Page number
+                                  </div>
+                              </ng-container>
+                              <ng-container *ngIf="((!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && !configOptions.includeAbstractSummary && index === 0 && configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && configOptions.headerFirstRight !== 'headerFirstRightPageNumber' && configOptions.headerFirstRight !== 'headerFirstRightEmpty') || (((configOptions.includeTitle && configOptions.titleInfoPos == 'titleInfoSeparatePage') || configOptions.includeAbstractSummary || index !== 0 || !configOptions.headerDifferentFirstPage || !configOptions.headerMoreDifferent) && configOptions.headerRight !== 'headerRightPageNumber' && configOptions.headerRight !== 'headerRightEmpty')">
+                                  <div class="headerEnter headerRight" contenteditable="true" #right (blur)="updateHeaderInfo(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && !configOptions.includeAbstractSummary ? 'firstRight' : 'right', left.innerHTML)" [innerHTML]="getHeaderInfo(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && !configOptions.includeAbstractSummary ? 'firstPage' : 'default', 'Right')">
+
+                                  </div>
+                              </ng-container>
+                          </div>
+                          <div class="labelOptions">
+                              ...
+                          </div>
+                      </div>
+                  </div>
+              </ng-container>
+              <ng-container *ngIf="configOptions.includeTitle && configOptions.titleInfoPos !== 'titleInfoSeparatePage' && !configOptions.includeAbstractSummary && index === 0">
+                  <div [ngClass]="{'alignCenter': configOptions.titleInfoAlign === 'titleInfoAlignCenter', 'alignRight': configOptions.titleInfoAlign === 'titleInfoAlignRight'}" class="titlePageTopWrap">
+                      <ng-container *ngFor="let index of [0, 1, 2, 3, 4, 5]; let i = index">
+                          <div *ngIf="configOptions.titleInfoIncludeClassIndex === i && configOptions.titleInfoIncludeClass" >
+                              <div class="titleLabelLabel">
+                                  Class
+                              </div>
+                              <div class="titleInfoTopWrap">
+                                  <div contenteditable="true" class="labelEnter" id="editting" #classEnter (blur)="updateTitleInfo('Class', classEnter.innerHTML)" [innerHTML]="getTitleField('Class')"></div>
+                                  <div class="labelOptions">
+                                      ...
+                                  </div>
+                              </div>
+                          </div>
+                          <div *ngIf="configOptions.titleInfoIncludeNameIndex === i  && configOptions.titleInfoIncludeName" >
+                              <div class="titleLabelLabel">
+                                  Name
+                              </div>
+                              <div class="titleInfoTopWrap">
+                                  <div contenteditable="true" class="labelEnter" id="editting" #nameEnter (blur)="updateTitleInfo('Name', nameEnter.innerHTML)" [innerHTML]="getTitleField('Name')"></div>
+                                  <div class="labelOptions">
+                                      ...
+                                  </div>
+                              </div>
+                          </div>
+                          <div *ngIf="configOptions.titleInfoIncludeOtherTextIndex === i && configOptions.titleInfoIncludeOtherText" >
+                              <div class="titleLabelLabel">
+                                  Other
+                              </div>
+                              <div class="titleInfoTopWrap">
+                                  <div contenteditable="true" class="labelEnter" id="editting" #otherEnter (blur)="updateTitleInfo('Other', otherEnter.innerHTML)" [innerHTML]="getTitleField('Other')"></div>
+                                  <div class="labelOptions">
+                                      ...
+                                  </div>
+                              </div>
+                          </div>
+                          <div *ngIf="configOptions.titleInfoIncludeProfessorIndex === i && configOptions.titleInfoIncludeProfessor" >
+                              <div class="titleLabelLabel">
+                                  Professor
+                              </div>
+                              <div class="titleInfoTopWrap">
+                                  <div contenteditable="true" class="labelEnter" id="editting" #profEnter (blur)="updateTitleInfo('Professor', profEnter.innerHTML)" [innerHTML]="getTitleField('Professor')"></div>
+                                  <div class="labelOptions">
+                                      ...
+                                  </div>
+                              </div>
+                          </div>
+                          <div *ngIf="configOptions.titleInfoIncludeSchoolIndex === i && configOptions.titleInfoIncludeSchool" >
+                              <div class="titleLabelLabel">
+                                  School
+                              </div>
+                              <div class="titleInfoTopWrap">
+                                  <div contenteditable="true" class="labelEnter" id="editting" #schoolEnter (blur)="updateTitleInfo('School', schoolEnter.innerHTML)" [innerHTML]="getTitleField('School')"></div>
+                                  <div class="labelOptions">
+                                      ...
+                                  </div>
+                              </div>
+                          </div>
+                          <div *ngIf="configOptions.titleInfoIncludeTitleIndex === i && configOptions.titleInfoIncludeTitle" >
+                              <div class="titleLabelLabel">
+                                  Title
+                              </div>
+                              <div class="titleInfoTopWrap">
+                                  <div contenteditable="true" class="labelEnter" id="editting" #titleEnter (blur)="updateTitleInfo('Title', titleEnter.innerHTML)" [innerHTML]="getTitleField('Title')"></div>
+                                  <div class="labelOptions">
+                                      ...
+                                  </div>
+                              </div>
+                          </div>
+                      </ng-container>
+                  </div>     
+                  <br />
+                  <br />           
+              </ng-container>
+              <div class="topLabelWrap" [ngClass]="{'alignCenter': (configOptions.bodySectionLabelAlign === 'bodySectionLabelCenter' && section.sectionLevel === 1 && configOptions.bodySectionLabelPos !== 'bodySectionLabelInline')  || (configOptions.bodySubsectionLabelAlign === 'bodySubsectionLabelCenter' && section.sectionLevel === 2 && configOptions.bodySubsectionLabelPos !== 'bodySubsectionLabelInline') || (configOptions.bodySubsubsectionLabelAlign === 'bodySubsubsectionLabelCenter' && section.sectionLevel === 3 && configOptions.bodySubsubsectionLabelPos !== 'bodySubsubsectionLabelInline'), 'alignRight': (configOptions.bodySectionLabelAlign === 'bodySectionLabelRight' && section.sectionLevel === 1 && configOptions.bodySectionLabelPos !== 'bodySectionLabelInline') || (configOptions.bodySubsectionLabelAlign === 'bodySubsectionLabelRight' && section.sectionLevel === 2 && configOptions.bodySubsectionLabelPos !== 'bodySubsectionLabelInline') || (configOptions.bodySubsubsectionLabelAlign === 'bodySubsubsectionLabelRight' && section.sectionLevel === 3 && configOptions.bodySubsubsectionLabelPos !== 'bodySubsubsectionLabelInline')}" *ngIf="(section.sectionLevel === 1 && configOptions.bodyIncludeSectionLabels) || (section.sectionLevel === 2 && configOptions.bodyIncludeSubsectionLabels) || (section.sectionLevel === 3 && configOptions.bodyIncludeSubsubsectionLabels)">
+                  <div class="labelLabel">
+                      S{{section.sectionLevel === 3 ? 'ubsubs' : section.sectionLevel === 2 ? 'ubs' : section.sectionLevel === 1 ? '' : ''}}ection Label
+                  </div>
+                  <div class="firstLabelWrap">
+                      <div contenteditable="true" class="labelEnter" id="editting" #sectionLabelContent (blur)="setSectionLabel(section, sectionLabelContent.innerHTML)" [innerHTML]="getSectionLabel(section)"></div>
+                      <div class="labelOptions">
+                          ...
+                      </div>
+                  </div>
+              </div>
+              <div class="inputWrap" [ngClass]="{'inputWrap': !((section.sectionLevel === 1 && configOptions.bodyIncludeSectionLabels) || (section.sectionLevel === 2 && configOptions.bodyIncludeSubsectionLabels) || (section.sectionLevel === 3 && configOptions.bodyIncludeSubsubsectionLabels)), 'inputWrapShort': (section.sectionLevel === 1 && configOptions.bodyIncludeSectionLabels) || (section.sectionLevel === 2 && configOptions.bodyIncludeSubsectionLabels) || (section.sectionLevel === 3 && configOptions.bodyIncludeSubsubsectionLabels)}">                    
+                  <div class="contentLabel">
+                      S{{section.sectionLevel === 3 ? 'ubsubs' : section.sectionLevel === 2 ? 'ubs' : section.sectionLevel === 1 ? '' : ''}}ection
+                  </div>
+                  <div class="deleteSectionButton" (click)="deleteSection(section)" *ngIf="contentObj.bodySections.length > 1">
+                      x
+                  </div>
+                  <div class="contentOptions" [style.margin-right]="section.sectionLevel === 1 ? '4px' : section.sectionLevel === 2 ? '4px' : section.sectionLevel === 3 ? '4px' : null">
+                      ...
+                  </div>
+                  <div [froalaEditor]="sectionsOptions" style="margin-top: 50px; width: calc(100% - 22px);"></div>
+                  <!-- <div class="contentEnterWrap">
+                      <div contenteditable="true" class="contentEnter" id="editting" #sectionContent (blur)="parseSectionContent(section, sectionContent.innerHTML)" [innerHTML]="getSectionContent(section)"></div>		
+                  </div> -->
+              </div>
+          </div>
+      </ng-container>
+      <!--Body Page && Body and Conclusion Page-->
+      <div *ngIf="configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && ((!configOptions.includeAbstractSummary && (!configOptions.includeTitle || configOptions.titleInfoPos === 'titleInfoSeparatePage')) || (configOptions.includeAbstractSummary && configOptions.summaryOwnPage))" class="paperBack">
+          <ng-container *ngIf="configOptions.includeHeader">
+              <div>
+                  <div class="titleLabelLabel">
+                      {{configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && !configOptions.includeAbstractSummary ? "First Page " : ""}}Header
+                  </div>
+                  <div class="titleInfoTopWrap">
+                      <div class="headerLabelEnter" id="editting" style="width: calc(100% - 24px);">
+                          <ng-container *ngIf="(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && !configOptions.includeAbstractSummary && configOptions.headerFirstLeft == 'headerFirstLeftPageNumber') || ((!configOptions.headerDifferentFirstPage || !configOptions.headerMoreDifferent || (configOptions.includeTitle && configOptions.titleInfoPos == 'titleInfoSeparatePage') || configOptions.bodyBetweenSections == 'bodyEachSectionOwnPage' || configOptions.includeAbstractSummary) && configOptions.headerLeft == 'headerLeftPageNumber')">
+                              <div *ngIf="configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHeader && !configOptions.includeTitle && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && !configOptions.includeAbstractSummary" class="runningHead">Running head:&nbsp;</div>
+                              <div class="headerEnter headerLeft" title="Inserted when paper is generated">
+                                  <!--{{configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHeader && !configOptions.includeTitle && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && !configOptions.includeAbstractSummary ? "Running head: " : ""}}-->
+                                  Page number
+                              </div>
+                          </ng-container>
+                          <ng-container *ngIf="(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && !configOptions.includeAbstractSummary && configOptions.headerFirstLeft !== 'headerFirstLeftPageNumber' && configOptions.headerFirstLeft !== 'headerFirstLeftEmpty') || ((!configOptions.headerDifferentFirstPage || !configOptions.headerMoreDifferent || (configOptions.includeTitle && configOptions.titleInfoPos == 'titleInfoSeparatePage') || configOptions.bodyBetweenSections == 'bodyEachSectionOwnPage' || configOptions.includeAbstractSummary) && configOptions.headerLeft !== 'headerLeftPageNumber' && configOptions.headerLeft !== 'headerLeftEmpty')">
+                              <div *ngIf="configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHeader && !configOptions.includeTitle && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && !configOptions.includeAbstractSummary" class="runningHead">Running head:&nbsp;</div>
+                              <div class="headerEnter headerLeft" contenteditable="true" #left (blur)="updateHeaderInfo(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && !configOptions.includeTitle && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && !configOptions.includeAbstractSummary ? 'firstLeft' : 'left', left.innerHTML)" [innerHTML]="getHeaderInfo(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && !configOptions.includeTitle && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && !configOptions.includeAbstractSummary ? 'firstPage' : 'default', 'Left')">
+                                  <!--{{configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHeader && !configOptions.includeTitle && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && !configOptions.includeAbstractSummary ? "Running head: " : ""}}-->
+                              </div>
+                          </ng-container>
+                          <ng-container *ngIf="(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && !configOptions.includeAbstractSummary && configOptions.headerFirstRight == 'headerFirstRightPageNumber') || ((!configOptions.headerDifferentFirstPage || !configOptions.headerMoreDifferent || (configOptions.includeTitle && configOptions.titleInfoPos == 'titleInfoSeparatePage') || configOptions.bodyBetweenSections == 'bodyEachSectionOwnPage' || configOptions.includeAbstractSummary) && configOptions.headerRight == 'headerRightPageNumber')">
+                              <div class="headerEnter headerRight" title="Inserted when paper is generated">
+                                  Page number
+                              </div>
+                          </ng-container>
+                          <ng-container *ngIf="(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && !configOptions.includeAbstractSummary && configOptions.headerFirstRight !== 'headerFirstRightPageNumber' && configOptions.headerFirstRight !== 'headerFirstRightEmpty') || ((!configOptions.headerDifferentFirstPage || !configOptions.headerMoreDifferent || (configOptions.includeTitle && configOptions.titleInfoPos == 'titleInfoSeparatePage') || configOptions.bodyBetweenSections == 'bodyEachSectionOwnPage' || configOptions.includeAbstractSummary) && configOptions.headerRight !== 'headerRightPageNumber' && configOptions.headerRight !== 'headerRightEmpty')">
+                              <div class="headerEnter headerRight" contenteditable="true" #right (blur)="updateHeaderInfo(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && !configOptions.includeTitle && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && !configOptions.includeAbstractSummary ? 'firstRight' : 'right', right.innerHTML)" [innerHTML]="getHeaderInfo(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && !configOptions.includeTitle && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && !configOptions.includeAbstractSummary ? 'firstPage' : 'default', 'Right')">
+                                  
+                              </div>
+                          </ng-container>
+                      </div>
+                      <div class="labelOptions">
+                          ...
+                      </div>
+                  </div>
+              </div>
+          </ng-container>
+          <ng-container *ngFor="let section of contentObj.bodySections; let index = index;">
+              <div class="topLabelWrap" [ngClass]="{'alignCenter': (configOptions.bodySectionLabelAlign === 'bodySectionLabelCenter' && section.sectionLevel === 1 && configOptions.bodySectionLabelPos !== 'bodySectionLabelInline')  || (configOptions.bodySubsectionLabelAlign === 'bodySubsectionLabelCenter' && section.sectionLevel === 2 && configOptions.bodySubsectionLabelPos !== 'bodySubsectionLabelInline') || (configOptions.bodySubsubsectionLabelAlign === 'bodySubsubsectionLabelCenter' && section.sectionLevel === 3 && configOptions.bodySubsubsectionLabelPos !== 'bodySubsubsectionLabelInline'), 'alignRight': (configOptions.bodySectionLabelAlign === 'bodySectionLabelRight' && section.sectionLevel === 1 && configOptions.bodySectionLabelPos !== 'bodySectionLabelInline') || (configOptions.bodySubsectionLabelAlign === 'bodySubsectionLabelRight' && section.sectionLevel === 2 && configOptions.bodySubsectionLabelPos !== 'bodySubsectionLabelInline') || (configOptions.bodySubsubsectionLabelAlign === 'bodySubsubsectionLabelRight' && section.sectionLevel === 3 && configOptions.bodySubsubsectionLabelPos !== 'bodySubsubsectionLabelInline')}" *ngIf="(section.sectionLevel === 1 && configOptions.bodyIncludeSectionLabels) || (section.sectionLevel === 2 && configOptions.bodyIncludeSubsectionLabels) || (section.sectionLevel === 3 && configOptions.bodyIncludeSubsubsectionLabels)">  
+                  <div class="labelLabel">
+                      S{{section.sectionLevel === 3 ? 'ubsubs' : section.sectionLevel === 2 ? 'ubs' : section.sectionLevel === 1 ? '' : ''}}ection Label
+                  </div>
+                  <div class="firstLabelWrap">
+                      <div contenteditable="true" class="labelEnter" id="editting" #sectionLabelContent (blur)="setSectionLabel(section, sectionLabelContent.innerHTML)" [innerHTML]="getSectionLabel(section)"></div>
+                      <div class="labelOptions">
+                          ...
+                      </div>
+                  </div>
+              </div>
+              <div [ngClass]="{'inputWrap': !((section.sectionLevel === 1 && configOptions.bodyIncludeSectionLabels) || (section.sectionLevel === 2 && configOptions.bodyIncludeSubsectionLabels) || (section.sectionLevel === 3 && configOptions.bodyIncludeSubsubsectionLabels)), 'inputWrapShort': (section.sectionLevel === 1 && configOptions.bodyIncludeSectionLabels) || (section.sectionLevel === 2 && configOptions.bodyIncludeSubsectionLabels) || (section.sectionLevel === 3 && configOptions.bodyIncludeSubsubsectionLabels)}">
+                  <div class="contentLabel">
+                      S{{section.sectionLevel === 3 ? 'ubsubs' : section.sectionLevel === 2 ? 'ubs' : section.sectionLevel === 1 ? '' : ''}}ection
+                  </div>
+                  <div class="deleteSectionButton" (click)="deleteSection(section)" *ngIf="contentObj.bodySections.length > 1">
+                      x
+                  </div>
+                  <div class="contentOptions" [style.margin-right]="section.sectionLevel === 1 ? '4px' : section.sectionLevel === 2 ? '4px' : section.sectionLevel === 3 ? '4px' : null">
+                      ...
+                  </div>
+                  <div [froalaEditor]="sectionsOptions" style="margin-top: 50px; width: calc(100% - 22px);"></div>
+                  <!-- <div class="contentEnterWrap">
+                      <div contenteditable="true" class="contentEnter" id="editting" #sectionContent (blur)="parseSectionContent(section, sectionContent.innerHTML)" [innerHTML]="getSectionContent(section)"></div>		
+                  </div> -->
+              </div>
+          </ng-container>
+          <ng-container *ngIf="configOptions.includeConclusion && !configOptions.conclusionOwnPage">
+              <div class="topLabelWrap" [ngClass]="{'alignCenter': configOptions.conclusionSectionLabelAlign === 'conclusionSectionLabelCenter', 'alignRight': configOptions.conclusionSectionLabelAlign === 'conclusionSectionLabelRight'}" *ngIf="configOptions.conclusionIncludeLabel">
+                  <div class="labelLabel">
+                      Conclusion Label
+                  </div>
+                  <div class="firstLabelWrap">
+                      <div contenteditable="true" class="labelEnter" id="editting" #concLabel (blur)="setLabel('conclusion', concLabel.innerHTML)" [innerHTML]="getLabel('conclusion')"></div>
+                      <div class="labelOptions">
+                          ...
+                      </div>
+                  </div>
+              </div>
+              <div class="contentLabel" style="margin-top: 34px;">
+                  Conclusion
+              </div>
+              <div class="contentOptions" style="margin-right: -86px; margin-top: 51px;">
+                  ...
+              </div>
+              <div [froalaEditor]="conclusionOptions" style="margin-top: 50px; width: calc(100% - 22px);"></div>
+              <!-- <div class="contentEnterWrap">
+                  <div #conc contenteditable="true" (blur)="parseConclusion(conc.innerHTML)" [innerHtml]="getConclusion()" class="contentEnter" id="editting">
+                  </div>		
+              </div> -->
+          </ng-container>
+      </div>
+      <!--Conclusion Page-->
+      <div *ngIf="configOptions.includeConclusion && (configOptions.conclusionOwnPage || configOptions.bodyBetweenSections === 'bodyEachSectionOwnPage')" class="paperBack">
+          <ng-container *ngIf="configOptions.includeHeader">
+              <div>
+                  <div class="titleLabelLabel">
+                      Header
+                  </div>
+                  <div class="titleInfoTopWrap">
+                      <div class="headerLabelEnter" id="editting" style="width: calc(100% - 24px);">
+                          <ng-container *ngIf="configOptions.headerLeft == 'headerLeftPageNumber'">
+                              <div class="headerEnter headerLeft" title="Inserted when paper is generated">
+                                  Page number
+                              </div>
+                          </ng-container>
+                          <ng-container *ngIf="configOptions.headerLeft != 'headerLeftPageNumber' && configOptions.headerLeft !== 'headerLeftEmpty'">
+                              <div *ngIf="configOptions.headerLeft !== 'headerLeftEmpty'" class="headerEnter headerLeft" contenteditable="true"  #left (blur)="updateHeaderInfo('left', left.innerHTML)" [innerHTML]="getHeaderInfo('default', 'Left')">
+                              
+                              </div>
+                          </ng-container>
+                          <ng-container *ngIf="configOptions.headerRight == 'headerRightPageNumber'">
+                              <div class="headerEnter headerRight" title="Inserted when paper is generated">
+                                  Page number
+                              </div>
+                          </ng-container>
+                          <ng-container *ngIf="configOptions.headerRight != 'headerRightPageNumber' && configOptions.headerRight !== 'headerRightEmpty'">
+                              <div *ngIf="configOptions.headerRight !== 'headerRightEmpty'" class="headerEnter headerRight" contenteditable="true" #right (blur)="updateHeaderInfo('right', right.innerHTML)" [innerHTML]="getHeaderInfo('default', 'right')">
+                              
+                              </div>
+                          </ng-container>
+                      </div>
+                      <div class="labelOptions">
+                          ...
+                      </div>
+                  </div>
+              </div>
+          </ng-container>
+          <div class="topLabelWrap" [ngClass]="{'alignCenter': configOptions.conclusionSectionLabelAlign === 'conclusionSectionLabelCenter', 'alignRight': configOptions.conclusionSectionLabelAlign === 'conclusionSectionLabelRight'}" *ngIf="configOptions.conclusionIncludeLabel">
+              <div class="labelLabel">
+                  Conclusion Label
+              </div>
+              <div class="firstLabelWrap">
+                  <div contenteditable="true" class="labelEnter" id="editting" #concLabel (blur)="setLabel('conclusion', concLabel.innerHTML)" [innerHTML]="getLabel('conclusion')"></div>
+                  <div class="labelOptions">
+                      ...
+                  </div>
+              </div>
+          </div>
+          <div [ngClass]="{'inputWrap': !configOptions.conclusionIncludeLabel, 'inputWrapShort': configOptions.conclusionIncludeLabel}">
+              <div class="contentLabel">
+                  Conclusion
+              </div>
+              <div class="contentOptions" style="margin-right: 4px;">
+                  ...
+              </div>
+              <div [froalaEditor]="conclusionOptions" style="margin-top: 50px; width: calc(100% - 22px);"></div>
+              <!-- <div class="contentEnterWrap">
+                  <div #conc contenteditable="true" (blur)="parseConclusion(conc.innerHTML)" [innerHtml]="getConclusion()" class="contentEnter" id="editting">
+                  </div>		
+              </div> -->
+          </div>
+      </div>
+  </div>
+</div>
