@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FontsService } from "../services/fonts.service";
 
 @Component({
@@ -13,6 +13,7 @@ export class FormatBarComponent implements OnInit {
     italic: boolean = false;
     underline: boolean = false;
   
+    @Output() nameChangeEvent = new EventEmitter();
     @Output() boldEvent = new EventEmitter();
     @Output() italicsEvent = new EventEmitter();
     @Output() underlineEvent = new EventEmitter();
@@ -25,12 +26,18 @@ export class FormatBarComponent implements OnInit {
     fontSizes: Array<number> = [];
     fonts: Array<string> = [];
 
+    @Input() docName: string = '';
+
   constructor(private fontsService: FontsService) {
     this.fontSizes = fontsService.getFontSizes();
     this.fonts = fontsService.getFontOptions();
   }
 
   ngOnInit() {
+  }
+
+  nameChanged() {
+    this.nameChangeEvent.emit(this.docName);
   }
 
   setBold() {

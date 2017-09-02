@@ -12,6 +12,7 @@ export class WriteButtonComponent implements OnInit {
   @Output() sectionAdded = new EventEmitter();
   @Output() subsectionAdded = new EventEmitter();
   @Output() subsubsectionAdded = new EventEmitter();
+  docName: string = '';
   optionsOpen = false;
   headerObj = {
     applyTo: "",
@@ -156,6 +157,10 @@ export class WriteButtonComponent implements OnInit {
   ngOnInit() {
   }
 
+  changeName(newName) {
+    this.docName = newName;
+  }
+
   showOptions() {
     this.optionsOpen = !this.optionsOpen;
   }
@@ -184,7 +189,11 @@ export class WriteButtonComponent implements OnInit {
     this.optionsOpen = false;
     this.parseConfig();
     this.parseContent();
-    this.docwriterService.writeDocument(this.samplePaperObj);
+    let docsName = this.docName;
+    if (!docsName || docsName == '') {
+      docsName = 'My Paper';
+    }
+    this.docwriterService.writeDocument(this.samplePaperObj, docsName);
   }
 
   parseContent() {

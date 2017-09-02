@@ -5,8 +5,15 @@
       <td style="vertical-align: middle;">
         <img style="width: 28px;" src="../../logo.png">
       </td>
-      <td style="vertical-align: middle; font-size: 23px;">
+      <td style="vertical-align: middle; font-size: 23px; width: 290px;">
         Write It Easy
+      </td>
+      <td>
+        <input (change)="nameChanged()" class="textInputField option" style="font-size: 18px !important; width: 170px !important;" type="text" [placeholder]="'My Paper'" [(ngModel)]="docName">
+        <!-- (change)="" [(ngModel)]="docName"> -->
+      </td>
+      <td>
+        .docx
       </td>
     </tr>
   </table>

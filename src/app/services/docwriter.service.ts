@@ -53,7 +53,7 @@ export class DocwriterService {
   pageNumXML = `<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE   \\* MERGEFORMAT </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:t>2</w:t></w:r><w:r><w:rPr><w:noProof/></w:rPr><w:fldChar w:fldCharType="end"/></w:r>`;
   tabXML = `<w:r><w:tab/></w:r>`;
 
-  public writeDocument(paperObj) {
+  public writeDocument(paperObj, docName) {
     console.log('Writing Document');
     this.setCore();
     this.setDocument(paperObj);
@@ -84,37 +84,14 @@ export class DocwriterService {
     zip.file('_rels/.rels', this.relsContent);
     zip.file('docProps/app.xml', this.appContent);
     zip.file('docProps/core.xml', this.coreContent);
-
-    // archive.append(self.contentTypesContent, { name: '[Content_Types].xml' });
-    // archive.append(self.wordDocumentContent, { name: 'word\\document.xml' });
-    // archive.append(self.fontTableContent, { name: 'word\\fontTable.xml' });
-    // archive.append(self.settingsContent, { name: 'word\\settings.xml' });
-    // archive.append(self.stylesContent, { name: 'word\\styles.xml' });
-    // archive.append(self.webSettingsContent, { name: 'word\\webSettings.xml' });
-    // archive.append(self.wordRelsContent, { name: 'word\\_rels\\document.xml.rels' });
-    // if (paperObj.headers.includeHeaders) {
-    //     archive.append(self.emptyHeaderContent, { name: 'word\\header1.xml' });
-    //     archive.append(self.header2Content, { name: 'word\\header2.xml' });
-    //     archive.append(self.header3Content, { name: 'word\\header3.xml' });
-    //     archive.append(self.emptyFooterContent, { name: 'word\\footer1.xml' });
-    //     archive.append(self.emptyFooterContent, { name: 'word\\footer2.xml' });
-    //     archive.append(self.emptyFooterContent, { name: 'word\\footer3.xml' });
-    //     archive.append(self.footNotesContent, { name: 'word\\footnotes.xml' });
-    //     archive.append(self.endNotesContent, { name: 'word\\endnotes.xml' });
-    // }
-    // archive.append(self.wordThemeContent, { name: 'word\\theme\\theme1.xml' });
-    // archive.append(self.relsContent, { name: '_rels\\.rels' });
-    // archive.append(self.appContent, { name: 'docProps\\app.xml' });
-    // archive.append(self.coreContent, { name: 'docProps\\core.xml' });
-
-
-
-
-    // zip.file("Hello.txt", "Hello World\n");
     zip.generateAsync({type:"blob"})
     .then(function(content) {
-        // see FileSaver.js
-        FileSaver.saveAs(content, "example.docx");
+        if (!docName || docName == '') {
+          FileSaver.saveAs(content, "My Paper.docx");
+        }
+        else {
+          FileSaver.saveAs(content, `${docName}.docx`);
+        }
     });
 
   }
