@@ -1,11 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'content-enter',
   templateUrl: './content-enter.component.html',
   styleUrls: ['./content-enter.component.css']
 })
-export class ContentEnterComponent implements OnInit {
+export class ContentEnterComponent implements OnInit, OnChanges {
+  ngOnChanges(changes: SimpleChanges): void {
+    // throw new Error("Method not implemented.");
+    console.log(this.summaryText);
+  }
   @Input() configOptions;
   deletedSections = [];
   selEnd;
@@ -18,7 +23,16 @@ export class ContentEnterComponent implements OnInit {
     toolbarButtons: ['bold', 'italic', 'underline', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', '|', 'align', 'outdent', 'indent', 'insertImage', '|', 'spellChecker', '|', 'undo', 'redo'],
     toolbarButtonsMD: ['bold', 'italic', 'underline', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', '|', 'align', 'outdent', 'indent', 'insertImage', '|', 'spellChecker', '|', 'undo', 'redo'],
     toolbarButtonsSM: ['bold', 'italic', 'underline', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', '|', 'align', 'outdent', 'indent', 'insertImage', '|', 'spellChecker', '|', 'undo', 'redo'],
-    placeholderText: 'Enter summary content here'
+    placeholderText: 'Enter summary content here',
+    events: {
+      'froalaEditor.blur': (e, editor) => {       
+        let editorContent = this.getUltimateParent(editor.selection.get().focusNode);
+        
+        console.log(editorContent);
+        
+        this.getParagraphsParsed(editorContent);
+      }
+    }
   }
 
   sectionsOptions = {
@@ -34,6 +48,8 @@ export class ContentEnterComponent implements OnInit {
     toolbarButtonsSM: ['bold', 'italic', 'underline', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', '|', 'align', 'outdent', 'indent', 'insertImage', '|', 'spellChecker', '|', 'undo', 'redo'],
     placeholderText: 'Enter conclusion content here'
   }
+
+  summaryText: any = '';
   
   constructor() { 
     let starterObj = JSON.parse(JSON.stringify(this.sectionObj));  
@@ -46,40 +62,131 @@ export class ContentEnterComponent implements OnInit {
   ngOnInit() {
   }
 
-  bold() {
-    this.setBold = true;
-    console.log("bold it");
+  getParagraphsParsed(contentObj) {
+    let childNodes = contentObj.childNodes;
+    for (let i = 0; i < childNodes.length; i++) {
+      let paraNode = childNodes[i];
+      if (paraNode.nodeName == 'P') {
+        // let paraChild = paraNode.childNodes;
+        // for (let j = 0; j < paraChild.length; j++) {
+          let parsedElements = this.parseContPara(paraNode);
+          console.log(parsedElements);
+          //TODO: Create Format Sections off of what is returned
+        // }
+      }
+      else {
+        console.log('Not a paragraph!');
+      }
+    }
   }
 
-  italic() {
-    this.setItalic = true;
-    console.log("italicize it");
+  // formatSectionObj = {
+  //   bold: false,
+  //   underline: false,
+  //   italicize: false,
+  //   fontSize: 12,
+  //   font: "Times New Roman",
+  //   content: "",  
+  //   indexVal: 0  
+  // };
+
+  getFormatNodes(elNode, currBold, currItalicize, currUnderline, currentFont, currentSize) {
+    switch(elNode.nodeName) {
+      case 'STRONG':
+        currBold = true;
+        break;
+      case 'EM':
+        currItalicize = true;
+        break;
+      case 'U':
+        currUnderline = true;
+        break;
+      case 'SPAN':
+        let styleToParse = elNode.attributes[0].nodeValue;
+        let splitSections = styleToParse.split(';');
+        for (let i = 0; i < splitSections.length; i++) {
+          let sectionToCheck = splitSections[i];
+          if (_.includes(sectionToCheck, 'font-family: ')) {
+            let fontDec = sectionToCheck.split(': ')[1];
+            let newFont = fontDec.split(', ')[0];
+            currentFont = newFont;
+          }
+          else if (_.includes(sectionToCheck, 'font-size: ')) {
+            let fontSizeDec = sectionToCheck.split(': ')[1];
+            let newFontSize = fontSizeDec.split('px')[0];
+            let currentSize = newFontSize;
+          }
+        }
+        break;
+    }
+    if (elNode.nodeName == '#text') {
+      //text node
+      return {
+        content: elNode.nodeValue,
+        bold: currBold,
+        italicize: currItalicize,
+        underline: currUnderline,
+        font: currentFont,
+        size: currentSize
+      };
+    }
+    else {
+      let formatRv = [];
+      for (let i = 0; i < elNode.childNodes.length; i++) {
+        formatRv.push(this.getFormatNodes(elNode.childNodes[i], currBold, currItalicize, currUnderline, currentFont, currentSize));
+      }
+      return formatRv;
+    }
   }
 
-  underline() {
-    this.setUnderline = true;
-    console.log("underline it");
+  parseContPara(elNode) {
+    let formatSections = this.getFormatNodes(elNode, false, false, false, 'Times New Roman', 12);
+    return _.flattenDeep(formatSections);
   }
 
-  fontChange(fontName) {
-    console.log("change font: " + fontName);
+  getUltimateParent(editorNode) {
+    if (editorNode.parentNode.className == 'fr-element fr-view') {
+      return editorNode.parentNode;
+    }
+    else {
+      return this.getUltimateParent(editorNode.parentNode);
+    }
   }
 
-  fontSizeChange(fontSize) {
-    console.log("change size: " + fontSize);
-  }
+  // bold() {
+  //   this.setBold = true;
+  //   console.log("bold it");
+  // }
 
-  indent() {
-    console.log("move in");
-  }
+  // italic() {
+  //   this.setItalic = true;
+  //   console.log("italicize it");
+  // }
 
-  reverseIndent() {
-    console.log("move out");
-  }
+  // underline() {
+  //   this.setUnderline = true;
+  //   console.log("underline it");
+  // }
 
-  insertReference(data) {
-    console.log("add reference");
-  }
+  // fontChange(fontName) {
+  //   console.log("change font: " + fontName);
+  // }
+
+  // fontSizeChange(fontSize) {
+  //   console.log("change size: " + fontSize);
+  // }
+
+  // indent() {
+  //   console.log("move in");
+  // }
+
+  // reverseIndent() {
+  //   console.log("move out");
+  // }
+
+  // insertReference(data) {
+  //   console.log("add reference");
+  // }
 
   updateHeaderInfo(selection, content) {
     // console.log(change.currentTarget.outerText);

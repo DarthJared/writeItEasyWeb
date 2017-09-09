@@ -241,7 +241,7 @@
                   <div class="contentOptions" style="margin-right: 4px;">
                       ...
                   </div>
-                  <div [froalaEditor]="summaryOptions" style="margin-top: 50px; width: calc(100% - 22px);"></div>
+                  <div [froalaEditor]="summaryOptions" [(froalaModel)]="summaryText" style="margin-top: 50px; width: calc(100% - 22px);"></div>
                   <!-- <div class="contentEnterWrap">                        
                       <div #sum contenteditable="true" (blur)="setSelection(sum, 'summary'); parseSummary(sum.innerHTML);" class="contentEnter" id="editting" [innerHtml]="getSummary()"></div>		
                   </div> -->
