@@ -7,6 +7,10 @@
     background-color: #7A7A7A;
 }
 
+.toUpperCase {
+    text-transform: uppercase;
+}
+
 p {
     text-indent: 40px;
 }

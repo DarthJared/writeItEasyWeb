@@ -35,12 +35,14 @@ export class ConfigOptionsService {
       headerRight: 'headerRightPageNumber',
       headerRightInput: '',
       headerDifferentFirstPage: true,
-      headerUseRunningHeader: true,
+      headerUseRunningHead: true,
       headerMoreDifferent: false,
       headerFirstLeft: 'headerFirstLeftPaperTitle',
       headerFirstLeftInput: '',
       headerFirstRight: 'headerFirstRightPageNumber',
       headerFirstRightInput: '',
+      summaryLabelFont: 'Times New Roman',
+      summaryLabelFontSize: '12',
       summaryOwnPage: true,
       summaryIncludeSectionLabel: true,
       summarySectionLabelAlign: 'summarySectionLabelCenter',
@@ -48,12 +50,20 @@ export class ConfigOptionsService {
       bodyIncludeSectionLabels: true,
       bodyIncludeSubsectionLabels: true,
       bodyIncludeSubsubsectionLabels: true,
+      bodySectionLabelFont: 'Times New Roman',
+      bodySubsectionLabelFont: 'Times New Roman',
+      bodySubsubsectionLabelFont: 'Times New Roman',
+      bodySectionLabelFontSize: '12',
+      bodySubsectionLabelFontSize: '12',
+      bodySubsubsectionLabelFontSize: '12',
       bodySectionLabelPos: 'bodySectionLabelOwnLine',
       bodySectionLabelAlign: 'bodySectionLabelCenter',
       bodySubsectionLabelPos: 'bodySubsectionLabelOwnLine',
       bodySubsectionLabelAlign: 'bodySubsectionLabelLeft',
       bodySubsubsectionLabelPos: 'bodySubsubsectionLabelInline',
       bodySubsubsectionLabelAlign: '',
+      conclusionLabelFont: 'Times New Roman',
+      conclusionLabelFontSize: '12',
       conclusionOwnPage: true,
       conclusionIncludeLabel: true,
       conclusionSectionLabelAlign: 'conclusionSectionLabelCenter',
@@ -319,7 +329,7 @@ export class ConfigOptionsService {
                               inputType: 'toggle'
                           },
                           {
-                              name: 'headerUseRunningHeader',
+                              name: 'headerUseRunningHead',
                               displayName: 'Use "Running head:"',
                               inputType: 'toggle',
                               hideUntil: [
@@ -418,6 +428,18 @@ export class ConfigOptionsService {
                       inputType: 'toggle'
                   },
                   {
+                    name: 'summaryLabelFont',
+                    displayName: 'Label Font',
+                    inputType: 'fontSelect',
+                    hideUntil: 'summaryIncludeSectionLabel'
+                },
+                {
+                    name: 'summaryLabelFontSize',
+                    displayName: 'Label Font Size',
+                    inputType: 'fontSizeSelect',
+                    hideUntil: 'summaryIncludeSectionLabel'
+                },
+                  {
                       name: 'summarySectionLabelAlign',
                       displayName: 'Section Label Align',
                       inputType: 'radio',
@@ -483,6 +505,42 @@ export class ConfigOptionsService {
                           }
                       ]
                   },
+                  {
+                    name: 'bodySectionLabelFont',
+                    displayName: 'Section Label Font',
+                    inputType: 'fontSelect',
+                    hideUntil: 'bodyIncludeSectionLabels'
+                },
+                {
+                    name: 'bodySubsectionLabelFont',
+                    displayName: 'Subsection Label Font',
+                    inputType: 'fontSelect',
+                    hideUntil: 'bodyIncludeSubsectionLabels'
+                },
+                {
+                    name: 'bodySubsubsectionLabelFont',
+                    displayName: 'Subsubsection Label Font',
+                    inputType: 'fontSelect',
+                    hideUntil: 'bodyIncludeSubsubsectionLabels'
+                },
+                {
+                    name: 'bodySectionLabelFontSize',
+                    displayName: 'Section Label Font Size',
+                    inputType: 'fontSizeSelect',
+                    hideUntil: 'bodyIncludeSectionLabels'
+                },
+                {
+                    name: 'bodySubsectionLabelFontSize',
+                    displayName: 'Subsection Label Font Size',
+                    inputType: 'fontSizeSelect',
+                    hideUntil: 'bodyIncludeSubsectionLabels'
+                },
+                {
+                    name: 'bodySubsubsectionLabelFontSize',
+                    displayName: 'Subsubsection Label Font Size',
+                    inputType: 'fontSizeSelect',
+                    hideUntil: 'bodyIncludeSubsubsectionLabels'
+                },
                   {
                       name: 'bodySectionLabelPos',
                       displayName: 'Section Label Position',
@@ -610,6 +668,18 @@ export class ConfigOptionsService {
                       optionName: 'Include Section Label',
                       inputType: 'toggle'
                   },
+                  {
+                    name: 'conclusionLabelFont',
+                    displayName: 'Label Font',
+                    inputType: 'fontSelect',
+                    hideUntil: 'conclusionIncludeLabel'
+                },
+                {
+                    name: 'conclusionLabelFontSize',
+                    displayName: 'Label Font Size',
+                    inputType: 'fontSizeSelect',
+                    hideUntil: 'conclusionIncludeLabel'
+                },
                   {
                       name: 'conclusionSectionLabelAlign',
                       displayName: 'Section Label Align',

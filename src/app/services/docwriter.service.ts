@@ -102,8 +102,6 @@ export class DocwriterService {
     this.header2Content += this.headerParts[0];
     this.header3Content += this.headerParts[0];
     var firstPageDifferent = headerObj.diffFirstPage;
-    var newFont = headerObj.font;
-    var fontSize = headerObj.fontSize;
     //header2.xml = default, header3.xml = first page
     var defaultHeader;
     for (var h in headerObj.headers) {
@@ -112,23 +110,24 @@ export class DocwriterService {
             defaultHeader = header;
         }
     }
+    let headerFont = headerObj.font;
+    let headerFontSize = headerObj.fontSize  * 2;
     if (firstPageDifferent) {
         var firstPageHeader;
-        for (h in headerObj.headers) {
-            var header = headerObj.headers[h];
+        for (header of headerObj.headers) {
             if (header.applyTo === "firstPage") {
                 firstPageHeader = header;
             }
         }
         if (firstPageHeader.leftType === "text") {
-            this.header3Content += `<w:r><w:t>${firstPageHeader.left}</w:t></w:r>`;
+            this.header3Content += `<w:r><w:rPr><w:rFonts w:ascii="${headerFont}" w:hAnsi="${headerFont}"/><w:sz w:val="${headerFontSize}"/><w:szCs w:val="${headerFontSize}"/></w:rPr><w:t>${firstPageHeader.left}</w:t></w:r>`;
         }
         else if (firstPageHeader.leftType === "pageNumber") {
             this.header3Content += this.pageNumXML;
         }
         this.header3Content += this.tabXML;
         if (firstPageHeader.rightType === "text") {
-            this.header3Content += `<w:r><w:rPr><w:noProof/></w:rPr><w:t>${firstPageHeader.right}</w:t></w:r>`;
+            this.header3Content += `<w:r><w:rPr><w:rFonts w:ascii="${headerFont}" w:hAnsi="${headerFont}"/><w:sz w:val="${headerFontSize}"/><w:szCs w:val="${headerFontSize}"/><w:noProof/></w:rPr><w:t>${firstPageHeader.right}</w:t></w:r>`;
         }
         else if (firstPageHeader.rightType === "pageNumber") {
             this.header3Content += this.pageNumXML;
@@ -136,14 +135,14 @@ export class DocwriterService {
     }
     else {
         if (defaultHeader.leftType === "text") {
-            this.header3Content += `<w:r><w:t>${defaultHeader.left}</w:t></w:r>`;
+            this.header3Content += `<w:r><w:rPr><w:rFonts w:ascii="${headerFont}" w:hAnsi="${headerFont}"/><w:sz w:val="${headerFontSize}"/><w:szCs w:val="${headerFontSize}"/></w:rPr><w:t>${defaultHeader.left}</w:t></w:r>`;
         }
         else if (defaultHeader.leftType === "pageNumber") {
             this.header3Content += this.pageNumXML;
         }
         this.header3Content += this.tabXML;
         if (defaultHeader.rightType === "text") {
-            this.header3Content += `<w:r><w:rPr><w:noProof/></w:rPr><w:t>${defaultHeader.right}</w:t></w:r>`;
+            this.header3Content += `<w:r><w:rPr><w:rFonts w:ascii="${headerFont}" w:hAnsi="${headerFont}"/><w:sz w:val="${headerFontSize}"/><w:szCs w:val="${headerFontSize}"/><w:noProof/></w:rPr><w:t>${defaultHeader.right}</w:t></w:r>`;
         }
         else if (defaultHeader.rightType === "pageNumber") {
             this.header3Content += this.pageNumXML;
@@ -157,7 +156,7 @@ export class DocwriterService {
     }
     this.header2Content += this.tabXML;
     if (defaultHeader.rightType === "text") {
-        this.header2Content += `<w:r><w:rPr><w:noProof/></w:rPr><w:t>${defaultHeader.right}</w:t></w:r>`;
+        this.header2Content += `<w:r><w:rPr><w:rFonts w:ascii="${headerFont}" w:hAnsi="${headerFont}"/><w:sz w:val="${headerFontSize}"/><w:szCs w:val="${headerFontSize}"/><w:noProof/></w:rPr><w:t>${defaultHeader.right}</w:t></w:r>`;
     }
     else if (defaultHeader.rightType === "pageNumber") {
         this.header2Content += this.pageNumXML;
@@ -324,32 +323,19 @@ setSummaryConclusion(sectionObj, breakBefore) {
         else {                
             console.log("You got some weird outliers!");
         }
-        if (position === "lineBefore") {
+        // if (position === "lineBefore") {
             toReturn += labelContentText;
             toReturn += `<w:bookmarkStart w:id="0" w:name="_GoBack"/><w:bookmarkEnd w:id="0"/></w:p>`;
-        }
-        else if (position === "inline") {
+        // }
+        // else if (position === "inline") {
             
-        }            
+        // }            
     }
     var firstOfPara = true;
     var firstOfPara2 = true;
     for (var p in sectionObj.paragraphs) {
         var paragraph = sectionObj.paragraphs[p];
-        if (includeLabel) {
-            if (firstOfPara) {
-                firstOfPara = false;
-                if (position !== "inline") {                    
-                    toReturn += `<w:p w:rsidR="00E22951" w:rsidRDefault="00451743">`;
-                }
-            }
-            else if (!firstOfPara) {
-                toReturn += `<w:p w:rsidR="00E22951" w:rsidRDefault="00451743">`;
-            }
-        }
-        else {
-            toReturn += `<w:p w:rsidR="00E22951" w:rsidRDefault="00451743">`;
-        }
+        toReturn += `<w:p w:rsidR="00E22951" w:rsidRDefault="00451743">`;
         
         var topIndent = paragraph.topIndent * 720;
         var bottomIndent = paragraph.bottomIndent * 720;

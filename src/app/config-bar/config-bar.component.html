@@ -19,7 +19,7 @@
                           <div class="fieldTitle">{{field.displayName}}</div>
                           <hr>
                           <select class="fieldOptions" [(ngModel)]="paperSettings[field.name]" (change)="sendConfigObj();">
-                              <option *ngFor="let option of fontsService.options">
+                              <option *ngFor="let option of fontsService.getFontOptions()">
                                   {{option}}
                               </option>
                           </select>
@@ -28,7 +28,7 @@
                           <div class="fieldTitle">{{field.displayName}}</div>
                           <hr>
                           <select class="fieldOptions" [(ngModel)]="paperSettings[field.name]" (change)="sendConfigObj()">
-                              <option *ngFor="let option of fontsService.sizes">
+                              <option *ngFor="let option of fontsService.getFontSizes()">
                                   {{option}}
                               </option>
                           </select>

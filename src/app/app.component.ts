@@ -13,9 +13,14 @@ export class AppComponent {
   }
 
   configOptions = {};
+  paperContent = {};
   
   updateConfig(configObj) {
-      this.configOptions = configObj;
+    this.configOptions = configObj;
+  }
+
+  updateContent(contentObj) {
+    this.paperContent = contentObj;
   }
 
   samplePaperObj = {

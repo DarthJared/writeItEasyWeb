@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { DocwriterService } from "./../services/docwriter.service";
+import * as _ from 'lodash';
 
 @Component({
   selector: 'write-button',
@@ -9,6 +10,7 @@ import { DocwriterService } from "./../services/docwriter.service";
 })
 export class WriteButtonComponent implements OnInit {
   @Input() configOptions;
+  @Input() paperContent;
   @Output() sectionAdded = new EventEmitter();
   @Output() subsectionAdded = new EventEmitter();
   @Output() subsubsectionAdded = new EventEmitter();
@@ -193,11 +195,7 @@ export class WriteButtonComponent implements OnInit {
     if (!docsName || docsName == '') {
       docsName = 'My Paper';
     }
-    this.docwriterService.writeDocument(this.samplePaperObj, docsName);
-  }
-
-  parseContent() {
-    console.log('parsing entered content');
+    this.docwriterService.writeDocument(this.paperObj, docsName);
   }
 
   parseConfig() {     
@@ -210,15 +208,28 @@ export class WriteButtonComponent implements OnInit {
       this.paperObj.headers.diffFirstPage = this.configOptions.headerDifferentFirstPage;
       this.paperObj.headers.font = this.configOptions.headerFont;
       this.paperObj.headers.fontSize = this.configOptions.headerFontSize;
+      let defaultHeader; 
+      this.paperObj.headers.headers = [];
+      for (let header of this.paperContent.headers) {
+        if (header && header.applyTo == 'default') {
+          defaultHeader = header;
+        }
+      }
       if (this.configOptions.headerDifferentFirstPage) {
         let headerFirst = JSON.parse(JSON.stringify(this.headerObj));
+        let firstHeader; 
+        for (let header of this.paperContent.headers) {
+          if (header && header.applyTo == 'firstPage') {
+            firstHeader = header;
+          }
+        }
         if (this.configOptions.headerMoreDifferent) {
           if (this.configOptions.headerFirstLeft == 'headerFirstLeftPaperTitle' || this.configOptions.headerFirstLeft == 'headerFirstLeftOtherText') {
             headerFirst.applyTo = 'firstPage';
             headerFirst.leftType = 'text';
             headerFirst.left = this.configOptions.headerUseRunningHead 
-              ? 'Running head: ' + this.configOptions.headerFirstLeftInput 
-              : this.configOptions.headerFirstLeftInput;
+              ? 'Running head: ' + firstHeader.left 
+              : firstHeader.left;
           }
           else if (this.configOptions.headerFirstLeft == 'headerFirstLeftPageNumber') {
             headerFirst.applyTo = 'firstPage';
@@ -230,7 +241,7 @@ export class WriteButtonComponent implements OnInit {
           }
           if (this.configOptions.headerFirstRight == 'headerFirstRightPaperTitle' || this.configOptions.headerFirstRight == 'headerFirstRightOtherText') {
             headerFirst.rightType = 'text';
-            headerFirst.right = this.configOptions.headerFirstRightInput;
+            headerFirst.right = firstHeader.right;
           }
           else if (this.configOptions.headerFirstRight == 'headerFirstRightPageNumber') {
             headerFirst.rightType = 'pageNumber';
@@ -244,8 +255,8 @@ export class WriteButtonComponent implements OnInit {
             headerFirst.applyTo = 'firstPage';
             headerFirst.leftType = 'text';
             headerFirst.left = this.configOptions.headerUseRunningHead 
-              ? 'Running head: ' + this.configOptions.headerLeftInput 
-              : this.configOptions.headerLeftInput;
+              ? 'Running head: ' + defaultHeader.left 
+              : defaultHeader.left;
           }
           else if (this.configOptions.headerLeft == 'headerLeftPageNumber') {
             headerFirst.applyTo = 'firstPage';
@@ -257,7 +268,7 @@ export class WriteButtonComponent implements OnInit {
           }
           if (this.configOptions.headerRight == 'headerRightPaperTitle' || this.configOptions.headerRight == 'headerRightOtherText') {
             headerFirst.rightType = 'text';
-            headerFirst.right = this.configOptions.headerRightInput;
+            headerFirst.right = defaultHeader.right;
           }
           else if (this.configOptions.headerRight == 'headerRightPageNumber') {
             headerFirst.rightType = 'pageNumber';
@@ -268,11 +279,12 @@ export class WriteButtonComponent implements OnInit {
         }
         this.paperObj.headers.headers.push(headerFirst)
       }
-      let headerMain = JSON.parse(JSON.stringify(this.headerObj));;
+      let headerMain = JSON.parse(JSON.stringify(this.headerObj));
+      
       if (this.configOptions.headerLeft == 'headerLeftPaperTitle' || this.configOptions.headerLeft == 'headerLeftOtherText') {
         headerMain.applyTo = 'default';
         headerMain.leftType = 'text';
-        headerMain.left = this.configOptions.headerLeftInput;
+        headerMain.left = defaultHeader.left;
       }
       else if (this.configOptions.headerLeft == 'headerLeftPageNumber') {
         headerMain.applyTo = 'default';
@@ -284,7 +296,7 @@ export class WriteButtonComponent implements OnInit {
       }
       if (this.configOptions.headerRight == 'headerRightPaperTitle' || this.configOptions.headerRight == 'headerRightOtherText') {
         headerMain.rightType = 'text';
-        headerMain.right = this.configOptions.headerRightInput;
+        headerMain.right = defaultHeader.right;
       }
       else if (this.configOptions.headerRight == 'headerRightPageNumber') {
         headerMain.rightType = 'pageNumber';
@@ -312,17 +324,69 @@ export class WriteButtonComponent implements OnInit {
       this.paperObj.titleInfo.font = this.configOptions.titleInfoFont;
       this.paperObj.titleInfo.fontSize = this.configOptions.titleInfoFontSize;
       //bold, underline, and italicize needed
-      //title fields still not passed in
-
+      // this.paperObj.titleInfo.fields = [];
+      let updatedFields = [];
+      for (let i = 0; i < 6; i++) {
+        if (this.configOptions.titleInfoIncludeTitle && this.configOptions.titleInfoIncludeTitleIndex == i) {
+          let toPush = {name: 'Title', value: ''};
+          for (let titleField of this.paperObj.titleInfo.fields) {
+            if (titleField.name == 'Title')
+              toPush.value = titleField.value
+          }
+          updatedFields.push(toPush);
+        }
+        else if (this.configOptions.titleInfoIncludeName && this.configOptions.titleInfoIncludeNameIndex == i) {
+          let toPush = {name: 'Name', value: ''};
+          for (let titleField of this.paperObj.titleInfo.fields) {
+            if (titleField.name == 'Name')
+              toPush.value = titleField.value
+          }
+          updatedFields.push(toPush);
+        }
+        else if (this.configOptions.titleInfoIncludeClass && this.configOptions.titleInfoIncludeClassIndex == i) {
+          let toPush = {name: 'Class', value: ''};
+          for (let titleField of this.paperObj.titleInfo.fields) {
+            if (titleField.name == 'Class')
+              toPush.value = titleField.value
+          }
+          updatedFields.push(toPush);        
+        }
+        else if (this.configOptions.titleInfoIncludeProfessor && this.configOptions.titleInfoIncludeProfessorIndex == i) {
+          let toPush = {name: 'Professor', value: ''};
+          for (let titleField of this.paperObj.titleInfo.fields) {
+            if (titleField.name == 'Professor')
+              toPush.value = titleField.value
+          }
+          updatedFields.push(toPush);      
+        }
+        else if (this.configOptions.titleInfoIncludeSchool && this.configOptions.titleInfoIncludeSchoolIndex == i) {
+          let toPush = {name: 'School', value: ''};
+          for (let titleField of this.paperObj.titleInfo.fields) {
+            if (titleField.name == 'School')
+              toPush.value = titleField.value
+          }
+          updatedFields.push(toPush);          
+        }
+        else if (this.configOptions.titleInfoIncludeOtherText && this.configOptions.titleInfoIncludeOtherTextIndex == i) {
+          let toPush = {name: 'Other', value: ''};
+          for (let titleField of this.paperObj.titleInfo.fields) {
+            if (titleField.name == 'Other')
+              toPush.value = titleField.value
+          }
+          updatedFields.push(toPush);      
+        }
+      }   
+      this.paperObj.titleInfo.fields = updatedFields;   
     }
 
     /*Summary / Abstract*/
-    if (this.configOptions.includeSummaryAbstract) {
+    if (this.configOptions.includeAbstractSummary) {
       this.paperObj.summaryAbstract.onOwnPage = this.configOptions.summaryOwnPage;
       if (this.configOptions.summaryIncludeSectionLabel) {
         this.paperObj.summaryAbstract.includeLabel = true;
-        //insert label text
-        //handle font, size, bold, underline, and italicize
+        //handle bold, underline, and italicize
+        this.paperObj.summaryAbstract.label.font = this.configOptions.summaryLabelFont;
+        this.paperObj.summaryAbstract.label.fontSize = this.configOptions.summaryLabelFontSize;
         if (this.configOptions.summarySectionLabelAlign == 'summarySectionLabelCenter')
           this.paperObj.summaryAbstract.label.alignment = 'center';
         else if (this.configOptions.summarySectionLabelAlign == 'summarySectionLabelLeft')
@@ -331,10 +395,8 @@ export class WriteButtonComponent implements OnInit {
           this.paperObj.summaryAbstract.label.alignment = 'right';
       }
     }
-    //handle paragraphs
 
     /*Paper Body*/
-    //handle sections and paragraphs
     //handle between sections
 
     /*Conclusion*/
@@ -342,8 +404,9 @@ export class WriteButtonComponent implements OnInit {
       this.paperObj.conclusion.onOwnPage = this.configOptions.conclusionOwnPage;
       if (this.configOptions.conclusionIncludeLabel) {
         this.paperObj.conclusion.includeLabel = true;
-        //insert label text
-        //handle font, size, bold, underline, and italicize
+        //handle bold, underline, and italicize
+        this.paperObj.conclusion.label.font = this.configOptions.conclusionLabelFont;
+        this.paperObj.conclusion.label.fontSize = this.configOptions.conclusionLabelFontSize;
         if (this.configOptions.conclusionSectionLabelAlign == 'conclusionSectionLabelCenter')
           this.paperObj.conclusion.label.alignment = 'center';
         else if (this.configOptions.conclusionSectionLabelAlign == 'conclusionSectionLabelLeft')
@@ -351,7 +414,6 @@ export class WriteButtonComponent implements OnInit {
         else if (this.configOptions.conclusionSectionLabelAlign == 'conclusionSectionLabelRight')
           this.paperObj.conclusion.label.alignment = 'right';
       }
-      //handle paragraphs
     }
 
     /*References*/
@@ -398,29 +460,85 @@ export class WriteButtonComponent implements OnInit {
     }
   }
 
+  parseContent() {
+    if (this.paperContent.titleFields) {
+      for (let titleField of this.paperObj.titleInfo.fields) {
+        for (let updatedField of this.paperContent.titleFields) {
+          if (titleField.name == updatedField.name) {
+            titleField.value = updatedField.value;
+          }
+        }
+      }
+    }
+    if (this.paperContent.summaryLabel) {
+      this.paperObj.summaryAbstract.label.labelText = this.paperContent.summaryLabel.labelText;
+    }
+    if (this.paperContent.summaryParagraphs) {
+      this.paperObj.summaryAbstract.paragraphs = this.paperContent.summaryParagraphs;
+    }
+    if (this.paperContent.bodySections) {
+      this.paperObj.body.sections = _.sortBy(this.paperContent.bodySections, ['indexVal']);
+      for (let section of this.paperObj.body.sections) {
+        if (section.includeLabel) {
+          let sectionLevel;
+          switch(section.sectionLevel) {
+            case 1: 
+              sectionLevel = 'Section';
+              break;
+            case 2:
+              sectionLevel = 'Subsection';
+              break;
+            case 3:
+              sectionLevel = 'Subsubsection';
+              break;
+            default:
+              sectionLevel = 'Just not right';
+          } 
+          //TODO: Handle bold, italics, and underline
+          section.label.font = this.configOptions[`body${sectionLevel}LabelFont`];
+          section.label.fontSize = this.configOptions[`body${sectionLevel}LabelFontSize`];
+          section.label.alignment = this.configOptions[`body${sectionLevel}LabelAlign`];
+          let labelPos;
+          switch (this.configOptions[`body${sectionLevel}LabelPos`]) {
+            case `body${sectionLevel}LabelOwnLine`:
+              labelPos = 'lineBefore';
+              break;
+            default:
+              labelPos = 'inline';
+          }
+          section.label.position = labelPos;
+        }
+      }
+    }
+    if (this.paperContent.conclusionLabel) {
+      this.paperObj.conclusion.label.labelText = this.paperContent.conclusionLabel.labelText;
+    }
+    if (this.paperContent.conclusionParagraphs) {
+      this.paperObj.conclusion.paragraphs = this.paperContent.conclusionParagraphs;
+    }
+  }
+
   samplePaperObj = {
     title: "My Paper",
     author: "Jared Beagley",
     headers:  {
-          includeHeaders: true,
-          diffFirstPage: true,
-          font: "Times New Roman",
-          fontSize: 12,
-          headers: [
-              {
-                  applyTo: "firstPage",
-                  leftType: "text",
-                  rightType: "pageNumber",
-                  left: "Running head: MY PAPER"
-              },
-              {
-                  applyTo: "default",
-                  leftType: "text",
-                  rightType: "pageNumber",
-                  left: "MY PAPER"
-              }
-          ]
-      },	
+      includeHeaders: true,
+      diffFirstPage: true,
+      headers: [
+          {
+              applyTo: "firstPage",
+              leftType: "text",
+              rightType: "pageNumber",
+              left: "Running head: MY PAPER"
+          },
+          {
+              applyTo: "default",
+              leftType: "text",
+              rightType: "pageNumber",
+              left: "MY PAPER"
+          }
+      ]
+    },	
     titleInfo:
     {
       onOwnPage: true,
