@@ -15,6 +15,23 @@
                               </ng-container>
                           </div>                
                       </div>
+                      <div class="radioGroup" *ngIf="field.inputType == 'textFormatter'">
+                        <div class="fieldTitle">{{field.displayName}}</div>
+                        <hr>
+                        <table class="formatterTable">
+                            <tr>
+                                <td [ngClass]="{'selectedFormat': paperSettings[field.name].bold, 'formatterCell': !paperSettings[field.name].bold}" (click)="paperSettings[field.name].bold = !paperSettings[field.name].bold; sendConfigObj();">
+                                    Bold
+                                </td>
+                                <td [ngClass]="{'selectedFormat': paperSettings[field.name].italic, 'formatterCell': !paperSettings[field.name].italic}" (click)="paperSettings[field.name].italic = !paperSettings[field.name].italic; sendConfigObj();">
+                                    Italic
+                                </td>
+                                <td [ngClass]="{'selectedFormat': paperSettings[field.name].underline, 'formatterCell': !paperSettings[field.name].underline}" (click)="paperSettings[field.name].underline = !paperSettings[field.name].underline; sendConfigObj();">
+                                    Underline
+                                </td>
+                            </tr>
+                        </table>
+                      </div>
                       <div class="radioGroup" *ngIf="field.inputType == 'fontSelect'">
                           <div class="fieldTitle">{{field.displayName}}</div>
                           <hr>

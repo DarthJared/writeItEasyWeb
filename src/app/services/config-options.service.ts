@@ -28,6 +28,7 @@ export class ConfigOptionsService {
       titleInfoIncludeOtherTextIndex: 5,
       titleInfoAlign: 'titleInfoAlignCenter',
       titleInfoPos: 'titleInfoSeparatePage',
+      titleInfoFormat: {bold: false, italic: false, underline: false},
       headerFont: 'Times New Roman',
       headerFontSize: '12',
       headerLeft: 'headerLeftPaperTitle',
@@ -246,6 +247,11 @@ export class ConfigOptionsService {
                               title: 'At Top of First Page'
                           }
                       ]
+                  },
+                  {
+                      name: 'titleInfoFormat',
+                      displayName: 'Bold / Italics / Underline',
+                      inputType: 'textFormatter'
                   }
               ]
           },

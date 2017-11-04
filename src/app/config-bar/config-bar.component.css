@@ -16,6 +16,36 @@ td {
     font-size: 12px;
 }
 
+.formatterTable {
+    width: 260px;
+    text-align: center;
+}
+
+.formatterCell {
+    width: 33%;
+    background-color: #BFBFBF;
+    border-radius: 5px;
+}
+
+.selectedFormat {
+    width: 33%;
+    background-color: #888888;
+    color: #FFFFFF;
+    border-radius: 5px;
+}
+
+.formatterCell:hover,
+.selectedFormat:hover {
+    background-color: #757575;
+    color: #FFFFFF ;
+}
+
+.formatterCell:active,
+.selectedFormat:active {
+    background-color: #5F5F5F;
+    color: #FFFFFF ;
+}
+
 .innerWrapper {
     position: absolute;
     width: calc(100% - 3px);
