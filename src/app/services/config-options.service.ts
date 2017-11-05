@@ -31,6 +31,7 @@ export class ConfigOptionsService {
       titleInfoFormat: {bold: false, italic: false, underline: false},
       headerFont: 'Times New Roman',
       headerFontSize: '12',
+      headerFormat: {bold: false, italic: false, underline: false},
       headerLeft: 'headerLeftPaperTitle',
       headerLeftInput: 'My Paper',
       headerRight: 'headerRightPageNumber',
@@ -44,6 +45,7 @@ export class ConfigOptionsService {
       headerFirstRightInput: '',
       summaryLabelFont: 'Times New Roman',
       summaryLabelFontSize: '12',
+      summaryLabelFormat: {bold: false, italic: false, underline: false},
       summaryOwnPage: true,
       summaryIncludeSectionLabel: true,
       summarySectionLabelAlign: 'summarySectionLabelCenter',
@@ -57,6 +59,9 @@ export class ConfigOptionsService {
       bodySectionLabelFontSize: '12',
       bodySubsectionLabelFontSize: '12',
       bodySubsubsectionLabelFontSize: '12',
+      bodySectionLabelFormat: {bold: false, italic: false, underline: false},
+      bodySubsectionLabelFormat: {bold: false, italic: false, underline: false},
+      bodySubsubsectionLabelFormat: {bold: false, italic: false, underline: false},
       bodySectionLabelPos: 'bodySectionLabelOwnLine',
       bodySectionLabelAlign: 'bodySectionLabelCenter',
       bodySubsectionLabelPos: 'bodySubsectionLabelOwnLine',
@@ -65,11 +70,13 @@ export class ConfigOptionsService {
       bodySubsubsectionLabelAlign: '',
       conclusionLabelFont: 'Times New Roman',
       conclusionLabelFontSize: '12',
+      conclusionLabelFormat: {bold: false, italic: false, underline: false},
       conclusionOwnPage: true,
       conclusionIncludeLabel: true,
       conclusionSectionLabelAlign: 'conclusionSectionLabelCenter',
       referencesFont: 'Times New Roman',
       referencesFontSize: '12',
+      referencesLabelFormat: {bold: false, italic: false, underline: false},
       referencesOwnPage: true,
       referencesIncludeLabel: true,
       referencesLabelInput: 'References',
@@ -413,6 +420,11 @@ export class ConfigOptionsService {
                               ]
                           }
                       ]
+                  },
+                  {
+                    name: 'headerFormat',
+                    displayName: 'Bold / Italics / Underline',
+                    inputType: 'textFormatter'
                   }
               ]
           },
@@ -430,7 +442,7 @@ export class ConfigOptionsService {
                   {
                       name: 'summaryIncludeSectionLabel',
                       displayName: 'Section Label',
-                      optionName: 'Include Section Label',
+                      optionName: 'Include Label',
                       inputType: 'toggle'
                   },
                   {
@@ -445,73 +457,78 @@ export class ConfigOptionsService {
                     inputType: 'fontSizeSelect',
                     hideUntil: 'summaryIncludeSectionLabel'
                 },
-                  {
-                      name: 'summarySectionLabelAlign',
-                      displayName: 'Section Label Align',
-                      inputType: 'radio',
-                      hideUntil: 'summaryIncludeSectionLabel',
-                      options: [
-                          {
-                              name: 'summarySectionLabelLeft',
-                              title: 'Left'
-                          },
-                          {
-                              name: 'summarySectionLabelCenter',
-                              title: 'Center'
-                          },
-                          {
-                              name: 'summarySectionLabelRight',
-                              title: 'Right'
-                          }
-                      ]
-                  }
-              ]
-          },
-          {
-              name: 'body',
-              title: 'Body',
-              hideUntil: 'none',
-              fields: [
-                  {
-                      name: 'bodyBetweenSections',
-                      displayName: 'Between Sections',
-                      inputType: 'radio',
-                      options: [
-                          {
-                              name: 'bodyBlankLineBetweenSections',
-                              title: 'Blank Line Between Each Section'
-                          },
-                          {
-                              name: 'bodyEachSectionOwnPage',
-                              title: 'Each Section On Its Own Page'
-                          },
-                          {
-                              name: 'bodyNoSpaceBetweenSections',
-                              title: 'No Space Between Sections'
-                          }
-                      ]
-                  },
-                  {
-                      name: 'bodyLabels',
-                      displayName: 'Include Labels',
-                      inputType: 'checkbox',
-                      reorderable: false,
-                      options: [
-                          {
-                              name: 'bodyIncludeSectionLabels',
-                              title: 'Include Section Labels'
-                          },
-                          {
-                              name: 'bodyIncludeSubsectionLabels',
-                              title: 'Include Subsection Labels'
-                          },
-                          {
-                              name: 'bodyIncludeSubsubsectionLabels',
-                              title: 'Include Subsubsection Labels'
-                          }
-                      ]
-                  },
-                  {
+                {
+                  name: 'summaryLabelFormat',
+                  displayName: 'Label Bold / Italics / Underline',
+                  inputType: 'textFormatter'
+                },
+                {
+                    name: 'summarySectionLabelAlign',
+                    displayName: 'Label Align',
+                    inputType: 'radio',
+                    hideUntil: 'summaryIncludeSectionLabel',
+                    options: [
+                        {
+                            name: 'summarySectionLabelLeft',
+                            title: 'Left'
+                        },
+                        {
+                            name: 'summarySectionLabelCenter',
+                            title: 'Center'
+                        },
+                        {
+                            name: 'summarySectionLabelRight',
+                            title: 'Right'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            name: 'body',
+            title: 'Body',
+            hideUntil: 'none',
+            fields: [
+            {   
+                    name: 'bodyBetweenSections',
+                    displayName: 'Between Sections',
+                    inputType: 'radio',
+                    options: [
+                        {
+                            name: 'bodyBlankLineBetweenSections',
+                            title: 'Blank Line Between Each Section'
+                        },
+                        {
+                            name: 'bodyEachSectionOwnPage',
+                            title: 'Each Section On Its Own Page'
+                        },
+                        {
+                            name: 'bodyNoSpaceBetweenSections',
+                            title: 'No Space Between Sections'
+                        }
+                    ]
+                },
+                {
+                    name: 'bodyLabels',
+                    displayName: 'Include Labels',
+                    inputType: 'checkbox',
+                    reorderable: false,
+                    options: [
+                        {
+                            name: 'bodyIncludeSectionLabels',
+                            title: 'Include Section Labels'
+                        },
+                        {
+                            name: 'bodyIncludeSubsectionLabels',
+                            title: 'Include Subsection Labels'
+                        },
+                        {
+                            name: 'bodyIncludeSubsubsectionLabels',
+                            title: 'Include Subsubsection Labels'
+                        }
+                    ]
+                },
+                {
                     name: 'bodySectionLabelFont',
                     displayName: 'Section Label Font',
                     inputType: 'fontSelect',
@@ -547,134 +564,149 @@ export class ConfigOptionsService {
                     inputType: 'fontSizeSelect',
                     hideUntil: 'bodyIncludeSubsubsectionLabels'
                 },
-                  {
-                      name: 'bodySectionLabelPos',
-                      displayName: 'Section Label Position',
-                      inputType: 'radio',
-                      hideUntil: 'bodyIncludeSectionLabels',
-                      options: [
-                          {
-                              name: 'bodySectionLabelInline',
-                              title: 'Inline with the First Paragraph'
-                          },
-                          {
-                              name: 'bodySectionLabelOwnLine',
-                              title: 'On Line Before First Paragraph'
-                          }
-                      ]
-                  },
-                  {
-                      name: 'bodySubsectionLabelPos',
-                      displayName: 'Subsection Label Position',
-                      inputType: 'radio',
-                      hideUntil: 'bodyIncludeSubsectionLabels',
-                      options: [
-                          {
-                              name: 'bodySubsectionLabelInline',
-                              title: 'Inline with the First Paragraph'
-                          },
-                          {
-                              name: 'bodySubsectionLabelOwnLine',
-                              title: 'On Line Before First Paragraph'
-                          }
-                      ]
-                  },
-                  {
-                      name: 'bodySubsubsectionLabelPos',
-                      displayName: 'Subsubsection Label Position',
-                      inputType: 'radio',
-                      hideUntil: 'bodyIncludeSubsubsectionLabels',
-                      options: [
-                          {
-                              name: 'bodySubsubsectionLabelInline',
-                              title: 'Inline with the First Paragraph'
-                          },
-                          {
-                              name: 'bodySubsubsectionLabelOwnLine',
-                              title: 'On Line Before First Paragraph'
-                          }
-                      ]
-                  },
-                  {
-                      name: 'bodySectionLabelAlign',
-                      displayName: 'Section Label Align',
-                      inputType: 'radio',
-                      hideUntil: 'bodyIncludeSectionLabels',
-                      options: [
-                          {
-                              name: 'bodySectionLabelLeft',
-                              title: 'Left'
-                          },
-                          {
-                              name: 'bodySectionLabelCenter',
-                              title: 'Center'
-                          },
-                          {
-                              name: 'bodySectionLabelRight',
-                              title: 'Right'
-                          }
-                      ]
-                  },
-                  {
-                      name: 'bodySubsectionLabelAlign',
-                      displayName: 'Subsection Label Align',
-                      inputType: 'radio',
-                      hideUntil: 'bodyIncludeSubsectionLabels',
-                      options: [
-                          {
-                              name: 'bodySubsectionLabelLeft',
-                              title: 'Left'
-                          },
-                          {
-                              name: 'bodySubsectionLabelCenter',
-                              title: 'Center'
-                          },
-                          {
-                              name: 'bodySubsectionLabelRight',
-                              title: 'Right'
-                          }
-                      ]
-                  },
-                  {
-                      name: 'bodySubsubsectionLabelAlign',
-                      displayName: 'Subsubsection Label Align',
-                      inputType: 'radio',
-                      hideUntil: 'bodyIncludeSubsubsectionLabels',
-                      options: [
-                          {
-                              name: 'bodySubsubsectionLabelLeft',
-                              title: 'Left'
-                          },
-                          {
-                              name: 'bodySubsubsectionLabelCenter',
-                              title: 'Center'
-                          },
-                          {
-                              name: 'bodySubsubsectionLabelRight',
-                              title: 'Right'
-                          }
-                      ]
-                  }
-              ]
-          },
-          {
-              name: 'conclusion',
-              title: 'Conclusion',
-              hideUntil: 'includeConclusion',
-              fields: [
-                  {
-                      name: 'conclusionOwnPage',
-                      displayName: 'Separate Page',
-                      optionName: 'On its Own Page',
-                      inputType: 'toggle'
-                  },
-                  {
-                      name: 'conclusionIncludeLabel',
-                      displayName: 'Section Label',
-                      optionName: 'Include Section Label',
-                      inputType: 'toggle'
-                  },
-                  {
+                {
+                    name: 'bodySectionLabelPos',
+                    displayName: 'Section Label Position',
+                    inputType: 'radio',
+                    hideUntil: 'bodyIncludeSectionLabels',
+                    options: [
+                        {
+                            name: 'bodySectionLabelInline',
+                            title: 'Inline with the First Paragraph'
+                        },
+                        {
+                            name: 'bodySectionLabelOwnLine',
+                            title: 'On Line Before First Paragraph'
+                        }
+                    ]
+                },
+                {
+                    name: 'bodySubsectionLabelPos',
+                    displayName: 'Subsection Label Position',
+                    inputType: 'radio',
+                    hideUntil: 'bodyIncludeSubsectionLabels',
+                    options: [
+                        {
+                            name: 'bodySubsectionLabelInline',
+                            title: 'Inline with the First Paragraph'
+                        },
+                        {
+                            name: 'bodySubsectionLabelOwnLine',
+                            title: 'On Line Before First Paragraph'
+                        }
+                    ]
+                },
+                {
+                    name: 'bodySubsubsectionLabelPos',
+                    displayName: 'Subsubsection Label Position',
+                    inputType: 'radio',
+                    hideUntil: 'bodyIncludeSubsubsectionLabels',
+                    options: [
+                        {
+                            name: 'bodySubsubsectionLabelInline',
+                            title: 'Inline with the First Paragraph'
+                        },
+                        {
+                            name: 'bodySubsubsectionLabelOwnLine',
+                            title: 'On Line Before First Paragraph'
+                        }
+                    ]
+                },
+                {
+                  name: 'bodySectionLabelFormat',
+                  displayName: 'Section Label Bold / Italics / Underline',
+                  inputType: 'textFormatter'
+                },
+                {
+                  name: 'bodySubsectionLabelFormat',
+                  displayName: 'Subsection Label Bold / Italics / Underline',
+                  inputType: 'textFormatter'
+                },
+                {
+                  name: 'bodySubsubsectionLabelFormat',
+                  displayName: 'Subsubsection Label Bold / Italics / Underline',
+                  inputType: 'textFormatter'
+                },
+                {
+                    name: 'bodySectionLabelAlign',
+                    displayName: 'Section Label Align',
+                    inputType: 'radio',
+                    hideUntil: 'bodyIncludeSectionLabels',
+                    options: [
+                        {
+                            name: 'bodySectionLabelLeft',
+                            title: 'Left'
+                        },
+                        {
+                            name: 'bodySectionLabelCenter',
+                            title: 'Center'
+                        },
+                        {
+                            name: 'bodySectionLabelRight',
+                            title: 'Right'
+                        }
+                    ]
+                },
+                {
+                    name: 'bodySubsectionLabelAlign',
+                    displayName: 'Subsection Label Align',
+                    inputType: 'radio',
+                    hideUntil: 'bodyIncludeSubsectionLabels',
+                    options: [
+                        {
+                            name: 'bodySubsectionLabelLeft',
+                            title: 'Left'
+                        },
+                        {
+                            name: 'bodySubsectionLabelCenter',
+                            title: 'Center'
+                        },
+                        {
+                            name: 'bodySubsectionLabelRight',
+                            title: 'Right'
+                        }
+                    ]
+                },
+                {
+                    name: 'bodySubsubsectionLabelAlign',
+                    displayName: 'Subsubsection Label Align',
+                    inputType: 'radio',
+                    hideUntil: 'bodyIncludeSubsubsectionLabels',
+                    options: [
+                        {
+                            name: 'bodySubsubsectionLabelLeft',
+                            title: 'Left'
+                        },
+                        {
+                            name: 'bodySubsubsectionLabelCenter',
+                            title: 'Center'
+                        },
+                        {
+                            name: 'bodySubsubsectionLabelRight',
+                            title: 'Right'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            name: 'conclusion',
+            title: 'Conclusion',
+            hideUntil: 'includeConclusion',
+            fields: [
+                {
+                    name: 'conclusionOwnPage',
+                    displayName: 'Separate Page',
+                    optionName: 'On its Own Page',
+                    inputType: 'toggle'
+                },
+                {
+                    name: 'conclusionIncludeLabel',
+                    displayName: 'Section Label',
+                    optionName: 'Include Section Label',
+                    inputType: 'toggle'
+                },
+                {
                     name: 'conclusionLabelFont',
                     displayName: 'Label Font',
                     inputType: 'fontSelect',
@@ -686,93 +718,103 @@ export class ConfigOptionsService {
                     inputType: 'fontSizeSelect',
                     hideUntil: 'conclusionIncludeLabel'
                 },
-                  {
-                      name: 'conclusionSectionLabelAlign',
-                      displayName: 'Section Label Align',
-                      inputType: 'radio',
-                      hideUntil: 'conclusionIncludeLabel',
-                      options: [
-                          {
-                              name: 'conclusionSectionLabelLeft',
-                              title: 'Left'
-                          },
-                          {
-                              name: 'conclusionSectionLabelCenter',
-                              title: 'Center'
-                          },
-                          {
-                              name: 'conclusionSectionLabelRight',
-                              title: 'Right'
-                          }
-                      ]
-                  }
-              ]
-          },
-          {
-              name: 'referencesWorksCited',
-              title: 'References / Works Cited',
-              hideUntil: 'includeReferencesWorksCited',
-              fields: [
-                  {
-                      name: 'referencesFont',
-                      displayName: 'Font',
-                      inputType: 'fontSelect'
-                  },
-                  {
-                      name: 'referencesFontSize',
-                      displayName: 'Font Size',
-                      inputType: 'fontSizeSelect'
-                  },
-                  {
-                      name: 'referencesOwnPage',
-                      displayName: 'Separate Page',
-                      optionName: 'On its Own Page',
-                      inputType: 'toggle'
-                  },
-                  {
-                      name: 'referencesIncludeLabel',
-                      displayName: 'Section Label',
-                      optionName: 'Include Section Label',
-                      inputType: 'toggleInput',
-                      options: [
-                          {
-                              title: 'Include Section Label',
-                              placeholder: 'Enter Section Label here...',
-                              type: 'text'
-                          }
-                      ]
-                  },
-                  {
-                      name: 'referencesLabelAlign',
-                      displayName: 'Align References Section Label',
-                      inputType: 'radio',
-                      hideUntil: 'referencesIncludeLabel',
-                      options: [
-                          {
-                              name: 'referencesLabelAlignLeft',
-                              title: 'Left'
-                          },
-                          {
-                              name: 'referencesLabelAlignCenter',
-                              title: 'Center'
-                          },
-                          {
-                              name: 'referencesLabelAlignRight',
-                              title: 'Right'
-                          }
-                      ]
-                  },
-                  {
-                      name: 'referencesHangingIndent',
-                      displayName: 'Reference Hanging Indent',
-                      inputType: 'indentCounter'
-                  }
-              ]
-          }
+                {
+                  name: 'conclusionLabelFormat',
+                  displayName: 'Label Bold / Italics / Underline',
+                  inputType: 'textFormatter'
+                },
+                {
+                    name: 'conclusionSectionLabelAlign',
+                    displayName: 'Section Label Align',
+                    inputType: 'radio',
+                    hideUntil: 'conclusionIncludeLabel',
+                    options: [
+                        {
+                            name: 'conclusionSectionLabelLeft',
+                            title: 'Left'
+                        },
+                        {
+                            name: 'conclusionSectionLabelCenter',
+                            title: 'Center'
+                        },
+                        {
+                            name: 'conclusionSectionLabelRight',
+                            title: 'Right'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            name: 'referencesWorksCited',
+            title: 'References / Works Cited',
+            hideUntil: 'includeReferencesWorksCited',
+            fields: [
+                {
+                    name: 'referencesFont',
+                    displayName: 'Font',
+                    inputType: 'fontSelect'
+                },
+                {
+                    name: 'referencesFontSize',
+                    displayName: 'Font Size',
+                    inputType: 'fontSizeSelect'
+                },
+                {
+                    name: 'referencesOwnPage',
+                    displayName: 'Separate Page',
+                    optionName: 'On its Own Page',
+                    inputType: 'toggle'
+                },
+                {
+                    name: 'referencesIncludeLabel',
+                    displayName: 'Section Label',
+                    optionName: 'Include Section Label',
+                    inputType: 'toggleInput',
+                    options: [
+                        {
+                            title: 'Include Section Label',
+                            placeholder: 'Enter Section Label here...',
+                            type: 'text'
+                        }
+                    ]
+                },
+                {
+                  name: 'referencesLabelFormat',
+                  displayName: 'References Label Bold / Italics / Underline',
+                  inputType: 'textFormatter'
+                },
+                {
+                    name: 'referencesLabelAlign',
+                    displayName: 'Align References Section Label',
+                    inputType: 'radio',
+                    hideUntil: 'referencesIncludeLabel',
+                    options: [
+                        {
+                            name: 'referencesLabelAlignLeft',
+                            title: 'Left'
+                        },
+                        {
+                            name: 'referencesLabelAlignCenter',
+                            title: 'Center'
+                        },
+                        {
+                            name: 'referencesLabelAlignRight',
+                            title: 'Right'
+                        }
+                    ]
+                },
+                {
+                    name: 'referencesHangingIndent',
+                    displayName: 'Reference Hanging Indent',
+                    inputType: 'indentCounter'
+                }
+            ]
+        }
           
         ]
     };
-  }
-  constructor() { }
+    }
+    constructor() { }
 
 }

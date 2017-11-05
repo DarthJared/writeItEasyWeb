@@ -23,6 +23,22 @@ p {
     width: 100%;
 }
 
+.bolded {
+    font-weight: bold;
+}
+
+.italicized {
+    font-style: italic;
+}
+
+.underlined {
+    text-decoration: underline;
+}
+
+.underlined div {
+    text-decoration: underline;
+}
+
 .innerWrap {
     position: absolute;
     width: calc(100% - 6px);
@@ -122,6 +138,9 @@ p {
     background-color: #6E6E6E; 
     color: #FFFFFF; 
     border-radius: 3px;
+    text-decoration: none !important;
+    font-weight: normal !important;
+    font-style: normal !important;
 }
 
 .contentLabel {

@@ -7,7 +7,7 @@
                   <div class="titleLabelLabel">
                       {{configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent ? "First Page " : ""}}Header
                   </div>
-                  <div class="titleInfoTopWrap">
+                  <div class="titleInfoTopWrap" [ngClass]="{'bolded': configOptions.headerFormat.bold, 'italicized': configOptions.headerFormat.italic, 'underlined': configOptions.headerFormat.underline}">
                       <div class="headerLabelEnter" id="editting" style="width: calc(100% - 24px);">
                           <ng-container *ngIf="(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && configOptions.headerFirstLeft == 'headerFirstLeftPageNumber') || (!configOptions.headerMoreDifferent && configOptions.headerLeft == 'headerLeftPageNumber')">
                               <div *ngIf="configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHead" class="runningHead">Running head:&nbsp;</div>
@@ -44,7 +44,7 @@
                           Class
                       </div>
                       <div class="titleInfoWrap">
-                          <div contenteditable="true" class="labelEnter" id="editting" #classEnter (blur)="updateTitleInfo('Class', classEnter.innerHTML)" [innerHTML]="getTitleField('Class')"></div>
+                          <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #classEnter (blur)="updateTitleInfo('Class', classEnter.innerHTML)" [innerHTML]="getTitleField('Class')"></div>
                           <div class="labelOptions">
                               ...
                           </div>
@@ -55,7 +55,7 @@
                           Name
                       </div>
                       <div class="titleInfoWrap">
-                          <div contenteditable="true" class="labelEnter" id="editting" #nameEnter (blur)="updateTitleInfo('Name', nameEnter.innerHTML)" [innerHTML]="getTitleField('Name')"></div>
+                          <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #nameEnter (blur)="updateTitleInfo('Name', nameEnter.innerHTML)" [innerHTML]="getTitleField('Name')"></div>
                           <div class="labelOptions">
                               ...
                           </div>
@@ -66,7 +66,7 @@
                           Other
                       </div>
                       <div class="titleInfoWrap">
-                          <div contenteditable="true" class="labelEnter" id="editting" #otherEnter (blur)="updateTitleInfo('Other', otherEnter.innerHTML)" [innerHTML]="getTitleField('Other')"></div>
+                          <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #otherEnter (blur)="updateTitleInfo('Other', otherEnter.innerHTML)" [innerHTML]="getTitleField('Other')"></div>
                           <div class="labelOptions">
                               ...
                           </div>
@@ -77,7 +77,7 @@
                           Professor
                       </div>
                       <div class="titleInfoWrap">
-                          <div contenteditable="true" class="labelEnter" id="editting" #profEnter (blur)="updateTitleInfo('Professor', profEnter.innerHTML)" [innerHTML]="getTitleField('Professor')"></div>
+                          <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #profEnter (blur)="updateTitleInfo('Professor', profEnter.innerHTML)" [innerHTML]="getTitleField('Professor')"></div>
                           <div class="labelOptions">
                               ...
                           </div>
@@ -88,7 +88,7 @@
                           School
                       </div>
                       <div class="titleInfoWrap">
-                          <div contenteditable="true" class="labelEnter" id="editting" #schoolEnter (blur)="updateTitleInfo('School', schoolEnter.innerHTML)" [innerHTML]="getTitleField('School')"></div>
+                          <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #schoolEnter (blur)="updateTitleInfo('School', schoolEnter.innerHTML)" [innerHTML]="getTitleField('School')"></div>
                           <div class="labelOptions">
                               ...
                           </div>
@@ -99,7 +99,7 @@
                           Title
                       </div>
                       <div class="titleInfoWrap">
-                          <div contenteditable="true" class="labelEnter" id="editting" #titleEnter (blur)="updateTitleInfo('Title', titleEnter.innerHTML)" [innerHTML]="getTitleField('Title')"></div>
+                          <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #titleEnter (blur)="updateTitleInfo('Title', titleEnter.innerHTML)" [innerHTML]="getTitleField('Title')"></div>
                           <div class="labelOptions">
                               ...
                           </div>
@@ -115,7 +115,7 @@
                   <div class="titleLabelLabel">
                       {{configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') ? "First Page " : ""}}Header
                   </div>
-                  <div class="titleInfoTopWrap">
+                  <div class="titleInfoTopWrap" [ngClass]="{'bolded': configOptions.headerFormat.bold, 'italicized': configOptions.headerFormat.italic, 'underlined': configOptions.headerFormat.underline}">
                       <div class="headerLabelEnter" id="editting" style="width: calc(100% - 24px);">
                           <ng-container *ngIf="((!configOptions.includeTitle || (configOptions.includeTitle && configOptions.titleInfoPos !== 'titleInfoSeparatePage')) && configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && configOptions.headerFirstLeft == 'headerFirstLeftPageNumber') || (((configOptions.includeTitle && configOptions.titleInfoPos == 'titleInfoSeparatePage') || !configOptions.headerMoreDifferent) && configOptions.headerLeft == 'headerLeftPageNumber')">
                               <div *ngIf="configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHead && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage')" class="runningHead">Running head:&nbsp;</div>
@@ -152,7 +152,7 @@
                               Class
                           </div>
                           <div class="titleInfoTopWrap">
-                              <div contenteditable="true" class="labelEnter" id="editting" #classEnter (blur)="updateTitleInfo('Class', classEnter.innerHTML)" [innerHTML]="getTitleField('Class')"></div>
+                              <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #classEnter (blur)="updateTitleInfo('Class', classEnter.innerHTML)" [innerHTML]="getTitleField('Class')"></div>
                               <div class="labelOptions">
                                   ...
                               </div>
@@ -163,7 +163,7 @@
                               Name
                           </div>
                           <div class="titleInfoTopWrap">
-                              <div contenteditable="true" class="labelEnter" id="editting" #nameEnter (blur)="updateTitleInfo('Name', nameEnter.innerHTML)" [innerHTML]="getTitleField('Name')"></div>
+                              <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #nameEnter (blur)="updateTitleInfo('Name', nameEnter.innerHTML)" [innerHTML]="getTitleField('Name')"></div>
                               <div class="labelOptions">
                                   ...
                               </div>
@@ -174,7 +174,7 @@
                               Other
                           </div>
                           <div class="titleInfoTopWrap">
-                              <div contenteditable="true" class="labelEnter" id="editting" #otherEnter (blur)="updateTitleInfo('Other', otherEnter.innerHTML)" [innerHTML]="getTitleField('Other')"></div>
+                              <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #otherEnter (blur)="updateTitleInfo('Other', otherEnter.innerHTML)" [innerHTML]="getTitleField('Other')"></div>
                               <div class="labelOptions">
                                   ...
                               </div>
@@ -185,7 +185,7 @@
                               Professor
                           </div>
                           <div class="titleInfoTopWrap">
-                              <div contenteditable="true" class="labelEnter" id="editting" #profEnter (blur)="updateTitleInfo('Professor', profEnter.innerHTML)" [innerHTML]="getTitleField('Professor')"></div>
+                              <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #profEnter (blur)="updateTitleInfo('Professor', profEnter.innerHTML)" [innerHTML]="getTitleField('Professor')"></div>
                               <div class="labelOptions">
                                   ...
                               </div>
@@ -196,7 +196,7 @@
                               School
                           </div>
                           <div class="titleInfoTopWrap">
-                              <div contenteditable="true" class="labelEnter" id="editting" #schoolEnter (blur)="updateTitleInfo('School', schoolEnter.innerHTML)" [innerHTML]="getTitleField('School')"></div>
+                              <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #schoolEnter (blur)="updateTitleInfo('School', schoolEnter.innerHTML)" [innerHTML]="getTitleField('School')"></div>
                               <div class="labelOptions">
                                   ...
                               </div>
@@ -207,7 +207,7 @@
                               Title
                           </div>
                           <div class="titleInfoTopWrap">
-                              <div contenteditable="true" class="labelEnter" id="editting" #titleEnter (blur)="updateTitleInfo('Title', titleEnter.innerHTML)" [innerHTML]="getTitleField('Title')"></div>
+                              <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #titleEnter (blur)="updateTitleInfo('Title', titleEnter.innerHTML)" [innerHTML]="getTitleField('Title')"></div>
                               <div class="labelOptions">
                                   ...
                               </div>
@@ -225,7 +225,7 @@
                       Abstract / Summary Label
                   </div>
                   <div class="firstLabelWrap">
-                      <div contenteditable="true" class="labelEnter" id="editting" #sumLabel (blur)="setLabel('summary', sumLabel.innerHTML)" [innerHTML]="getLabel('summary')"></div>
+                      <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.summaryLabelFormat.bold, 'italicized': configOptions.summaryLabelFormat.italic, 'underlined': configOptions.summaryLabelFormat.underline}" id="editting" #sumLabel (blur)="setLabel('summary', sumLabel.innerHTML)" [innerHTML]="getLabel('summary')"></div>
                       <div class="labelOptions">
                           ...
                       </div>
@@ -252,7 +252,7 @@
                           x
                       </div>
                       <div class="firstLabelWrap" *ngIf="(section.sectionLevel === 1 && configOptions.bodyIncludeSectionLabels) || (section.sectionLevel === 2 && configOptions.bodyIncludeSubsectionLabels) || (section.sectionLevel === 3 && configOptions.bodyIncludeSubsubsectionLabels)">
-                          <div contenteditable="true" class="labelEnter" id="editting" #sectionLabelContent (blur)="setSectionLabel(section, sectionLabelContent.innerHTML)" [innerHTML]="getSectionLabel(section)"></div>
+                          <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': getSectionLabelBold(section.sectionLevel), 'italicized': getSectionLabelItalic(section.sectionLevel), 'underlined': getSectionLabelUnderline(section.sectionLevel)}" id="editting" #sectionLabelContent (blur)="setSectionLabel(section, sectionLabelContent.innerHTML)" [innerHTML]="getSectionLabel(section)"></div>
                           <div class="labelOptions">
                               ...
                           </div>
@@ -273,7 +273,7 @@
                           Conclusion Label
                       </div>
                       <div class="firstLabelWrap">
-                          <div contenteditable="true" class="labelEnter" id="editting" #concLabel (blur)="setLabel('conclusion', concLabel.innerHTML)" [innerHTML]="getLabel('conclusion')"></div>
+                          <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.conclusionLabelFormat.bold, 'italicized': configOptions.conclusionLabelFormat.italic, 'underlined': configOptions.conclusionLabelFormat.underline}" id="editting" #concLabel (blur)="setLabel('conclusion', concLabel.innerHTML)" [innerHTML]="getLabel('conclusion')"></div>
                           <div class="labelOptions">
                               ...
                           </div>
@@ -297,7 +297,7 @@
                       <div class="titleLabelLabel">
                           {{configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && !configOptions.includeAbstractSummary ? "First Page " : ""}}Header
                       </div>
-                      <div class="titleInfoTopWrap">
+                      <div class="titleInfoTopWrap" [ngClass]="{'bolded': configOptions.headerFormat.bold, 'italicized': configOptions.headerFormat.italic, 'underlined': configOptions.headerFormat.underline}">
                           <div class="headerLabelEnter" id="editting" style="width: calc(100% - 24px);">
                               <ng-container *ngIf="((!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && !configOptions.includeAbstractSummary && index === 0 && configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && configOptions.headerFirstLeft == 'headerFirstLeftPageNumber') || (((configOptions.includeTitle && configOptions.titleInfoPos == 'titleInfoSeparatePage') || configOptions.includeAbstractSummary || index !== 0 || !configOptions.headerDifferentFirstPage || !configOptions.headerMoreDifferent) && configOptions.headerLeft == 'headerLeftPageNumber')">
                                   <div *ngIf="configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHead && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && !configOptions.includeAbstractSummary" class="runningHead">Running head:&nbsp;</div>
@@ -335,7 +335,7 @@
                                   Class
                               </div>
                               <div class="titleInfoTopWrap">
-                                  <div contenteditable="true" class="labelEnter" id="editting" #classEnter (blur)="updateTitleInfo('Class', classEnter.innerHTML)" [innerHTML]="getTitleField('Class')"></div>
+                                  <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #classEnter (blur)="updateTitleInfo('Class', classEnter.innerHTML)" [innerHTML]="getTitleField('Class')"></div>
                                   <div class="labelOptions">
                                       ...
                                   </div>
@@ -346,7 +346,7 @@
                                   Name
                               </div>
                               <div class="titleInfoTopWrap">
-                                  <div contenteditable="true" class="labelEnter" id="editting" #nameEnter (blur)="updateTitleInfo('Name', nameEnter.innerHTML)" [innerHTML]="getTitleField('Name')"></div>
+                                  <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #nameEnter (blur)="updateTitleInfo('Name', nameEnter.innerHTML)" [innerHTML]="getTitleField('Name')"></div>
                                   <div class="labelOptions">
                                       ...
                                   </div>
@@ -357,7 +357,7 @@
                                   Other
                               </div>
                               <div class="titleInfoTopWrap">
-                                  <div contenteditable="true" class="labelEnter" id="editting" #otherEnter (blur)="updateTitleInfo('Other', otherEnter.innerHTML)" [innerHTML]="getTitleField('Other')"></div>
+                                  <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #otherEnter (blur)="updateTitleInfo('Other', otherEnter.innerHTML)" [innerHTML]="getTitleField('Other')"></div>
                                   <div class="labelOptions">
                                       ...
                                   </div>
@@ -368,7 +368,7 @@
                                   Professor
                               </div>
                               <div class="titleInfoTopWrap">
-                                  <div contenteditable="true" class="labelEnter" id="editting" #profEnter (blur)="updateTitleInfo('Professor', profEnter.innerHTML)" [innerHTML]="getTitleField('Professor')"></div>
+                                  <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #profEnter (blur)="updateTitleInfo('Professor', profEnter.innerHTML)" [innerHTML]="getTitleField('Professor')"></div>
                                   <div class="labelOptions">
                                       ...
                                   </div>
@@ -379,7 +379,7 @@
                                   School
                               </div>
                               <div class="titleInfoTopWrap">
-                                  <div contenteditable="true" class="labelEnter" id="editting" #schoolEnter (blur)="updateTitleInfo('School', schoolEnter.innerHTML)" [innerHTML]="getTitleField('School')"></div>
+                                  <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #schoolEnter (blur)="updateTitleInfo('School', schoolEnter.innerHTML)" [innerHTML]="getTitleField('School')"></div>
                                   <div class="labelOptions">
                                       ...
                                   </div>
@@ -390,7 +390,7 @@
                                   Title
                               </div>
                               <div class="titleInfoTopWrap">
-                                  <div contenteditable="true" class="labelEnter" id="editting" #titleEnter (blur)="updateTitleInfo('Title', titleEnter.innerHTML)" [innerHTML]="getTitleField('Title')"></div>
+                                  <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.titleInfoFormat.bold, 'italicized': configOptions.titleInfoFormat.italic, 'underlined': configOptions.titleInfoFormat.underline}" id="editting" #titleEnter (blur)="updateTitleInfo('Title', titleEnter.innerHTML)" [innerHTML]="getTitleField('Title')"></div>
                                   <div class="labelOptions">
                                       ...
                                   </div>
@@ -403,10 +403,10 @@
               </ng-container>
               <div class="topLabelWrap" [ngClass]="{'alignCenter': (configOptions.bodySectionLabelAlign === 'bodySectionLabelCenter' && section.sectionLevel === 1 && configOptions.bodySectionLabelPos !== 'bodySectionLabelInline')  || (configOptions.bodySubsectionLabelAlign === 'bodySubsectionLabelCenter' && section.sectionLevel === 2 && configOptions.bodySubsectionLabelPos !== 'bodySubsectionLabelInline') || (configOptions.bodySubsubsectionLabelAlign === 'bodySubsubsectionLabelCenter' && section.sectionLevel === 3 && configOptions.bodySubsubsectionLabelPos !== 'bodySubsubsectionLabelInline'), 'alignRight': (configOptions.bodySectionLabelAlign === 'bodySectionLabelRight' && section.sectionLevel === 1 && configOptions.bodySectionLabelPos !== 'bodySectionLabelInline') || (configOptions.bodySubsectionLabelAlign === 'bodySubsectionLabelRight' && section.sectionLevel === 2 && configOptions.bodySubsectionLabelPos !== 'bodySubsectionLabelInline') || (configOptions.bodySubsubsectionLabelAlign === 'bodySubsubsectionLabelRight' && section.sectionLevel === 3 && configOptions.bodySubsubsectionLabelPos !== 'bodySubsubsectionLabelInline')}" *ngIf="(section.sectionLevel === 1 && configOptions.bodyIncludeSectionLabels) || (section.sectionLevel === 2 && configOptions.bodyIncludeSubsectionLabels) || (section.sectionLevel === 3 && configOptions.bodyIncludeSubsubsectionLabels)">
                   <div class="labelLabel">
-                      S{{section.sectionLevel === 3 ? 'ubsubs' : section.sectionLevel === 2 ? 'ubs' : section.sectionLevel === 1 ? '' : ''}}ectionection Label
+                      S{{section.sectionLevel === 3 ? 'ubsubs' : section.sectionLevel === 2 ? 'ubs' : section.sectionLevel === 1 ? '' : ''}}ection Label
                   </div>
                   <div class="firstLabelWrap">
-                      <div contenteditable="true" class="labelEnter" id="editting" #sectionLabelContent (blur)="setSectionLabel(section, sectionLabelContent.innerHTML)" [innerHTML]="getSectionLabel(section)"></div>
+                      <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': getSectionLabelBold(section.sectionLevel), 'italicized': getSectionLabelItalic(section.sectionLevel), 'underlined': getSectionLabelUnderline(section.sectionLevel)}" [innerHTML]="getSectionLabel(section)"></div>
                       <div class="labelOptions">
                           ...
                       </div>
@@ -433,7 +433,7 @@
                   <div class="titleLabelLabel">
                       {{configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && !configOptions.includeAbstractSummary ? "First Page " : ""}}Header
                   </div>
-                  <div class="titleInfoTopWrap">
+                  <div class="titleInfoTopWrap" [ngClass]="{'bolded': configOptions.headerFormat.bold, 'italicized': configOptions.headerFormat.italic, 'underlined': configOptions.headerFormat.underline}">
                       <div class="headerLabelEnter" id="editting" style="width: calc(100% - 24px);">
                           <ng-container *ngIf="(configOptions.headerDifferentFirstPage && configOptions.headerMoreDifferent && (!configOptions.includeTitle || configOptions.titleInfoPos !== 'titleInfoSeparatePage') && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && !configOptions.includeAbstractSummary && configOptions.headerFirstLeft == 'headerFirstLeftPageNumber') || ((!configOptions.headerDifferentFirstPage || !configOptions.headerMoreDifferent || (configOptions.includeTitle && configOptions.titleInfoPos == 'titleInfoSeparatePage') || configOptions.bodyBetweenSections == 'bodyEachSectionOwnPage' || configOptions.includeAbstractSummary) && configOptions.headerLeft == 'headerLeftPageNumber')">
                               <div *ngIf="configOptions.headerDifferentFirstPage && configOptions.headerUseRunningHead && !configOptions.includeTitle && configOptions.bodyBetweenSections !== 'bodyEachSectionOwnPage' && !configOptions.includeAbstractSummary" class="runningHead">Running head:&nbsp;</div>
@@ -471,7 +471,7 @@
                             S{{section.sectionLevel === 3 ? 'ubsubs' : section.sectionLevel === 2 ? 'ubs' : section.sectionLevel === 1 ? '' : ''}}ection Label
                         </div>
                         <div class="firstLabelWrap">
-                            <div contenteditable="true" class="labelEnter" id="editting" #sectionLabelContent (blur)="setSectionLabel(section, sectionLabelContent.innerHTML)" [innerHTML]="getSectionLabel(section)"></div>
+                            <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': getSectionLabelBold(section.sectionLevel), 'italicized': getSectionLabelItalic(section.sectionLevel), 'underlined': getSectionLabelUnderline(section.sectionLevel)}" id="editting" #sectionLabelContent (blur)="setSectionLabel(section, sectionLabelContent.innerHTML)" [innerHTML]="getSectionLabel(section)"></div>
                             <div class="labelOptions">
                                 ...
                             </div>
@@ -498,7 +498,7 @@
                       Conclusion Label
                   </div>
                   <div class="firstLabelWrap">
-                      <div contenteditable="true" class="labelEnter" id="editting" #concLabel (blur)="setLabel('conclusion', concLabel.innerHTML)" [innerHTML]="getLabel('conclusion')"></div>
+                      <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.conclusionLabelFormat.bold, 'italicized': configOptions.conclusionLabelFormat.italic, 'underlined': configOptions.conclusionLabelFormat.underline}" id="editting" #concLabel (blur)="setLabel('conclusion', concLabel.innerHTML)" [innerHTML]="getLabel('conclusion')"></div>
                       <div class="labelOptions">
                           ...
                       </div>
@@ -520,7 +520,7 @@
                   <div class="titleLabelLabel">
                       Header
                   </div>
-                  <div class="titleInfoTopWrap">
+                  <div class="titleInfoTopWrap" [ngClass]="{'bolded': configOptions.headerFormat.bold, 'italicized': configOptions.headerFormat.italic, 'underlined': configOptions.headerFormat.underline}">
                       <div class="headerLabelEnter" id="editting" style="width: calc(100% - 24px);">
                           <ng-container *ngIf="configOptions.headerLeft == 'headerLeftPageNumber'">
                               <div class="headerEnter headerLeft" title="Inserted when paper is generated">
@@ -554,7 +554,7 @@
                   Conclusion Label
               </div>
               <div class="firstLabelWrap">
-                  <div contenteditable="true" class="labelEnter" id="editting" #concLabel (blur)="setLabel('conclusion', concLabel.innerHTML)" [innerHTML]="getLabel('conclusion')"></div>
+                  <div contenteditable="true" class="labelEnter" [ngClass]="{'bolded': configOptions.conclusionLabelFormat.bold, 'italicized': configOptions.conclusionLabelFormat.italic, 'underlined': configOptions.conclusionLabelFormat.underline}" id="editting" #concLabel (blur)="setLabel('conclusion', concLabel.innerHTML)" [innerHTML]="getLabel('conclusion')"></div>
                   <div class="labelOptions">
                       ...
                   </div>

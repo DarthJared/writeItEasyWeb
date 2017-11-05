@@ -18,7 +18,7 @@
                       <div class="radioGroup" *ngIf="field.inputType == 'textFormatter'">
                         <div class="fieldTitle">{{field.displayName}}</div>
                         <hr>
-                        <table class="formatterTable">
+                        <!-- <table class="formatterTable">
                             <tr>
                                 <td [ngClass]="{'selectedFormat': paperSettings[field.name].bold, 'formatterCell': !paperSettings[field.name].bold}" (click)="paperSettings[field.name].bold = !paperSettings[field.name].bold; sendConfigObj();">
                                     Bold
@@ -30,7 +30,13 @@
                                     Underline
                                 </td>
                             </tr>
-                        </table>
+                        </table> -->
+                        <input class="option" type="checkbox" [checked]="paperSettings[field.name].bold" (change)="paperSettings[field.name].bold = !paperSettings[field.name].bold; sendConfigObj();"><span class="fieldOptions">Bold</span>
+                        <br>
+                        <input class="option fieldOptions" type="checkbox" [checked]="paperSettings[field.name].italic" (change)="paperSettings[field.name].italic = !paperSettings[field.name].italic; sendConfigObj();"><span class="fieldOptions">Italic</span>
+                        <br>
+                        <input class="option fieldOptions" type="checkbox" [checked]="paperSettings[field.name].underline" (change)="paperSettings[field.name].underline = !paperSettings[field.name].underline; sendConfigObj();"><span class="fieldOptions">Underline</span>
+                        <br>
                       </div>
                       <div class="radioGroup" *ngIf="field.inputType == 'fontSelect'">
                           <div class="fieldTitle">{{field.displayName}}</div>

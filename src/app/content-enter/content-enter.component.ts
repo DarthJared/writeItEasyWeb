@@ -286,6 +286,21 @@ export class ContentEnterComponent implements OnInit, OnChanges {
     return toReturn;
   }
 
+  getSectionLabelBold(sectionLevel) {
+    let labelFormatText = `bodyS${sectionLevel === 3 ? 'ubsubs' : sectionLevel === 2 ? 'ubs' : sectionLevel === 1 ? '' : ''}ectionLabelFormat`;
+    return this.configOptions[labelFormatText].bold;
+  }
+
+  getSectionLabelItalic(sectionLevel) {
+    let labelFormatText = `bodyS${sectionLevel === 3 ? 'ubsubs' : sectionLevel === 2 ? 'ubs' : sectionLevel === 1 ? '' : ''}ectionLabelFormat`;
+    return this.configOptions[labelFormatText].italic;
+  }
+
+  getSectionLabelUnderline(sectionLevel) {
+    let labelFormatText = `bodyS${sectionLevel === 3 ? 'ubsubs' : sectionLevel === 2 ? 'ubs' : sectionLevel === 1 ? '' : ''}ectionLabelFormat`;
+    return this.configOptions[labelFormatText].underline;
+  }
+
   setSectionLabel(section, labelContent) {
     let setSectionObj;
     if (this.contentObj.bodySections) {
