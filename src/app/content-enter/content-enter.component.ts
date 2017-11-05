@@ -317,6 +317,7 @@ export class ContentEnterComponent implements OnInit, OnChanges {
     }   
     setSectionObj.label.labelText = labelContent;
     this.contentObj.bodySections.push(setSectionObj);
+    this.sortSections();
     this.emitContentObjChange();
   }
 
@@ -358,6 +359,10 @@ export class ContentEnterComponent implements OnInit, OnChanges {
     }    
   }
 
+  sortSections() {
+    this.contentObj.bodySections = _.sortBy(this.contentObj.bodySections, ['index']);
+  }
+
   deleteSection(section, confirmDelete = true) {
     let todelete = confirmDelete ? confirm("Are you sure you want to delete this section?  If you proceed, the contents will be lost and it cannot be undone.") : true;
     if (todelete) {
@@ -368,6 +373,7 @@ export class ContentEnterComponent implements OnInit, OnChanges {
         }
       }
     }
+    this.sortSections();
     this.emitContentObjChange();
   }
 
@@ -386,6 +392,7 @@ export class ContentEnterComponent implements OnInit, OnChanges {
     newSection.sectionLevel = 1;
     this.contentObj.bodySections.push(newSection);
     this.sectionOptionsList.push(newOptions);
+    this.sortSections();
     this.emitContentObjChange();
   }
 
@@ -400,6 +407,7 @@ export class ContentEnterComponent implements OnInit, OnChanges {
     newSection.sectionLevel = 2;
     this.contentObj.bodySections.push(newSection);
     this.sectionOptionsList.push(newOptions);
+    this.sortSections();
     this.emitContentObjChange();
   }
 
@@ -414,6 +422,7 @@ export class ContentEnterComponent implements OnInit, OnChanges {
     newSection.sectionLevel = 3;
     this.contentObj.bodySections.push(newSection);
     this.sectionOptionsList.push(newOptions);
+    this.sortSections();
     this.emitContentObjChange();
   }
   

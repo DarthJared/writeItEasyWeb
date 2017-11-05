@@ -463,9 +463,9 @@
                   </div>
               </div>
           </ng-container>
-          <ng-container *ngFor="let iterate of contentObj.bodySections; let i = index;">
+          <!-- <ng-container *ngFor="let iterate of contentObj.bodySections; let i = index;"> -->
               <ng-container *ngFor="let section of contentObj.bodySections; let index = index;">
-                <ng-container *ngIf="section.indexVal == i">
+                <!-- <ng-container *ngIf="section.indexVal == i"> -->
                     <div class="topLabelWrap" [ngClass]="{'alignCenter': (configOptions.bodySectionLabelAlign === 'bodySectionLabelCenter' && section.sectionLevel === 1 && configOptions.bodySectionLabelPos !== 'bodySectionLabelInline')  || (configOptions.bodySubsectionLabelAlign === 'bodySubsectionLabelCenter' && section.sectionLevel === 2 && configOptions.bodySubsectionLabelPos !== 'bodySubsectionLabelInline') || (configOptions.bodySubsubsectionLabelAlign === 'bodySubsubsectionLabelCenter' && section.sectionLevel === 3 && configOptions.bodySubsubsectionLabelPos !== 'bodySubsubsectionLabelInline'), 'alignRight': (configOptions.bodySectionLabelAlign === 'bodySectionLabelRight' && section.sectionLevel === 1 && configOptions.bodySectionLabelPos !== 'bodySectionLabelInline') || (configOptions.bodySubsectionLabelAlign === 'bodySubsectionLabelRight' && section.sectionLevel === 2 && configOptions.bodySubsectionLabelPos !== 'bodySubsectionLabelInline') || (configOptions.bodySubsubsectionLabelAlign === 'bodySubsubsectionLabelRight' && section.sectionLevel === 3 && configOptions.bodySubsubsectionLabelPos !== 'bodySubsubsectionLabelInline')}" *ngIf="(section.sectionLevel === 1 && configOptions.bodyIncludeSectionLabels) || (section.sectionLevel === 2 && configOptions.bodyIncludeSubsectionLabels) || (section.sectionLevel === 3 && configOptions.bodyIncludeSubsubsectionLabels)">  
                         <div class="labelLabel">
                             S{{section.sectionLevel === 3 ? 'ubsubs' : section.sectionLevel === 2 ? 'ubs' : section.sectionLevel === 1 ? '' : ''}}ection Label
@@ -479,7 +479,7 @@
                     </div>
                     <div [ngClass]="{'inputWrap': !((section.sectionLevel === 1 && configOptions.bodyIncludeSectionLabels) || (section.sectionLevel === 2 && configOptions.bodyIncludeSubsectionLabels) || (section.sectionLevel === 3 && configOptions.bodyIncludeSubsubsectionLabels)), 'inputWrapShort': (section.sectionLevel === 1 && configOptions.bodyIncludeSectionLabels) || (section.sectionLevel === 2 && configOptions.bodyIncludeSubsectionLabels) || (section.sectionLevel === 3 && configOptions.bodyIncludeSubsubsectionLabels)}">
                         <div class="contentLabel">
-                            S{{section.sectionLevel === 3 ? 'ubsubs' : section.sectionLevel === 2 ? 'ubs' : section.sectionLevel === 1 ? '' : ''}}ectionious
+                            S{{section.sectionLevel === 3 ? 'ubsubs' : section.sectionLevel === 2 ? 'ubs' : section.sectionLevel === 1 ? '' : ''}}ection
                         </div>
                         <div class="deleteSectionButton" (click)="deleteSection(section)" *ngIf="contentObj.bodySections.length > 1">
                             x
@@ -489,9 +489,9 @@
                         </div>
                         <div [froalaModel]="" [froalaEditor]="sectionOptionsList[section.indexVal]" style="margin-top: 50px; width: calc(100% - 22px);"></div>
                     </div>
-                </ng-container>
+                <!-- </ng-container> -->
               </ng-container>              
-          </ng-container>
+          <!-- </ng-container> -->
           <ng-container *ngIf="configOptions.includeConclusion && !configOptions.conclusionOwnPage">
               <div class="topLabelWrap" [ngClass]="{'alignCenter': configOptions.conclusionSectionLabelAlign === 'conclusionSectionLabelCenter', 'alignRight': configOptions.conclusionSectionLabelAlign === 'conclusionSectionLabelRight'}" *ngIf="configOptions.conclusionIncludeLabel">
                   <div class="labelLabel">
