@@ -420,12 +420,13 @@ export class ConfigOptionsService {
                               ]
                           }
                       ]
-                  },
-                  {
-                    name: 'headerFormat',
-                    displayName: 'Bold / Italics / Underline',
-                    inputType: 'textFormatter'
                   }
+                //   ,
+                //   {
+                //     name: 'headerFormat',
+                //     displayName: 'Bold / Italics / Underline',
+                //     inputType: 'textFormatter'
+                //   }
               ]
           },
           {

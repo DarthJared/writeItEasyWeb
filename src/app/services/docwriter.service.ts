@@ -417,8 +417,7 @@ setSummaryConclusion(sectionObj, breakBefore) {
 setBody(bodyObj) {
     var toReturn = "";
     var sections = bodyObj.sections;    
-    for(var s in sections) {
-        var section = sections[s];
+    for(var section of sections) {
         var position;
         var labelContentText;
         if (section.includeLabel) {
@@ -478,13 +477,13 @@ setBody(bodyObj) {
             else {                
                 console.log("You got some weird outliers!");
             }
-            if (position === "lineBefore") {
-                toReturn += labelContentText;
+            toReturn += labelContentText;
+            if (position === "lineBefore") {                
                 toReturn += `<w:bookmarkStart w:id="0" w:name="_GoBack"/><w:bookmarkEnd w:id="0"/></w:p>`;
             }
-            else if (position === "inline") {
+            // else if (position === "inline") {
                 
-            }            
+            // }            
         }
         var firstOfPara = true;
         var firstOfPara2 = true;
@@ -497,7 +496,7 @@ setBody(bodyObj) {
                         toReturn += `<w:p w:rsidR="00E22951" w:rsidRDefault="00451743">`;
                     }
                 }
-                else if (!firstOfPara) {
+                else {
                     toReturn += `<w:p w:rsidR="00E22951" w:rsidRDefault="00451743">`;
                 }
             }

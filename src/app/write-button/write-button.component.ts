@@ -85,6 +85,9 @@ export class WriteButtonComponent implements OnInit {
       diffFirstPage: false,
       font: "Times New Roman",
       fontSize: 12,
+      bold: false,
+      italicize: false,
+      underline: false,
       headers: []
     },	
     titleInfo:
@@ -208,6 +211,9 @@ export class WriteButtonComponent implements OnInit {
       this.paperObj.headers.diffFirstPage = this.configOptions.headerDifferentFirstPage;
       this.paperObj.headers.font = this.configOptions.headerFont;
       this.paperObj.headers.fontSize = this.configOptions.headerFontSize;
+      this.paperObj.headers.bold = this.configOptions.headerFormat.bold;
+      this.paperObj.headers.italicize = this.configOptions.headerFormat.italic;
+      this.paperObj.headers.underline = this.configOptions.headerFormat.underline;
       let defaultHeader; 
       this.paperObj.headers.headers = [];
       for (let header of this.paperContent.headers) {
@@ -310,6 +316,9 @@ export class WriteButtonComponent implements OnInit {
     /*Configure Title Info*/
     if (this.configOptions.includeTitle) {
       this.paperObj.titleInfo.onOwnPage = this.configOptions.titleInfoPos == 'titleInfoSeparatePage';
+      this.paperObj.titleInfo.bold = this.configOptions.titleInfoFormat.bold;
+      this.paperObj.titleInfo.italicize = this.configOptions.titleInfoFormat.italic;
+      this.paperObj.titleInfo.underline = this.configOptions.titleInfoFormat.underline;
       let titleAlign = '';
       if (this.configOptions.titleInfoAlign == 'titleInfoAlignLeft') {
         titleAlign = 'left';
@@ -384,7 +393,9 @@ export class WriteButtonComponent implements OnInit {
       this.paperObj.summaryAbstract.onOwnPage = this.configOptions.summaryOwnPage;
       if (this.configOptions.summaryIncludeSectionLabel) {
         this.paperObj.summaryAbstract.includeLabel = true;
-        //handle bold, underline, and italicize
+        this.paperObj.summaryAbstract.label.bold = this.configOptions.summaryLabelFormat.bold;
+        this.paperObj.summaryAbstract.label.italicize = this.configOptions.summaryLabelFormat.italic;
+        this.paperObj.summaryAbstract.label.underline = this.configOptions.summaryLabelFormat.underline;
         this.paperObj.summaryAbstract.label.font = this.configOptions.summaryLabelFont;
         this.paperObj.summaryAbstract.label.fontSize = this.configOptions.summaryLabelFontSize;
         if (this.configOptions.summarySectionLabelAlign == 'summarySectionLabelCenter')
@@ -404,7 +415,9 @@ export class WriteButtonComponent implements OnInit {
       this.paperObj.conclusion.onOwnPage = this.configOptions.conclusionOwnPage;
       if (this.configOptions.conclusionIncludeLabel) {
         this.paperObj.conclusion.includeLabel = true;
-        //handle bold, underline, and italicize
+        this.paperObj.conclusion.label.bold = this.configOptions.conclusionLabelFormat.bold;
+        this.paperObj.conclusion.label.italicize = this.configOptions.conclusionLabelFormat.italic;
+        this.paperObj.conclusion.label.underline = this.configOptions.conclusionLabelFormat.underline;
         this.paperObj.conclusion.label.font = this.configOptions.conclusionLabelFont;
         this.paperObj.conclusion.label.fontSize = this.configOptions.conclusionLabelFontSize;
         if (this.configOptions.conclusionSectionLabelAlign == 'conclusionSectionLabelCenter')
@@ -419,12 +432,6 @@ export class WriteButtonComponent implements OnInit {
     /*References*/
     if (this.configOptions.includeReferencesWorksCited) {
       this.paperObj.references.onOwnPage = this.configOptions.referencesOwnPage;
-      if (this.configOptions.referencesLabelAlign == 'referencesLabelAlignCenter')
-        this.paperObj.conclusion.label.alignment = 'center';
-      else if (this.configOptions.referencesLabelAlign == 'referencesLabelAlignleft')
-        this.paperObj.conclusion.label.alignment = 'left';
-      else if (this.configOptions.referencesLabelAlign == 'referencesLabelAlignRight')
-        this.paperObj.conclusion.label.alignment = 'right';
       //handle hanging indent
       this.paperObj.references.font = this.configOptions.referencesFont;
       this.paperObj.references.fontSize = this.configOptions.referencesFontSize;
@@ -443,7 +450,10 @@ export class WriteButtonComponent implements OnInit {
         this.paperObj.references.includeLabel = true;
         this.paperObj.references.label.labelText = this.configOptions.referencesLabelInput;
         this.paperObj.references.label.font = this.configOptions.referencesFont;
-        this.paperObj.references.label.fontSize = this.configOptions.referencesFontSize;        
+        this.paperObj.references.label.fontSize = this.configOptions.referencesFontSize;
+        this.paperObj.references.label.bold = this.configOptions.referencesLabelFormat.bold;
+        this.paperObj.references.label.italicize = this.configOptions.referencesLabelFormat.italic;
+        this.paperObj.references.label.underline = this.configOptions.referencesLabelFormat.underline;      
         let align = "";
         if (this.configOptions.referencesLabelAlign == 'referencesLabelAlignLeft') {
           align = "left";
@@ -493,11 +503,21 @@ export class WriteButtonComponent implements OnInit {
               break;
             default:
               sectionLevel = 'Just not right';
-          } 
-          //TODO: Handle bold, italics, and underline
+          }
           section.label.font = this.configOptions[`body${sectionLevel}LabelFont`];
           section.label.fontSize = this.configOptions[`body${sectionLevel}LabelFontSize`];
-          section.label.alignment = this.configOptions[`body${sectionLevel}LabelAlign`];
+          if (this.configOptions[`body${sectionLevel}LabelAlign`] == `body${sectionLevel}LabelLeft`) {
+            section.label.alignment = 'left';
+          }
+          else if (this.configOptions[`body${sectionLevel}LabelAlign`] == `body${sectionLevel}LabelCenter`) {
+            section.label.alignment = 'center';
+          }
+          else if (this.configOptions[`body${sectionLevel}LabelAlign`] == `body${sectionLevel}LabelRight`) {
+            section.label.alignment = 'right';
+          }
+          section.label.bold = this.configOptions[`body${sectionLevel}LabelFormat`].bold;
+          section.label.italicize = this.configOptions[`body${sectionLevel}LabelFormat`].italic;
+          section.label.underline = this.configOptions[`body${sectionLevel}LabelFormat`].underline;
           let labelPos;
           switch (this.configOptions[`body${sectionLevel}LabelPos`]) {
             case `body${sectionLevel}LabelOwnLine`:
@@ -524,6 +544,9 @@ export class WriteButtonComponent implements OnInit {
     headers:  {
       includeHeaders: true,
       diffFirstPage: true,
+      bold: false,
+      italicize: false,
+      underline: false,
       headers: [
           {
               applyTo: "firstPage",
