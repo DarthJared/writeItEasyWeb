@@ -2,9 +2,9 @@
 <!-- <div [froalaEditor]="options">Hello, Froala!</div> -->
 
 
-<!-- <md-input-container class="example-full-width">
-    <input mdInput placeholder="Company (disabled)" value="Google">
-</md-input-container> -->
+<!-- <mat-input-container class="example-full-width">
+    <input matInput placeholder="Company (disabled)" value="Google">
+</mat-input-container> -->
 
 <config-bar (configObj)="updateConfig($event)"></config-bar>
 <content-enter #content [configOptions]="configOptions" (contentObjChange)="updateContent($event)"></content-enter>

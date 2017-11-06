@@ -79,11 +79,11 @@
                           <div class="fieldOptions">
                               <ng-container *ngFor="let option of getOrderedInfo(field.options)">
                                   <div class="updownArrows">
-                                      <md-icon class="upArrow" (click)="moveUp(field.name, option.name, option.index); sendConfigObj();">play_arrow</md-icon>
+                                      <mat-icon class="upArrow" (click)="moveUp(field.name, option.name, option.index); sendConfigObj();">play_arrow</mat-icon>
                                       <!-- <i class="material-icons upArrow" (click)="moveUp(field.name, option.name, option.index); sendConfigObj();">play_arrow</i> -->
                                       <input class="reorderOption" type="checkbox" [checked]="paperSettings[option.name]" (change)="paperSettings[option.name] = !paperSettings[option.name]; sendConfigObj();">{{option.title}}
                                       <br>
-                                      <md-icon class="material-icons downArrow" (click)="moveDown(field.name, option.name, option.index); sendConfigObj();">play_arrow</md-icon>
+                                      <mat-icon class="material-icons downArrow" (click)="moveDown(field.name, option.name, option.index); sendConfigObj();">play_arrow</mat-icon>
                                       <!-- <i class="material-icons downArrow" (click)="moveDown(field.name, option.name, option.index); sendConfigObj();">play_arrow</i> -->
                                   </div>                            
                                   <br>

@@ -1,9 +1,19 @@
 <div class="writeButton" (click)="showOptions()">
-    <md-icon class="writeIcon">mode_edit</md-icon>
+    <mat-icon class="writeIcon">mode_edit</mat-icon>
 </div>
 <div class="writeShadow">
 </div>
 <div class="writeOptions" *ngIf="optionsOpen">
+    <div class="optionShadow" (click)="openQuotation()">
+        <div class="option">
+            Quote
+        </div>
+    </div>
+    <div class="optionShadow" (click)="openManageRefs()">
+        <div class="option">
+            Manage References
+        </div>
+    </div>
     <div class="optionShadow" (click)="addSection()">
         <div class="option">
             Add Section

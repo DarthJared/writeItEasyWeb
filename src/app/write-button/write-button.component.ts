@@ -174,6 +174,15 @@ export class WriteButtonComponent implements OnInit {
     this.optionsOpen = false;
   }
 
+  openQuotation() {
+    console.log('Open Quotation Adder');
+    
+  }
+
+  openManageRefs() {
+    console.log('Open Reference Management');
+  }
+
   addSection() {
     this.optionsOpen = false;
     this.sectionAdded.emit('added');
