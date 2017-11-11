@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DocwriterService } from "./../services/docwriter.service";
+import { QuotationDialogComponent } from "./../quotation-dialog/quotation-dialog.component";
 import * as _ from 'lodash';
 
 @Component({
@@ -157,7 +159,7 @@ export class WriteButtonComponent implements OnInit {
     }
   };
 
-  constructor(private docwriterService: DocwriterService) { }
+  constructor(private docwriterService: DocwriterService, public dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -176,7 +178,13 @@ export class WriteButtonComponent implements OnInit {
 
   openQuotation() {
     console.log('Open Quotation Adder');
-    
+    let dialogRef = this.dialog.open(QuotationDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+
+    });
+
   }
 
   openManageRefs() {

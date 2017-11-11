@@ -41,6 +41,7 @@ import {
   MatToolbarModule,
   MatTooltipModule,
 } from '@angular/material';
+import { QuotationDialogComponent } from './quotation-dialog/quotation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,11 @@ import {
     WriteButtonComponent,
     ConfigBarComponent,
     ContentEnterComponent,
-    FormatBarComponent
+    FormatBarComponent,
+    QuotationDialogComponent
+  ],
+  entryComponents: [
+    QuotationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -120,7 +125,9 @@ import {
     MatToolbarModule,
     MatTooltipModule,
   ],
-  providers: [],
+  providers: [
+    QuotationDialogComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
