@@ -455,11 +455,76 @@ export class ReferenceTypesService {
       ]
     },
     {
-      type: 'onlineOnlyJournal',
+      type: 'onlineJournal',
       display: 'Online Scholarly Journal',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'dateY',
+          display: 'Year of Publication',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Article Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Journal Name',
+          placeholder: 'Name',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Volume Number',
+          placeholder: 'Volume',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Issue Number',
+          placeholder: 'Issue',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Start Page',
+          placeholder: 'Start Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'End Page',
+          placeholder: 'End Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'DOI',
+          placeholder: 'ex. 10.1108/03090560710821161 or http://dx.doi.org/10.1016/j.appdev.2012.05.005',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -468,7 +533,72 @@ export class ReferenceTypesService {
       display: 'Online Periodical',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'dateY',
+          display: 'Year of Publication',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Article Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Periodical Name',
+          placeholder: 'Name',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Volume Number',
+          placeholder: 'Volume',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Issue Number',
+          placeholder: 'Issue',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Start Page',
+          placeholder: 'Start Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'End Page',
+          placeholder: 'End Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'DOI',
+          placeholder: 'ex. 10.1108/03090560710821161 or http://dx.doi.org/10.1016/j.appdev.2012.05.005',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -477,7 +607,45 @@ export class ReferenceTypesService {
       display: 'Online Newpaper Article',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date of Publication',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Article Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Newspaper Name',
+          placeholder: 'Name',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'End Page',
+          placeholder: 'End Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
         }
       ]
     },
@@ -486,7 +654,31 @@ export class ReferenceTypesService {
       display: 'Electronic Book',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date of Publication',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Book Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
         }
       ]
     },
@@ -495,7 +687,38 @@ export class ReferenceTypesService {
       display: 'Kindle Book',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date of Publication',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Book Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'DOI',
+          placeholder: 'ex. 10.1108/03090560710821161 or http://dx.doi.org/10.1016/j.appdev.2012.05.005',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
         }
       ]
     },
