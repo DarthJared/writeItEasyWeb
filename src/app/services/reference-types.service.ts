@@ -727,7 +727,31 @@ export class ReferenceTypesService {
       display: 'Online Bibliography',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date of Publication',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Book Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
         }
       ]
     },
@@ -736,7 +760,37 @@ export class ReferenceTypesService {
       display: 'Online Interview',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Interviewer',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'authorFML',
+          display: 'Interviewee',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date of Interview',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Interview Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
         }
       ]
     },
