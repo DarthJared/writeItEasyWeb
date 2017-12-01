@@ -1181,7 +1181,45 @@ export class ReferenceTypesService {
       display: 'Government Document',
       fields: [
         {
-          
+          type: 'text',
+          display: 'Organization Name',
+          placeholder: 'Name',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'dateY',
+          display: 'Year of Publication',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Publication Number',
+          placeholder: 'Number',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Publisher',
+          placeholder: 'Publisher',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Publication Location',
+          placeholder: 'Location',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1190,7 +1228,71 @@ export class ReferenceTypesService {
       display: 'Review',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Reviewer',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'dateY',
+          display: 'Year of Publication',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Review Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'authorFML',
+          display: 'Original Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Source of Review',
+          placeholder: 'Source',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Volume Number',
+          placeholder: 'Volume',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Issue Number',
+          placeholder: 'Issue',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Start Page',
+          placeholder: 'Start Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'End Page',
+          placeholder: 'End Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
         }
       ]
     },
@@ -1199,7 +1301,38 @@ export class ReferenceTypesService {
       display: 'Online Lecture Notes or Slides',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Presenter',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date of Publication',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Presentation Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'File Format',
+          placeholder: 'Format',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
         }
       ]
     },
@@ -1208,7 +1341,38 @@ export class ReferenceTypesService {
       display: 'Audio Podcast',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Presenter',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date of Publication',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Podcast Host',
+          placeholder: 'Host',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
         }
       ]
     },
@@ -1217,7 +1381,51 @@ export class ReferenceTypesService {
       display: 'Video Podcast',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Director',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'authorFML',
+          display: 'Producer',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date of Production',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Episode Number',
+          placeholder: 'Host',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Podcast Source',
+          placeholder: 'Host',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
         }
       ]
     },
@@ -1225,8 +1433,45 @@ export class ReferenceTypesService {
       type: 'motionPicture',
       display: 'Motion Picture',
       fields: [
+        {        
+          type: 'authorFML',
+          display: 'Director',
+          canAdd: false,
+          required: true
+        },
         {
-          
+          type: 'authorFML',
+          display: 'Producer',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date of Production',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Country of Origin',
+          placeholder: 'Country',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Studio or Distributor',
+          placeholder: 'Studio or Distributor',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1235,7 +1480,44 @@ export class ReferenceTypesService {
       display: 'TV Broadcast',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Director',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'authorFML',
+          display: 'Producer',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date of Production',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Location',
+          placeholder: 'Location',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Broadcaster',
+          placeholder: 'Broadcaster',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1244,7 +1526,57 @@ export class ReferenceTypesService {
       display: 'TV Episode',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Writer',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'authorFML',
+          display: 'Director',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'authorFML',
+          display: 'Producer',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date of Production',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Episode Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Series Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'City, State of Origin',
+          placeholder: 'Origin',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Studio or Distributor',
+          placeholder: 'Studio or Distributor',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1253,7 +1585,65 @@ export class ReferenceTypesService {
       display: 'Music Recording',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Songwriter',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date of Copyright',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Song Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'authorFML',
+          display: 'Artist',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Album',
+          placeholder: 'Album',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Recording Medium',
+          placeholder: 'Medium',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Recording Location',
+          placeholder: 'Location',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Label',
+          placeholder: 'Label',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'date',
+          display: 'Date of Recording',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1262,7 +1652,17 @@ export class ReferenceTypesService {
       display: 'Personal Interview',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Person Interviewed',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date of Interview',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1271,7 +1671,17 @@ export class ReferenceTypesService {
       display: 'Personal Email',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Person Emailing',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date of Email',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1280,7 +1690,17 @@ export class ReferenceTypesService {
       display: 'Personal Communication',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Communicator',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date of Communicating',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1289,7 +1709,66 @@ export class ReferenceTypesService {
       display: 'Letter to the Editor',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date of Publication',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Letter Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Work that Published the Letter',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Volume Number',
+          placeholder: 'Volume',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Issue Number',
+          placeholder: 'Issue',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Start Page',
+          placeholder: 'Start Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'End Page',
+          placeholder: 'End Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
         }
       ]
     }
