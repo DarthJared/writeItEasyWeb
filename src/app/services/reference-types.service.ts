@@ -220,7 +220,7 @@ export class ReferenceTypesService {
       fields: [
         {
           type: 'authorFML',
-          display: 'Author',
+          display: 'Original Author',
           canAdd: true,
           required: false
         },
@@ -239,7 +239,7 @@ export class ReferenceTypesService {
         },
         {
           type: 'authorFML',
-          display: 'Translator Name',
+          display: 'Translator',
           canAdd: true,
           required: false
         },
@@ -252,7 +252,7 @@ export class ReferenceTypesService {
         },
         {
           type: 'text',
-          display: 'Publisher Name',
+          display: 'Publisher',
           placeholder: 'Publisher',
           canAdd: false,
           required: false
@@ -1780,7 +1780,38 @@ export class ReferenceTypesService {
       display: 'Book',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Publisher Name',
+          placeholder: 'Publisher',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'date',
+          display: 'Date of Publication',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Edition',
+          placeholder: 'Edition',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1789,7 +1820,57 @@ export class ReferenceTypesService {
       display: 'Short Story',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Collection Title',
+          placeholder: 'Collection',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'authorFML',
+          display: 'Editor',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Publisher',
+          placeholder: 'Publisher',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'dateY',
+          display: 'Year of Publication',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Start Page',
+          placeholder: 'Start Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'End Page',
+          placeholder: 'End Page',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1798,7 +1879,45 @@ export class ReferenceTypesService {
       display: 'Editorial',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Source',
+          placeholder: 'Source',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'date',
+          display: 'Date of Publication',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Start Page',
+          placeholder: 'Start Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'End Page',
+          placeholder: 'End Page',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1807,7 +1926,32 @@ export class ReferenceTypesService {
       display: 'Encyclopedia or Dictionary Entry',
       fields: [
         {
-          
+          type: 'text',
+          display: 'Section or Word Referenced',
+          placeholder: 'Section or Word',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Title of Encyclopedia/Dictionary',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Edition',
+          placeholder: 'Edition',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'date',
+          display: 'Date of Publication',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1816,7 +1960,37 @@ export class ReferenceTypesService {
       display: 'Translated Book',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Original Author',
+          canAdd: true,
+          required: false
+        },
+        {
+          type: 'authorFML',
+          display: 'Translator',
+          canAdd: true,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Publisher',
+          placeholder: 'Publisher',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'date',
+          display: 'Date of Publication',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1825,7 +1999,45 @@ export class ReferenceTypesService {
       display: 'Magazine Article',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Aricle Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Magazine Name',
+          placeholder: 'Name',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'date',
+          display: 'Date of Publication',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Start Page',
+          placeholder: 'Start Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'End Page',
+          placeholder: 'End Page',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1834,7 +2046,45 @@ export class ReferenceTypesService {
       display: 'Newspaper Article',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Aricle Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Newspaper Name',
+          placeholder: 'Name',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'date',
+          display: 'Date of Publication',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Start Page',
+          placeholder: 'Start Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'End Page',
+          placeholder: 'End Page',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1843,7 +2093,58 @@ export class ReferenceTypesService {
       display: 'Journal Article',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Aricle Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Journal Name',
+          placeholder: 'Name',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Volume Number',
+          placeholder: 'Volume',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Issue Number',
+          placeholder: 'Issue',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'dateY',
+          display: 'Year of Publication',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Start Page',
+          placeholder: 'Start Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'End Page',
+          placeholder: 'End Page',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1852,7 +2153,58 @@ export class ReferenceTypesService {
       display: 'Online Only Scholarly Journal',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Aricle Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Journal Name',
+          placeholder: 'Name',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Volume Number',
+          placeholder: 'Volume',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Issue Number',
+          placeholder: 'Issue',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'dateY',
+          display: 'Year of Publication',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Accecssed On',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1861,7 +2213,45 @@ export class ReferenceTypesService {
       display: 'Online Periodical',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Aricle Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Periodical Name',
+          placeholder: 'Name',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'date',
+          display: 'Date of Publication',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Accecssed On',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1870,7 +2260,59 @@ export class ReferenceTypesService {
       display: 'Online Newspaper Article',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Aricle Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Newspaper Name',
+          placeholder: 'Name',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'date',
+          display: 'Date of Publication',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Start Page',
+          placeholder: 'Start Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'End Page',
+          placeholder: 'End Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Accecssed On',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1879,7 +2321,45 @@ export class ReferenceTypesService {
       display: 'Website',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Page Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Main Site Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'date',
+          display: 'Date of Publication',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Accecssed On',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1888,7 +2368,72 @@ export class ReferenceTypesService {
       display: 'Online and Print Scholarly Journal',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Aricle Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Journal Name',
+          placeholder: 'Name',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Volume Number',
+          placeholder: 'Volume',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Issue Number',
+          placeholder: 'Issue',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'dateY',
+          display: 'Year of Publication',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Start Page',
+          placeholder: 'Start Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'End Page',
+          placeholder: 'End Page',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Accecssed On',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1897,7 +2442,32 @@ export class ReferenceTypesService {
       display: 'Online Encyclopedia or Dictionary Entry',
       fields: [
         {
-          
+          type: 'text',
+          display: 'Section or Word Referenced',
+          placeholder: 'Section or Word',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Title of Encyclopedia/Dictionary',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Accecssed On',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1906,7 +2476,52 @@ export class ReferenceTypesService {
       display: 'Online Discussion or Blog Post',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Person Posting',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Person Posting Screen Name',
+          placeholder: 'Screen Name',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Post Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Name of Website',
+          placeholder: 'Website Name',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Date Posted',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Accecssed On',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1915,7 +2530,44 @@ export class ReferenceTypesService {
       display: 'Published Dissertation',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'School',
+          placeholder: 'School',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'dateY',
+          display: 'Year Degree Awarded',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Accecssed On',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1924,7 +2576,44 @@ export class ReferenceTypesService {
       display: 'Published Thesis',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'School',
+          placeholder: 'School',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'dateY',
+          display: 'Year Degree Awarded',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Accecssed On',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1933,7 +2622,44 @@ export class ReferenceTypesService {
       display: 'Unpublished Dissertation',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'School',
+          placeholder: 'School',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'dateY',
+          display: 'Year Degree Awarded',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Accecssed On',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
@@ -1942,7 +2668,44 @@ export class ReferenceTypesService {
       display: 'Unpublished Thesis',
       fields: [
         {
-          
+          type: 'authorFML',
+          display: 'Author',
+          canAdd: true,
+          required: true
+        },
+        {
+          type: 'text',
+          display: 'Title',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'School',
+          placeholder: 'School',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'dateY',
+          display: 'Year Degree Awarded',
+          canAdd: false,
+          required: false
+        },
+        {
+          type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'date',
+          display: 'Accecssed On',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
         }
       ]
     },
