@@ -98,7 +98,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'bookByOrg',
@@ -145,7 +151,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'encyclopedia',
@@ -212,7 +224,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'translated',
@@ -270,7 +288,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'magazine',
@@ -331,7 +355,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'newspaper',
@@ -392,7 +422,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'journal',
@@ -452,7 +488,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'onlineJournal',
@@ -526,7 +568,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'onlinePeriodical',
@@ -600,7 +648,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'onlineNewspaper',
@@ -647,7 +701,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'electronicBook',
@@ -680,7 +740,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'kindle',
@@ -720,7 +786,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'onlineBibliography',
@@ -753,7 +825,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'onlineInterview',
@@ -792,7 +870,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'onlineEncyclopedia',
@@ -866,7 +950,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'bookReview',
@@ -941,7 +1031,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'blog',
@@ -981,7 +1077,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'wiki',
@@ -1015,7 +1117,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'webDoc',
@@ -1055,7 +1163,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'onlineDissertation',
@@ -1095,7 +1209,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'publishedDissertation',
@@ -1134,7 +1254,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'unpublishedDissertation',
@@ -1174,7 +1300,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'governmentDocument',
@@ -1221,7 +1353,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'review',
@@ -1294,7 +1432,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'lectureNotesSlides',
@@ -1334,7 +1478,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'audioPodcast',
@@ -1374,7 +1524,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'videoPodcast',
@@ -1427,7 +1583,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'motionPicture',
@@ -1473,7 +1635,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'tvBroadcast',
@@ -1519,7 +1687,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'tvEpisode',
@@ -1578,7 +1752,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'music',
@@ -1645,7 +1825,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'interview',
@@ -1664,7 +1850,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'email',
@@ -1683,7 +1875,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'personal',
@@ -1702,7 +1900,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'letterToEditor',
@@ -1770,7 +1974,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     }
   ]
 
@@ -1813,7 +2023,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'shortStory',
@@ -1872,7 +2088,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'editorial',
@@ -1919,7 +2141,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'encyclopedia',
@@ -1953,7 +2181,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'translated',
@@ -1992,7 +2226,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'magazine',
@@ -2039,7 +2279,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'newspaper',
@@ -2086,7 +2332,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'journal',
@@ -2146,7 +2398,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'onlineOnlyJournal',
@@ -2206,7 +2464,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'onlinePeriodical',
@@ -2253,7 +2517,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'onlineNewspaper',
@@ -2314,7 +2584,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'website',
@@ -2361,7 +2637,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'onlinePrintJournal',
@@ -2435,7 +2717,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'onlineEncyclopedia',
@@ -2469,7 +2757,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'blogDiscussion',
@@ -2523,7 +2817,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'publishedDissertation',
@@ -2569,7 +2869,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'publishedThesis',
@@ -2615,7 +2921,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'unpublishedDeissertation',
@@ -2661,7 +2973,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'unpublishedThesis',
@@ -2707,7 +3025,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'governmentDocument',
@@ -2754,7 +3078,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'review',
@@ -2827,7 +3157,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'presentation',
@@ -2895,7 +3231,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'movie',
@@ -2927,7 +3269,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'tvEpisode',
@@ -2975,7 +3323,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         },
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'music',
@@ -3030,7 +3384,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'interview',
@@ -3049,7 +3409,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'email',
@@ -3081,7 +3447,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     },
     {
       type: 'letterToEditor',
@@ -3128,7 +3500,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+
+      }
     }
   ]
 }
