@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as _ from 'lodash';
 
 @Injectable()
 export class ReferenceTypesService {
@@ -58,7 +59,111 @@ export class ReferenceTypesService {
           canAdd: false,
           required: false
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+        let formatSections = [];
+        let newFormatSection = {
+          content: '',
+          bold: false,
+          italic: false,
+          underline: false,
+          font: 'Times New Roman',
+          fontSize: 12
+        };
+        
+        let beginFormatSection = _.cloneDeep(newFormatSection);
+        if (citationInfoObj['Author'].length < 1) {
+          // TODO: Throw error saying need to have author
+        }
+        let elipseAdded: boolean = false;
+        for (let i = 0; i < citationInfoObj['Author'].length; i++) {
+          let authorObj = citationInfoObj['Author'][i];
+          if (i < 6 && i != citationInfoObj['Author'].length - 1) {
+            if (authorObj.lastName.length > 0)
+              beginFormatSection.content += `${authorObj.lastName}, `;
+            if (authorObj.firstName.length > 0) {
+              beginFormatSection.content += `${authorObj.firstName[0].toUpperCase()}.`;
+              if (authorObj.middleName.length < 1)
+                beginFormatSection.content += ', ';
+              else
+                beginFormatSection.content += ' ';
+            }
+            if (authorObj.middleName.length > 0) 
+              beginFormatSection.content += `${authorObj.middleName[0].toUpperCase()}., `
+          }
+          else if (i == citationInfoObj['Author'].length - 1) {
+            if (!elipseAdded && i > 0)
+              beginFormatSection.content += '& ';
+            if (authorObj.lastName.length > 0) {
+              beginFormatSection.content += authorObj.lastName;
+              if (authorObj.firstName.length > 0 || authorObj.middleName.length > 0)
+                beginFormatSection.content += ',';
+              beginFormatSection.content += ' ';
+            }
+            if (authorObj.firstName.length > 0)
+              beginFormatSection.content += `${authorObj.firstName[0].toUpperCase()}. `;
+            if (authorObj.middleName.length > 0) 
+              beginFormatSection.content += `${authorObj.middleName[0].toUpperCase()}. `;
+          }
+          else {
+            if (!elipseAdded) {
+              elipseAdded = true;
+              beginFormatSection.content += '... ';
+            }
+          }
+        }
+        if (citationInfoObj['Year of Publication'].length < 1) {
+          beginFormatSection.content += '(n.d.). ';
+        }
+        else {
+          beginFormatSection.content += `(${citationInfoObj['Year of Publication']}). `;  
+        }
+        if (citationInfoObj['Title'].length < 1) {
+          // TODO: Throw error because there needs to be a title
+        }
+        let titleFormatObj = _.cloneDeep(newFormatSection);
+        titleFormatObj.italic = true;
+        let nextCapital = true;
+        for (let i = 0; i < citationInfoObj['Title'].length; i++) {
+          let toCheck = citationInfoObj['Title'][i];
+          if (nextCapital) {
+            if (toCheck == ' ')
+              nextCapital = false;
+            titleFormatObj.content += toCheck.toUpperCase();
+          }
+          else {
+            titleFormatObj.content += toCheck.toLowerCase();
+          }
+          if (toCheck == ':')
+            nextCapital = true;
+        }
+        let finishFormatObj = _.cloneDeep(newFormatSection);
+        if (citationInfoObj['Edition'].length < 1) {
+          titleFormatObj.content += '. ';
+        }
+        else {
+          finishFormatObj.content += ` (${citationInfoObj['Edition']} ed.). `
+        }
+        if (citationInfoObj['Publication Location'].length > 0) {
+          if (citationInfoObj['Publisher'].length > 0) {
+            finishFormatObj.content += `${citationInfoObj['Publication Location']}: `;
+          }
+          else {
+            finishFormatObj.content += `${citationInfoObj['Publication Location']}.`;
+          }
+        }
+        if (citationInfoObj['Publisher'].length > 0) {
+          finishFormatObj.content += `${citationInfoObj['Publisher']}.`;
+        }
+
+        formatSections.push(beginFormatSection);
+        formatSections.push(titleFormatObj);
+        formatSections.push(finishFormatObj);        
+        return formatSections;
+      }
     },
     {
       type: 'bookNoAuth',
@@ -103,7 +208,11 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        let formattedReference = '';
+        
+                
+        
+        return formattedReference;
       }
     },
     {
@@ -3505,7 +3614,11 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
+        let formattedReference = '';
 
+
+
+        return formattedReference;
       }
     }
   ]
