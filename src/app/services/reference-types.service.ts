@@ -14,6 +14,15 @@ export class ReferenceTypesService {
     return this.referencesFrameworkMLA;
   }
 
+  formatSectionObj = {
+    content: '',
+    bold: false,
+    italic: false,
+    underline: false,
+    font: 'Times New Roman',
+    fontSize: 12
+  };
+
   referencesFrameworkAPA = [
     {
       type: 'bookAuth',
@@ -65,16 +74,8 @@ export class ReferenceTypesService {
       },
       referencesPage: citationInfoObj => {
         let formatSections = [];
-        let newFormatSection = {
-          content: '',
-          bold: false,
-          italic: false,
-          underline: false,
-          font: 'Times New Roman',
-          fontSize: 12
-        };
         
-        let beginFormatSection = _.cloneDeep(newFormatSection);
+        let beginFormatSection = _.cloneDeep(this.formatSectionObj);
         if (citationInfoObj['Author'].length < 1) {
           // TODO: Throw error saying need to have author
         }
@@ -124,7 +125,7 @@ export class ReferenceTypesService {
         if (citationInfoObj['Title'].length < 1) {
           // TODO: Throw error because there needs to be a title
         }
-        let titleFormatObj = _.cloneDeep(newFormatSection);
+        let titleFormatObj = _.cloneDeep(this.formatSectionObj);
         titleFormatObj.italic = true;
         let nextCapital = true;
         for (let i = 0; i < citationInfoObj['Title'].length; i++) {
@@ -140,7 +141,7 @@ export class ReferenceTypesService {
           if (toCheck == ':')
             nextCapital = true;
         }
-        let finishFormatObj = _.cloneDeep(newFormatSection);
+        let finishFormatObj = _.cloneDeep(this.formatSectionObj);
         if (citationInfoObj['Edition'].length < 1) {
           titleFormatObj.content += '. ';
         }
@@ -208,11 +209,52 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-        let formattedReference = '';
-        
-                
-        
-        return formattedReference;
+        let formatSections = [];
+        let beginFormatSection = _.cloneDeep(this.formatSectionObj);
+        if (citationInfoObj['Title'].length < 1) {
+          // TODO: Throw error because title is required
+        }
+        beginFormatSection.italic = true;
+        let nextCapital = true;
+        for (let i = 0; i < citationInfoObj['Title'].length; i++) {
+          if (nextCapital) {
+            if (citationInfoObj['Title'][i] != ' ') {
+              nextCapital = false;
+            }
+            beginFormatSection.content += citationInfoObj['Title'][i].toUpperCase();
+          }
+          else {
+            beginFormatSection.content += citationInfoObj['Title'][i].toLowerCase();
+          }
+          if (citationInfoObj['Title'][i] == ':') {
+            nextCapital = true;
+          }
+        }
+        let midFormatSection = _.cloneDeep(this.formatSectionObj);
+        if (citationInfoObj['Edition'].length > 0) {
+          midFormatSection.content += ` (${citationInfoObj['Edition']} ed.).`;
+        }
+        else {
+          midFormatSection.content += '.';
+        }
+        if (citationInfoObj['Year of Publication'].length > 0) {
+          midFormatSection.content += `(${citationInfoObj['Year of Publication']}). `;
+        }
+        else {
+          midFormatSection.content += '(n.d.). ';
+        }
+        if (citationInfoObj['Publication Location'].length > 0) {
+          if (citationInfoObj['Publisher Name'].length > 0) {
+            midFormatSection.content += `${citationInfoObj['Publication Location']}: `;
+          }
+          else {
+            midFormatSection.content += `${citationInfoObj['Publication Location']}.`;
+          }
+        }
+        if (citationInfoObj['Publisher Name'].length > 0) {
+          midFormatSection.content += `${citationInfoObj['Publisher Name']}.`;
+        }
+        return formatSections;
       }
     },
     {
@@ -3614,7 +3656,7 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-        let formattedReference = '';
+        let formatSections = [];
 
 
 
