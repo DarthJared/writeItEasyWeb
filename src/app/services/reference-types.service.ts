@@ -307,7 +307,57 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        let formatSections = [];
+        let beginFormatSection = _.cloneDeep(this.formatSectionObj);
+        if (citationInfoObj['Organization'].length < 1) {
+          // TODO: Throw error because title is required
+        }
+        beginFormatSection.content += `${citationInfoObj['Organization']}. `;
+        if (citationInfoObj['Year of Publication'].length > 0) {
+          beginFormatSection.content += `(${citationInfoObj['Year of Publication']}). `;
+        }
+        else {
+          beginFormatSection.content += '(n.d.). ';
+        }
+        let midFormatSection = _.cloneDeep(this.formatSectionObj);
+        midFormatSection.italic = true;
+        let nextCapital = true;
+        if (citationInfoObj['Title'].length < 1) {
+          // TODO: Throw error because title is required
+        }
+        for (let i = 0; i < citationInfoObj['Title'].length; i++) {
+          if (nextCapital) {
+            if (citationInfoObj['Title'][i] != ' ') {
+              nextCapital = false;
+            }
+            midFormatSection.content += citationInfoObj['Title'][i].toUpperCase();
+          }
+          else {
+            midFormatSection.content += citationInfoObj['Title'][i].toLowerCase();
+          }
+          if (citationInfoObj['Title'][i] == ':') {
+            nextCapital = true;
+          }
+        }
+        let endFormatSection = _.cloneDeep(this.formatSectionObj);
+        if (citationInfoObj['Edition'].length > 0) {
+          endFormatSection.content += ` (${citationInfoObj['Edition']} ed.). `;
+        }
+        else {
+          midFormatSection.content += '. ';
+        }
+        if (citationInfoObj['Publication Location'].length > 0) {
+          if (citationInfoObj['Publisher Name'].length > 0) {
+            midFormatSection.content += `${citationInfoObj['Publication Location']}: `;
+          }
+          else {
+            midFormatSection.content += `${citationInfoObj['Publication Location']}.`;
+          }
+        }
+        if (citationInfoObj['Publisher Name'].length > 0) {
+          midFormatSection.content += `${citationInfoObj['Publisher Name']}.`;
+        }
+        return formatSections;
       }
     },
     {
