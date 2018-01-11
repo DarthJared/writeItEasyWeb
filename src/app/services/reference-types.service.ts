@@ -436,100 +436,156 @@ export class ReferenceTypesService {
       referencesPage: citationInfoObj => {
         let formatSections = [];
         let beginFormatSection = _.cloneDeep(this.formatSectionObj);
-        if (citationInfoObj['Author'].length < 1) {
-          // TODO: Throw error saying need to have author
-        }
-        let elipseAdded: boolean = false;
-        for (let i = 0; i < citationInfoObj['Author'].length; i++) {
-          let authorObj = citationInfoObj['Author'][i];
-          if (i < 6 && i != citationInfoObj['Author'].length - 1) {
-            if (authorObj.lastName.length > 0)
-              beginFormatSection.content += `${authorObj.lastName}, `;
-            if (authorObj.firstName.length > 0) {
-              beginFormatSection.content += `${authorObj.firstName[0].toUpperCase()}.`;
-              if (authorObj.middleName.length < 1)
-                beginFormatSection.content += ', ';
-              else
+        if (citationInfoObj['Author'].length > 0) {
+          let elipseAdded: boolean = false;
+          for (let i = 0; i < citationInfoObj['Author'].length; i++) {
+            let authorObj = citationInfoObj['Author'][i];
+            if (i < 6 && i != citationInfoObj['Author'].length - 1) {
+              if (authorObj.lastName.length > 0)
+                beginFormatSection.content += `${authorObj.lastName}, `;
+              if (authorObj.firstName.length > 0) {
+                beginFormatSection.content += `${authorObj.firstName[0].toUpperCase()}.`;
+                if (authorObj.middleName.length < 1)
+                  beginFormatSection.content += ', ';
+                else
+                  beginFormatSection.content += ' ';
+              }
+              if (authorObj.middleName.length > 0) 
+                beginFormatSection.content += `${authorObj.middleName[0].toUpperCase()}., `
+            }
+            else if (i == citationInfoObj['Author'].length - 1) {
+              if (!elipseAdded && i > 0)
+                beginFormatSection.content += '& ';
+              if (authorObj.lastName.length > 0) {
+                beginFormatSection.content += authorObj.lastName;
+                if (authorObj.firstName.length > 0 || authorObj.middleName.length > 0)
+                  beginFormatSection.content += ',';
                 beginFormatSection.content += ' ';
+              }
+              if (authorObj.firstName.length > 0)
+                beginFormatSection.content += `${authorObj.firstName[0].toUpperCase()}. `;
+              if (authorObj.middleName.length > 0) 
+                beginFormatSection.content += `${authorObj.middleName[0].toUpperCase()}. `;
             }
-            if (authorObj.middleName.length > 0) 
-              beginFormatSection.content += `${authorObj.middleName[0].toUpperCase()}., `
+            else {
+              if (!elipseAdded) {
+                elipseAdded = true;
+                beginFormatSection.content += '... ';
+              }
+            }
           }
-          else if (i == citationInfoObj['Author'].length - 1) {
-            if (!elipseAdded && i > 0)
-              beginFormatSection.content += '& ';
-            if (authorObj.lastName.length > 0) {
-              beginFormatSection.content += authorObj.lastName;
-              if (authorObj.firstName.length > 0 || authorObj.middleName.length > 0)
-                beginFormatSection.content += ',';
-              beginFormatSection.content += ' ';
-            }
-            if (authorObj.firstName.length > 0)
-              beginFormatSection.content += `${authorObj.firstName[0].toUpperCase()}. `;
-            if (authorObj.middleName.length > 0) 
-              beginFormatSection.content += `${authorObj.middleName[0].toUpperCase()}. `;
+          if (citationInfoObj['Year of Publication'].length < 1) {
+            beginFormatSection.content += '(n.d.). ';
           }
           else {
-            if (!elipseAdded) {
-              elipseAdded = true;
-              beginFormatSection.content += '... ';
+            beginFormatSection.content += `(${citationInfoObj['Year of Publication']}). `;  
+          }
+          if (citationInfoObj['Section or Word Referenced'].length < 1) {
+            // TODO: Throw error because there needs to be a title
+          }
+          beginFormatSection.content += `${citationInfoObj['Section or Word Referenced']}. In `;
+          if (citationInfoObj['Title of Encyclopedia or Dictionary'].length < 1) {
+            // TODO: Throw error because there needs to be a title
+          }
+          let titleFormatObj = _.cloneDeep(this.formatSectionObj);
+          titleFormatObj.italic = true;
+          titleFormatObj.content += `${citationInfoObj['Title of Encyclopedia or Dictionary']}. `;
+          let finishFormatObj = _.cloneDeep(this.formatSectionObj);
+          if (citationInfoObj['Volume'].length > 0 || citationInfoObj['Start Page'].length > 0) {
+            finishFormatObj.content += '(';
+          }
+          if (citationInfoObj['Volume'].length > 0) {
+            finishFormatObj.content += `Vol. ${citationInfoObj['Volume']}`;
+            if (citationInfoObj['Start Page'].length > 0) {
+              finishFormatObj.content += ', ';
+            } 
+            else {
+              finishFormatObj.content += '). ';
             }
           }
-        }
-        if (citationInfoObj['Year of Publication'].length < 1) {
-          beginFormatSection.content += '(n.d.). ';
+          if (citationInfoObj['Start Page'].length < 1 && citationInfoObj['End Page'].length > 0) {
+            // TODO: Throw error because there needs to be a start page if there is an end page
+          }
+          else if (citationInfoObj['Start Page'].length > 0 && citationInfoObj['End Page'].length > 0 &&
+              citationInfoObj['Start Page'] != citationInfoObj['End Page']) {
+            finishFormatObj.content += `pp. ${citationInfoObj['Start Page']}-${citationInfoObj['End Page']}). `;
+          }
+          else if ((citationInfoObj['Start Page'].length > 0 && citationInfoObj['End Page'].length < 1) ||
+              (citationInfoObj['Start Page'] == citationInfoObj['End Page'] && citationInfoObj['Start Page'].length > 0)) {
+            finishFormatObj.content += `p. ${citationInfoObj['Start Page']}). `;
+          }
+          if (citationInfoObj['Publication Location'].length > 0) {
+            if (citationInfoObj['Publisher Name'].length > 0) {
+              finishFormatObj.content += `${citationInfoObj['Publication Location']}: `;
+            }
+            else {
+              finishFormatObj.content += `${citationInfoObj['Publication Location']}.`;
+            }
+          }
+          if (citationInfoObj['Publisher Name'].length > 0) {
+            finishFormatObj.content += `${citationInfoObj['Publisher Name']}.`;
+          }
+          formatSections.push(beginFormatSection);
+          formatSections.push(titleFormatObj);
+          formatSections.push(finishFormatObj);
         }
         else {
-          beginFormatSection.content += `(${citationInfoObj['Year of Publication']}). `;  
-        }
-        if (citationInfoObj['Section or Word Referenced'].length < 1) {
-          // TODO: Throw error because there needs to be a title
-        }
-        beginFormatSection.content += `${citationInfoObj['Section or Word Referenced']}. In `;
-        if (citationInfoObj['Title of Encyclopedia or Dictionary'].length < 1) {
-          // TODO: Throw error because there needs to be a title
-        }
-        let titleFormatObj = _.cloneDeep(this.formatSectionObj);
-        titleFormatObj.italic = true;
-        titleFormatObj.content += `${citationInfoObj['Title of Encyclopedia or Dictionary']}. `;
-        let finishFormatObj = _.cloneDeep(this.formatSectionObj);
-        if (citationInfoObj['Volume'].length > 0 || citationInfoObj['Start Page'].length > 0) {
-          finishFormatObj.content += '(';
-        }
-        if (citationInfoObj['Volume'].length > 0) {
-          finishFormatObj.content += `Vol. ${citationInfoObj['Volume']}`;
-          if (citationInfoObj['Start Page'].length > 0) {
-            finishFormatObj.content += ', ';
-          } 
-          else {
-            finishFormatObj.content += '). ';
+          if (citationInfoObj['Section or Word Referenced'].length < 1) {
+            // TODO: Throw error because there needs to be a title
           }
-        }
-        if (citationInfoObj['Start Page'].length < 1 && citationInfoObj['End Page'].length > 0) {
-          // TODO: Throw error because there needs to be a start page if there is an end page
-        }
-        else if (citationInfoObj['Start Page'].length > 0 && citationInfoObj['End Page'].length > 0 &&
-            citationInfoObj['Start Page'] != citationInfoObj['End Page']) {
-          finishFormatObj.content += `pp. ${citationInfoObj['Start Page']}-${citationInfoObj['End Page']}). `;
-        }
-        else if ((citationInfoObj['Start Page'].length > 0 && citationInfoObj['End Page'].length < 1) ||
-            (citationInfoObj['Start Page'] == citationInfoObj['End Page'] && citationInfoObj['Start Page'].length > 0)) {
-          finishFormatObj.content += `p. ${citationInfoObj['Start Page']}). `;
-        }
-        if (citationInfoObj['Publication Location'].length > 0) {
+          beginFormatSection.content += `${citationInfoObj['Section or Word Referenced']}. `;
+          if (citationInfoObj['Year of Publication'].length < 1) {
+            beginFormatSection.content += '(n.d.). In ';
+          }
+          else {
+            beginFormatSection.content += `(${citationInfoObj['Year of Publication']}). In `;  
+          }
+          
+          if (citationInfoObj['Title of Encyclopedia or Dictionary'].length < 1) {
+            // TODO: Throw error because there needs to be a title
+          }
+          let titleFormatObj = _.cloneDeep(this.formatSectionObj);
+          titleFormatObj.italic = true;
+          titleFormatObj.content += `${citationInfoObj['Title of Encyclopedia or Dictionary']}. `;
+          let finishFormatObj = _.cloneDeep(this.formatSectionObj);
+          if (citationInfoObj['Volume'].length > 0 || citationInfoObj['Start Page'].length > 0) {
+            finishFormatObj.content += '(';
+          }
+          if (citationInfoObj['Volume'].length > 0) {
+            finishFormatObj.content += `Vol. ${citationInfoObj['Volume']}`;
+            if (citationInfoObj['Start Page'].length > 0) {
+              finishFormatObj.content += ', ';
+            } 
+            else {
+              finishFormatObj.content += '). ';
+            }
+          }
+          if (citationInfoObj['Start Page'].length < 1 && citationInfoObj['End Page'].length > 0) {
+            // TODO: Throw error because there needs to be a start page if there is an end page
+          }
+          else if (citationInfoObj['Start Page'].length > 0 && citationInfoObj['End Page'].length > 0 &&
+              citationInfoObj['Start Page'] != citationInfoObj['End Page']) {
+            finishFormatObj.content += `pp. ${citationInfoObj['Start Page']}-${citationInfoObj['End Page']}). `;
+          }
+          else if ((citationInfoObj['Start Page'].length > 0 && citationInfoObj['End Page'].length < 1) ||
+              (citationInfoObj['Start Page'] == citationInfoObj['End Page'] && citationInfoObj['Start Page'].length > 0)) {
+            finishFormatObj.content += `p. ${citationInfoObj['Start Page']}). `;
+          }
+          if (citationInfoObj['Publication Location'].length > 0) {
+            if (citationInfoObj['Publisher Name'].length > 0) {
+              finishFormatObj.content += `${citationInfoObj['Publication Location']}: `;
+            }
+            else {
+              finishFormatObj.content += `${citationInfoObj['Publication Location']}.`;
+            }
+          }
           if (citationInfoObj['Publisher Name'].length > 0) {
-            finishFormatObj.content += `${citationInfoObj['Publication Location']}: `;
+            finishFormatObj.content += `${citationInfoObj['Publisher Name']}.`;
           }
-          else {
-            finishFormatObj.content += `${citationInfoObj['Publication Location']}.`;
-          }
+          formatSections.push(beginFormatSection);
+          formatSections.push(titleFormatObj);
+          formatSections.push(finishFormatObj);
         }
-        if (citationInfoObj['Publisher Name'].length > 0) {
-          finishFormatObj.content += `${citationInfoObj['Publisher Name']}.`;
-        }
-        formatSections.push(beginFormatSection);
-        formatSections.push(titleFormatObj);
-        formatSections.push(finishFormatObj);
         return formatSections;
       }
     },
