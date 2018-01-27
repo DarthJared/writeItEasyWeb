@@ -43,10 +43,10 @@
                 <ng-container *ngFor="let option of fieldsToEnter; let index = index">
                     <table class="fieldInput">
                         <tr>
-                            <td>
+                            <td class="midAlign">
                                 {{option.display}}:
                             </td>
-                            <td>
+                            <td class="midAlign">
                                 <ng-container [ngSwitch]="option.type">
                                     <ng-container *ngSwitchCase="'authorFML'">
                                         <input type="text" class="nameInput" placeholder="First" [(ngModel)]="referenceData.fieldData[option.display + 'First']">&nbsp;

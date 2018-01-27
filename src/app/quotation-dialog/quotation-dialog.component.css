@@ -122,16 +122,21 @@ hr {
 .fieldInput {
     display: inline-block;
     width: 33%;
+    height: 55px;
 }
 
 .fieldInput td:last-child {
     white-space: nowrap;
     text-align: right;
-    vertical-align: bottom;
 }
 
 .fieldInput td:first-child {
     width: 100%;
+}
+
+.midAlign {
+    vertical-align: middle;
+    height: 55px;
 }
 
 ::-webkit-scrollbar {
