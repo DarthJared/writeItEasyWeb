@@ -12,4 +12,5 @@
 <!-- (boldEvent)="content.bold()" (italicsEvent)="content.italic()" (underlineEvent)="content.underline()" (fontChangeEvent)="content.fontChange($event)" (fontSizeChangeEvent)="content.fontSizeChange($event)" (indentEvent)="content.indent()" (reverseIndentEvent)="content.reverseIndent()" (addReferenceEvent)="content.insertReference()"> -->
 
 </format-bar>
-<write-button #writer [configOptions]="configOptions" [paperContent]="paperContent" (sectionAdded)="content.addSection($event)" (subsectionAdded)="content.addSubsection($event)" (subsubsectionAdded)="content.addSubsubsection($event)"></write-button>
+<write-button #writer [configOptions]="configOptions" [paperContent]="paperContent" (openQuoteDialog)="openReferenceDialog($event)" (sectionAdded)="content.addSection($event)" (subsectionAdded)="content.addSubsection($event)" (subsubsectionAdded)="content.addSubsubsection($event)"></write-button>
+<quotation-dialog [openDialog]="dialogAdderOpen" [isApa]="isApa" (closeDialogEvent)="closeAdder($event)" (addReferenceEvent)="addReference($event)"></quotation-dialog>

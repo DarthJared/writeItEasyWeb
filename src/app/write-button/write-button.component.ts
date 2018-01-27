@@ -16,6 +16,7 @@ export class WriteButtonComponent implements OnInit {
   @Output() sectionAdded = new EventEmitter();
   @Output() subsectionAdded = new EventEmitter();
   @Output() subsubsectionAdded = new EventEmitter();
+  @Output() openQuoteDialog = new EventEmitter();
   docName: string = '';
   optionsOpen = false;
   headerObj = {
@@ -178,13 +179,8 @@ export class WriteButtonComponent implements OnInit {
 
   openQuotation() {
     console.log('Open Quotation Adder');
-    let dialogRef = this.dialog.open(QuotationDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-
-    });
-
+    this.optionsOpen = false;
+    this.openQuoteDialog.emit('Open it!');
   }
 
   openManageRefs() {

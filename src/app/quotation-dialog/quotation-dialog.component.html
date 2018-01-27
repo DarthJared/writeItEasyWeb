@@ -1,3 +1,87 @@
-<div>
-  
+<div *ngIf="openDialog" class="backShade">
+    <div class="dialogBack">
+        <div class="dialogHead">
+            Add a Quote
+        </div>
+        <div class="dialogMiddle">   
+            <div class="refTypeBox topLabelWrap">
+                <div class="topLabel">
+                    New Source or Existing Source:
+                </div>
+                <input type="radio" value="newRef" name="refType" [checked]="isNewRef" (change)="isNewRef = true;">&nbsp;New Source&nbsp;&nbsp;&nbsp;
+                <input type="radio" value="existRef" name="refType" [checked]="!isNewRef" (change)="isNewRef = false;">&nbsp;Existing Source
+                <hr>
+            </div>
+            <div *ngIf="isNewRef">                  
+                <div class="paddedBox">         
+                    Select a source type:
+                </div>
+                <div class="scrollableBox">
+                    <ng-container *ngFor="let refType of referenceTypeOptions; let index = index">
+                        <table class="refOption">
+                            <tr>
+                                <td class="refOptionCell">
+                                    <input type="radio" value="refType.type" name="refTypeSelect" [checked]="selectedRefType == refType.type" (change)="selectedRefType = refType.type; updateFields();">
+                                </td>
+                                <td class="refOptionCell">
+                                    {{refType.display}}
+                                </td>
+                            </tr>
+                        </table>
+                        <ng-container *ngIf="index % 4 == 3">
+                            <br>
+                        </ng-container>
+                    </ng-container>
+                </div>
+                <div class="paddedBox">
+                    <hr>
+                </div>
+            </div>
+            <div *ngIf="isNewRef" class="paddedBox">
+                Provide the source information here:
+                <ng-container *ngFor="let option of fieldsToEnter">
+                    {{option.display}}:&nbsp;
+                    <ngContainer [ngSwitch]="option.type">
+                        <ngContainer *ngSwitchCase="'authorFML'">
+
+                        </ngContainer>
+                        <ngContainer *ngSwitchCase="'dateY'">
+
+                        </ngContainer>
+                        <ngContainer *ngSwitchCase="'text'">
+
+                        </ngContainer>
+                        <ngContainer *ngSwitchCase="'date'">
+
+                        </ngContainer>
+                        <ngContainer *ngSwitchCase="'authorFML'">
+
+                        </ngContainer>
+                        <ngContainer *ngSwitchCase="'authorFML'">
+
+                        </ngContainer>
+                        <ngContainer *ngSwitchCase="'authorFML'">
+
+                        </ngContainer>
+                        <ngContainer *ngSwitchCase="'authorFML'">
+
+                        </ngContainer>
+
+                    </ngContainer>
+                </ng-container>
+
+                <hr>
+            </div>
+            <div *ngIf="!isNewRef">
+
+            </div>
+            <div class="quoteDiv">
+                <textarea class="quoteEnter" placeholder="Enter quote here..."></textarea>
+            </div>
+        </div>
+        <div class="dialogBottom">
+            <input type="button" class="cancelButton" value="Cancel" (click)="closeDialog()">
+            <input type="button" class="addButton" value="Add" (click)="addReference()">
+        </div>
+    </div>
 </div>

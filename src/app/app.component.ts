@@ -14,13 +14,29 @@ export class AppComponent {
 
   configOptions = {};
   paperContent = {};
+  dialogAdderOpen = false;
+  isApa: boolean = true;
   
   updateConfig(configObj) {
     this.configOptions = configObj;
+    this.isApa = configObj.apaMla == 'apa';
   }
 
   updateContent(contentObj) {
     this.paperContent = contentObj;
+  }
+
+  closeAdder(closeMsg) {
+    this.dialogAdderOpen = false;
+  }
+
+  addReference(refData) {
+    // TODO: Actually store the reference based off of refData
+    this.dialogAdderOpen = false;
+  }
+
+  openReferenceDialog(openMsg) {
+    this.dialogAdderOpen = true;
   }
 
   samplePaperObj = {
