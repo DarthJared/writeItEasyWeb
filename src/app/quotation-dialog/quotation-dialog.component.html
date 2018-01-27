@@ -21,7 +21,7 @@
                         <table class="refOption">
                             <tr>
                                 <td class="refOptionCell">
-                                    <input type="radio" value="refType.type" name="refTypeSelect" [checked]="selectedRefType == refType.type" (change)="selectedRefType = refType.type; updateFields();">
+                                    <input type="radio" value="refType.type" name="refTypeSelect" [checked]="referenceData.selectedRefType == refType.type" (change)="referenceData.selectedRefType = refType.type; updateFields();">
                                 </td>
                                 <td class="refOptionCell">
                                     {{refType.display}}
@@ -37,37 +37,38 @@
                     <hr>
                 </div>
             </div>
-            <div *ngIf="isNewRef" class="paddedBox">
+            <div *ngIf="isNewRef && fieldsToEnter.length > 0" class="paddedBox">
                 Provide the source information here:
-                <ng-container *ngFor="let option of fieldsToEnter">
-                    {{option.display}}:&nbsp;
-                    <ngContainer [ngSwitch]="option.type">
-                        <ngContainer *ngSwitchCase="'authorFML'">
-
-                        </ngContainer>
-                        <ngContainer *ngSwitchCase="'dateY'">
-
-                        </ngContainer>
-                        <ngContainer *ngSwitchCase="'text'">
-
-                        </ngContainer>
-                        <ngContainer *ngSwitchCase="'date'">
-
-                        </ngContainer>
-                        <ngContainer *ngSwitchCase="'authorFML'">
-
-                        </ngContainer>
-                        <ngContainer *ngSwitchCase="'authorFML'">
-
-                        </ngContainer>
-                        <ngContainer *ngSwitchCase="'authorFML'">
-
-                        </ngContainer>
-                        <ngContainer *ngSwitchCase="'authorFML'">
-
-                        </ngContainer>
-
-                    </ngContainer>
+                <br>
+                <ng-container *ngFor="let option of fieldsToEnter; let index = index">
+                    <table class="fieldInput">
+                        <tr>
+                            <td>
+                                {{option.display}}:
+                            </td>
+                            <td>
+                                <ng-container [ngSwitch]="option.type">
+                                    <ng-container *ngSwitchCase="'authorFML'">
+                                        <input type="text" class="nameInput" placeholder="First" [(ngModel)]="referenceData.fieldData[option.display + 'First']">&nbsp;
+                                        <input type="text" class="nameInput" placeholder="Middle" [(ngModel)]="referenceData.fieldData[option.display + 'Middle']">&nbsp;
+                                        <input type="text" class="nameInput" placeholder="Last" [(ngModel)]="referenceData.fieldData[option.display + 'Last']">
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="'dateY'">
+                                        <input type="text" class="shortTextInput" placeholder="YYYY" [(ngModel)]="referenceData.fieldData[option.display]">
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="'text'">
+                                        <input type="text" class="textInput" [placeholder]="option.placeholder" [(ngModel)]="referenceData.fieldData[option.display]">
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="'date'">
+                                        <input type="text" class="textInput" [placeholder]="option.placeholder" [(ngModel)]="referenceData.fieldData[option.display]">
+                                    </ng-container>
+                                </ng-container>
+                            </td>
+                        </tr>
+                    </table>
+                    <ng-container *ngIf="index % 3 == 2">
+                        <br>
+                    </ng-container>
                 </ng-container>
 
                 <hr>

@@ -107,6 +107,33 @@ hr {
     overflow-y: auto;
 }
 
+.nameInput {
+    width: 60px;
+}
+
+.textInput {
+    width: 170px;
+}
+
+.shortTextInput {
+    width: 60px;
+}
+
+.fieldInput {
+    display: inline-block;
+    width: 33%;
+}
+
+.fieldInput td:last-child {
+    white-space: nowrap;
+    text-align: right;
+    vertical-align: bottom;
+}
+
+.fieldInput td:first-child {
+    width: 100%;
+}
+
 ::-webkit-scrollbar {
     width: 8px;
 }

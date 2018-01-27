@@ -16,9 +16,11 @@ export class QuotationDialogComponent implements OnInit {
 
   @Input() isApa: boolean = true;
   isNewRef: boolean = true;
-  referenceData: any = {};
+  referenceData: any = {
+    selectedRefType: '',
+    fieldData: {}
+  };
   referenceTypeOptions;
-  selectedRefType = '';
   fieldsToEnter: any;
 
   constructor(private refTypeService: ReferenceTypesService) { 
@@ -38,14 +40,12 @@ export class QuotationDialogComponent implements OnInit {
   }
 
   updateFields() {
+    this.referenceData.fieldData = {};
     this.fieldsToEnter = _(this.referenceTypeOptions)
       .filter(
-        option => option.type == this.selectedRefType
+        option => option.type == this.referenceData.selectedRefType
       )
-      .map(option => {
-        console.log(option);
-        return option.fields;
-      })
+      .map(option => option.fields)
       .head();
   }
 
