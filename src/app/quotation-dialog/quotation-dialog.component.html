@@ -73,8 +73,18 @@
 
                 <hr>
             </div>
-            <div *ngIf="!isNewRef">
+            <div *ngIf="!isNewRef" class="paddedBox">
+                Select a Source:
+                <br>
+                <div class="existBack">
+                    <div class="existOption" *ngFor="let source of previousRefs">
+                        <input type="radio" name="selectedExistingSource">&nbsp;
+                        {{source.identifier}} 
+                    </div>
+                </div>   
+                <div class="existDetailBack">
 
+                </div>             
             </div>
             <div class="quoteDiv">
                 <textarea class="quoteEnter" placeholder="Enter quote here..."></textarea>

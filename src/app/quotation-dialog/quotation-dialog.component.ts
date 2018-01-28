@@ -22,10 +22,12 @@ export class QuotationDialogComponent implements OnInit {
   };
   referenceTypeOptions;
   fieldsToEnter: any;
+  previousRefs: any;
 
   constructor(private refTypeService: ReferenceTypesService) { 
     this.referenceTypeOptions = this.isApa ? refTypeService.getAPAReferenceTypes() : refTypeService.getMLAReferenceTypes();
     this.fieldsToEnter = [];
+    this.previousRefs = [];
   }
 
   ngOnInit() {
