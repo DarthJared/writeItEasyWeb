@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
+import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 //5 of 65
 @Injectable()
 export class ReferenceTypesService {
@@ -786,6 +787,10 @@ export class ReferenceTypesService {
           // TODO: Throw error because there needs to be an Original Publication Date
         }
         finishFormatObj.content += `(Original work published ${citationInfoObj['Original Year of Publication']})`;
+        formatSections.push(beginFormatSection);
+        formatSections.push(titleFormatObj);
+        formatSections.push(finishFormatObj);
+        return formatSections;
       }
     },
     {
@@ -852,7 +857,113 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        let formatSections = [];
+        let beginFormatSection = _.cloneDeep(this.formatSectionObj);
+        if (citationInfoObj['Author'].length < 1) {
+          // TODO: Throw error because there needs to be an author
+        }
+        let elipseAdded: boolean = false;
+        for (let i = 0; i < citationInfoObj['Author'].length; i++) {
+          let authorObj = citationInfoObj['Author'][i];
+          if (i < 6 && i != citationInfoObj['Author'].length - 1) {
+            if (authorObj.lastName.length > 0)
+              beginFormatSection.content += `${authorObj.lastName}, `;
+            if (authorObj.firstName.length > 0) {
+              beginFormatSection.content += `${authorObj.firstName[0].toUpperCase()}.`;
+              if (authorObj.middleName.length < 1)
+                beginFormatSection.content += ', ';
+              else
+                beginFormatSection.content += ' ';
+            }
+            if (authorObj.middleName.length > 0) 
+              beginFormatSection.content += `${authorObj.middleName[0].toUpperCase()}., `
+          }
+          else if (i == citationInfoObj['Author'].length - 1) {
+            if (!elipseAdded && i > 0)
+              beginFormatSection.content += '& ';
+            if (authorObj.lastName.length > 0) {
+              beginFormatSection.content += authorObj.lastName;
+              if (authorObj.firstName.length > 0 || authorObj.middleName.length > 0)
+                beginFormatSection.content += ',';
+              beginFormatSection.content += ' ';
+            }
+            if (authorObj.firstName.length > 0)
+              beginFormatSection.content += `${authorObj.firstName[0].toUpperCase()}. `;
+            if (authorObj.middleName.length > 0) 
+              beginFormatSection.content += `${authorObj.middleName[0].toUpperCase()}. `;
+          }
+          else {
+            if (!elipseAdded) {
+              elipseAdded = true;
+              beginFormatSection.content += '... ';
+            }
+          }
+        }
+        let titleFormatObj = _.cloneDeep(this.formatSectionObj);
+        let nextCapital = true;
+        titleFormatObj.content += '"';
+        for (let i = 0; i < citationInfoObj['Article Title'].length; i++) {
+          let toCheck = citationInfoObj['Article Title'][i];
+          if (nextCapital) {
+            if (toCheck == ' ')
+              nextCapital = false;
+            titleFormatObj.content += toCheck.toUpperCase();
+          }
+          else {
+            titleFormatObj.content += toCheck.toLowerCase();
+          }
+          if (toCheck == ':')
+            nextCapital = true;
+        }
+        titleFormatObj.content += '."';
+        let magNameFormatObj = _.cloneDeep(this.formatSectionObj);
+        magNameFormatObj.italic = true;
+        nextCapital = true;
+        for (let i = 0; i < citationInfoObj['Magazine Name'].length; i++) {
+          let toCheck = citationInfoObj['Magazine Name'][i];
+          if (nextCapital) {
+            if (toCheck == ' ')
+              nextCapital = false;
+              magNameFormatObj.content += toCheck.toUpperCase();
+          }
+          else {
+            magNameFormatObj.content += toCheck.toLowerCase();
+          }
+          if (toCheck == ':')
+            nextCapital = true;
+        }
+        magNameFormatObj += ', ';
+        let endFormatObj = _.cloneDeep(this.formatSectionObj);
+        if (citationInfoObj['Date of Publication'].length < 1) {
+          endFormatObj.content += 'n.d.';
+          if (citationInfoObj['Start Page'].length > 0) {
+            endFormatObj.content += ', ';
+          }
+        }
+        else {
+          endFormatObj.content += citationInfoObj['Date of Publication'];  
+          if (citationInfoObj['Start Page'].length > 0) {
+            endFormatObj.content += ', ';
+          }
+          else {
+            endFormatObj.content += '.';
+          }
+        }
+        if (citationInfoObj['Start Page'].length < 1 && citationInfoObj['End Page'].length > 0) {
+          // TODO: Throw error because there needs to be a start page if there is an end page
+        }
+        else if (citationInfoObj['Start Page'].length > 0 && citationInfoObj['End Page'].length > 0 &&
+            citationInfoObj['Start Page'] != citationInfoObj['End Page']) {
+            endFormatObj.content += `pp. ${citationInfoObj['Start Page']}-${citationInfoObj['End Page']}. `;
+        }
+        else if ((citationInfoObj['Start Page'].length > 0 && citationInfoObj['End Page'].length < 1) ||
+            (citationInfoObj['Start Page'] == citationInfoObj['End Page'] && citationInfoObj['Start Page'].length > 0)) {
+          endFormatObj.content += `p. ${citationInfoObj['Start Page']}. `;
+        }
+        formatSections.push(beginFormatSection);
+        formatSections.push(titleFormatObj);
+        formatSections.push(endFormatObj);
+        return formatSections;
       }
     },
     {
