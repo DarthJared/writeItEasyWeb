@@ -60,4 +60,89 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
+  getDateFormatSection(dateTxt, spaceBefore, spaceAfter) {
+    let newFormatSection = _.cloneDeep(this.formatSectionObj);
+    if (spaceBefore) {
+      newFormatSection.content += ' ';
+    }
+    if (dateTxt.length < 1) {
+      newFormatSection.content += '(n.d.).';
+    }
+    else {
+      newFormatSection.content += `(${dateTxt}).`;  
+    }
+    if (spaceAfter) {
+      newFormatSection.content += ' ';
+    }
+    return newFormatSection;
+  }
+
+  getTitleFormatSection(titleTxt, italic, quote, endWithPeriod, spaceBefore, spaceAfter) {
+    if (titleTxt.length < 1) {
+      // TODO: Throw error because there needs to be a title
+    }
+    let newFormatSection = _.cloneDeep(this.formatSectionObj);
+    newFormatSection.italic = italic;
+    if (spaceBefore) {
+      newFormatSection.content += ' ';
+    }
+    let nextCapital = true;
+    for (let i = 0; i < titleTxt.length; i++) {
+      let toCheck = titleTxt[i];
+      if (nextCapital) {
+        if (toCheck == ' ')
+          nextCapital = false;
+        newFormatSection.content += toCheck.toUpperCase();
+      }
+      else {
+        newFormatSection.content += toCheck.toLowerCase();
+      }
+      if (toCheck == ':')
+        nextCapital = true;
+    }
+    if (endWithPeriod) {
+      newFormatSection.content += '.';
+    }
+    if (spaceAfter) {
+      newFormatSection.content += ' ';
+    }
+    return newFormatSection;
+  }
+
+  getEditionFormatSection(editionTxt, spaceAfter) {
+    let newFormatSection = _.cloneDeep(this.formatSectionObj);
+    if (editionTxt.length > 0) {
+      newFormatSection.content += ` (${editionTxt} ed.).`
+    }
+    else {
+      newFormatSection.content += '.';
+    }
+    if (spaceAfter) {
+      newFormatSection.content += ' ';
+    }
+    return newFormatSection;
+  }
+
+  getPublishInfoFormatSection(publicationLocationTxt, publisherTxt, spaceBefore, spaceAfter) {
+    let newFormatSection = _.cloneDeep(this.formatSectionObj);
+    if (spaceBefore) {
+      newFormatSection.content += ' ';
+    }
+    if (publicationLocationTxt.length > 0) {
+      if (publisherTxt.length > 0) {
+        newFormatSection.content += `${publicationLocationTxt}: `;
+      }
+      else {
+        newFormatSection.content += `${publicationLocationTxt}.`;
+      }
+    }
+    if (publisherTxt.length > 0) {
+      newFormatSection.content += `${publisherTxt}.`;
+    }
+    if (spaceAfter) {
+      newFormatSection.content += ' ';
+    }
+    return newFormatSection;
+  }
+
 }
