@@ -60,16 +60,19 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
-  getDateFormatSection(dateTxt, spaceBefore, spaceAfter) {
+  getDateFormatSection(dateTxt, endWithPeriod, spaceBefore, spaceAfter) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     if (spaceBefore) {
       newFormatSection.content += ' ';
     }
     if (dateTxt.length < 1) {
-      newFormatSection.content += '(n.d.).';
+      newFormatSection.content += '(n.d.)';
     }
     else {
-      newFormatSection.content += `(${dateTxt}).`;  
+      newFormatSection.content += `(${dateTxt})`;  
+    }
+    if (endWithPeriod) {
+      newFormatSection.content += '.';
     }
     if (spaceAfter) {
       newFormatSection.content += ' ';
@@ -141,6 +144,38 @@ export class ReferenceHelperService {
     }
     if (spaceAfter) {
       newFormatSection.content += ' ';
+    }
+    return newFormatSection;
+  }
+
+  getTextFormatSection(text, endWithPeriod, spaceBefore, spaceAfter) {
+    let newFormatSection = _.cloneDeep(this.formatSectionObj);
+    if (spaceBefore) {
+      newFormatSection.content += ' ';
+    }
+    newFormatSection.content += text;
+    if (endWithPeriod) {
+      newFormatSection.content += '.';
+    }
+    if (spaceAfter) {
+      newFormatSection.content += ' ';
+    }
+    return newFormatSection;
+  }
+
+  getVolumeFormatSection(volText, pagesExist, spaceBefore, spaceAfter) {
+    let newFormatSection = _.cloneDeep(this.formatSectionObj);
+    if (volText.length > 0 || pagesExist) {
+      newFormatSection.content += '(';
+    }
+    if (volText.length > 0) {
+      newFormatSection.content += `Vol. ${volText}`;
+      if (pagesExist) {
+        newFormatSection.content += ', ';
+      } 
+      else {
+        newFormatSection.content += '). ';
+      }
     }
     return newFormatSection;
   }
