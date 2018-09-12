@@ -165,17 +165,48 @@ export class ReferenceHelperService {
 
   getVolumeFormatSection(volText, pagesExist, spaceBefore, spaceAfter) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
+    if (spaceBefore) {
+      newFormatSection.content += ' ';
+    }
     if (volText.length > 0 || pagesExist) {
       newFormatSection.content += '(';
     }
     if (volText.length > 0) {
       newFormatSection.content += `Vol. ${volText}`;
       if (pagesExist) {
-        newFormatSection.content += ', ';
+        newFormatSection.content += ',';
       } 
       else {
-        newFormatSection.content += '). ';
+        newFormatSection.content += ').';
       }
+    }
+    if (spaceAfter) {
+      newFormatSection.content += ' ';
+    }
+    return newFormatSection;
+  }
+
+  getPagesFormatSection(startPageText, endPageText, endWithPeriod, spaceBefore, spaceAfter) {
+    let newFormatSection = _.cloneDeep(this.formatSectionObj);
+    if (spaceBefore) {
+      newFormatSection.content += ' ';
+    }
+    if (startPageText.length < 1 && endPageText.length > 0) {
+      // TODO: Throw error because there needs to be a start page if there is an end page
+    }
+    else if (startPageText.length > 0 && endPageText.length > 0 &&
+      startPageText != endPageText) {
+      newFormatSection.content += `pp. ${startPageText}-${endPageText})`;
+    }
+    else if ((startPageText.length > 0 && endPageText.length < 1) ||
+      (startPageText == endPageText && startPageText.length > 0)) {
+      newFormatSection.content += `p. ${startPageText})`;
+    }
+    if (endWithPeriod) {
+      newFormatSection.content += '.';
+    }
+    if (spaceAfter) {
+      newFormatSection.content += ' ';
     }
     return newFormatSection;
   }

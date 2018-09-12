@@ -281,110 +281,53 @@ export class ReferenceTypesService {
       },
       referencesPage: citationInfoObj => {
         let formatSections = [];
-        let authorFormatSection;
-        let dateFormatSection;
-        let sectWordFormatSection;
-        let titleFormatSection;
-        let volFormatSection;
+        
         let beginFormatSection = _.cloneDeep(this.formatSectionObj);
         if (citationInfoObj['Author'].length > 0) {
-          authorFormatSection = this.referenceHelperService.getAuthorFormmatSection(citationInfoObj['Author']);
-          dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Year of Publication'], true, false, true);
+          let authorFormatSection = this.referenceHelperService.getAuthorFormmatSection(citationInfoObj['Author']);
+          let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Year of Publication'], true, false, true);
           if (citationInfoObj['Section or Word Referenced'].length < 1) {
             // TODO: Throw error because there needs to be a title
           }
-          sectWordFormatSection = this.referenceHelperService.getTextFormatSection(`${citationInfoObj['Section or Word Referenced']}. In`, false, false, true);
+          let sectWordFormatSection = this.referenceHelperService.getTextFormatSection(`${citationInfoObj['Section or Word Referenced']}. In`, false, false, true);
           if (citationInfoObj['Title of Encyclopedia or Dictionary'].length < 1) {
             // TODO: Throw error because there needs to be a title
           }
-          titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title of Encyclopedia or Dictionary'], true, false, true, false, true);
-          volFormatSection = this.referenceHelperService.getVolumeFormatSection(citationInfoObj['Volume'], citationInfoObj['Start Page'].length > 0, false, true);
+          let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title of Encyclopedia or Dictionary'], true, false, true, false, true);
+          let volFormatSection = this.referenceHelperService.getVolumeFormatSection(citationInfoObj['Volume'], citationInfoObj['Start Page'].length > 0, false, true);
+          let pagesFormatSection = this.referenceHelperService.getPagesFormatSection(citationInfoObj['Start Page'], citationInfoObj['End Page'], true, false, true);
+          let publishFormatSection = this.referenceHelperService.getPublishInfoFormatSection(citationInfoObj['Publication Location'], citationInfoObj['Publisher Name'], false, true);
           
-          
-          let finishFormatObj = _.cloneDeep(this.formatSectionObj);
-          
-          if (citationInfoObj['Start Page'].length < 1 && citationInfoObj['End Page'].length > 0) {
-            // TODO: Throw error because there needs to be a start page if there is an end page
-          }
-          else if (citationInfoObj['Start Page'].length > 0 && citationInfoObj['End Page'].length > 0 &&
-              citationInfoObj['Start Page'] != citationInfoObj['End Page']) {
-            finishFormatObj.content += `pp. ${citationInfoObj['Start Page']}-${citationInfoObj['End Page']}). `;
-          }
-          else if ((citationInfoObj['Start Page'].length > 0 && citationInfoObj['End Page'].length < 1) ||
-              (citationInfoObj['Start Page'] == citationInfoObj['End Page'] && citationInfoObj['Start Page'].length > 0)) {
-            finishFormatObj.content += `p. ${citationInfoObj['Start Page']}). `;
-          }
-          if (citationInfoObj['Publication Location'].length > 0) {
-            if (citationInfoObj['Publisher Name'].length > 0) {
-              finishFormatObj.content += `${citationInfoObj['Publication Location']}: `;
-            }
-            else {
-              finishFormatObj.content += `${citationInfoObj['Publication Location']}.`;
-            }
-          }
-          if (citationInfoObj['Publisher Name'].length > 0) {
-            finishFormatObj.content += `${citationInfoObj['Publisher Name']}.`;
-          }
-          formatSections.push(beginFormatSection);
-          formatSections.push(titleFormatObj);
-          formatSections.push(finishFormatObj);
+          formatSections.push(authorFormatSection);
+          formatSections.push(dateFormatSection);
+          formatSections.push(sectWordFormatSection);
+          formatSections.push(titleFormatSection);
+          formatSections.push(volFormatSection);
+          formatSections.push(pagesFormatSection);
+          formatSections.push(publishFormatSection);
         }
         else {
           if (citationInfoObj['Section or Word Referenced'].length < 1) {
             // TODO: Throw error because there needs to be a title
           }
-          beginFormatSection.content += `${citationInfoObj['Section or Word Referenced']}. `;
-          if (citationInfoObj['Year of Publication'].length < 1) {
-            beginFormatSection.content += '(n.d.). In ';
-          }
-          else {
-            beginFormatSection.content += `(${citationInfoObj['Year of Publication']}). In `;  
-          }
-          
+          let sectWordFormatSection = this.referenceHelperService.getTextFormatSection(`${citationInfoObj['Section or Word Referenced']}`, true, false, true);
+          let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Year of Publication'], true, false, true);
+          let inFormatSection = this.referenceHelperService.getTextFormatSection('In', false, false, true);
           if (citationInfoObj['Title of Encyclopedia or Dictionary'].length < 1) {
             // TODO: Throw error because there needs to be a title
           }
-          let titleFormatObj = _.cloneDeep(this.formatSectionObj);
-          titleFormatObj.italic = true;
-          titleFormatObj.content += `${citationInfoObj['Title of Encyclopedia or Dictionary']}. `;
-          let finishFormatObj = _.cloneDeep(this.formatSectionObj);
-          if (citationInfoObj['Volume'].length > 0 || citationInfoObj['Start Page'].length > 0) {
-            finishFormatObj.content += '(';
-          }
-          if (citationInfoObj['Volume'].length > 0) {
-            finishFormatObj.content += `Vol. ${citationInfoObj['Volume']}`;
-            if (citationInfoObj['Start Page'].length > 0) {
-              finishFormatObj.content += ', ';
-            } 
-            else {
-              finishFormatObj.content += '). ';
-            }
-          }
-          if (citationInfoObj['Start Page'].length < 1 && citationInfoObj['End Page'].length > 0) {
-            // TODO: Throw error because there needs to be a start page if there is an end page
-          }
-          else if (citationInfoObj['Start Page'].length > 0 && citationInfoObj['End Page'].length > 0 &&
-              citationInfoObj['Start Page'] != citationInfoObj['End Page']) {
-            finishFormatObj.content += `pp. ${citationInfoObj['Start Page']}-${citationInfoObj['End Page']}). `;
-          }
-          else if ((citationInfoObj['Start Page'].length > 0 && citationInfoObj['End Page'].length < 1) ||
-              (citationInfoObj['Start Page'] == citationInfoObj['End Page'] && citationInfoObj['Start Page'].length > 0)) {
-            finishFormatObj.content += `p. ${citationInfoObj['Start Page']}). `;
-          }
-          if (citationInfoObj['Publication Location'].length > 0) {
-            if (citationInfoObj['Publisher Name'].length > 0) {
-              finishFormatObj.content += `${citationInfoObj['Publication Location']}: `;
-            }
-            else {
-              finishFormatObj.content += `${citationInfoObj['Publication Location']}.`;
-            }
-          }
-          if (citationInfoObj['Publisher Name'].length > 0) {
-            finishFormatObj.content += `${citationInfoObj['Publisher Name']}.`;
-          }
-          formatSections.push(beginFormatSection);
-          formatSections.push(titleFormatObj);
-          formatSections.push(finishFormatObj);
+          let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title of Encyclopedia or Dictionary'], true, false, true, false, true);
+          let volFormatSection = this.referenceHelperService.getVolumeFormatSection(citationInfoObj['Volume'], citationInfoObj['Start Page'].length > 0, false, true);
+          let pagesFormatSection = this.referenceHelperService.getPagesFormatSection(citationInfoObj['Start Page'], citationInfoObj['End Page'], true, false, true);
+          let publishFormatSection = this.referenceHelperService.getPublishInfoFormatSection(citationInfoObj['Publication Location'], citationInfoObj['Publisher Name'], false, true);
+
+          formatSections.push(sectWordFormatSection);
+          formatSections.push(dateFormatSection);
+          formatSections.push(inFormatSection);
+          formatSections.push(titleFormatSection);
+          formatSections.push(volFormatSection);
+          formatSections.push(pagesFormatSection);
+          formatSections.push(publishFormatSection);
         }
         return formatSections;
       }
