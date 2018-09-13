@@ -15,7 +15,7 @@ export class ReferenceHelperService {
 
   constructor() { }
 
-  public getAuthorFormmatSection(authorsObj) {
+  public getAuthorFormatSection(authorsObj) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     if (authorsObj.length < 1) {
       // TODO: Throw error saying need to have author
@@ -80,6 +80,29 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
+  getNoParenDateFormatSection(dateTxt, endWithComma, spaceBefore, spaceAfter) {
+    let newFormatSection = _.cloneDeep(this.formatSectionObj);
+    if (spaceBefore) {
+      newFormatSection.content += ' ';
+    }
+    if (dateTxt.length < 1) {
+      newFormatSection.content += 'n.d.';
+    }
+    else {
+      newFormatSection.content += dateTxt;  
+      if (!endWithComma) {
+        newFormatSection.content += '.';
+      }
+    }
+    if (endWithComma) {
+      newFormatSection.content += ',';
+    }
+    if (spaceAfter) {
+      newFormatSection.content += ' ';
+    }
+    return newFormatSection;
+  }
+
   getTitleFormatSection(titleTxt, italic, quote, endWithPeriod, spaceBefore, spaceAfter) {
     if (titleTxt.length < 1) {
       // TODO: Throw error because there needs to be a title
@@ -88,6 +111,9 @@ export class ReferenceHelperService {
     newFormatSection.italic = italic;
     if (spaceBefore) {
       newFormatSection.content += ' ';
+    }
+    if (quote) {
+      newFormatSection.content += '"';
     }
     let nextCapital = true;
     for (let i = 0; i < titleTxt.length; i++) {
@@ -105,6 +131,9 @@ export class ReferenceHelperService {
     }
     if (endWithPeriod) {
       newFormatSection.content += '.';
+    }
+    if (quote) {
+      newFormatSection.content += '"';
     }
     if (spaceAfter) {
       newFormatSection.content += ' ';
@@ -186,7 +215,7 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
-  getPagesFormatSection(startPageText, endPageText, endWithPeriod, spaceBefore, spaceAfter) {
+  getPagesFormatSection(startPageText, endPageText, endWithParen, endWithPeriod, spaceBefore, spaceAfter) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     if (spaceBefore) {
       newFormatSection.content += ' ';
@@ -196,11 +225,14 @@ export class ReferenceHelperService {
     }
     else if (startPageText.length > 0 && endPageText.length > 0 &&
       startPageText != endPageText) {
-      newFormatSection.content += `pp. ${startPageText}-${endPageText})`;
+      newFormatSection.content += `pp. ${startPageText}-${endPageText}`;
     }
     else if ((startPageText.length > 0 && endPageText.length < 1) ||
       (startPageText == endPageText && startPageText.length > 0)) {
-      newFormatSection.content += `p. ${startPageText})`;
+      newFormatSection.content += `p. ${startPageText}`;
+    }
+    if (endWithPeriod) {
+      newFormatSection.content += '(';
     }
     if (endWithPeriod) {
       newFormatSection.content += '.';
