@@ -177,8 +177,9 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
-  getTextFormatSection(text, endWithPeriod, spaceBefore, spaceAfter) {
+  getTextFormatSection(text, italic, endWithPeriod, spaceBefore, spaceAfter) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
+    newFormatSection.italic = italic;
     if (spaceBefore) {
       newFormatSection.content += ' ';
     }
@@ -231,8 +232,8 @@ export class ReferenceHelperService {
       (startPageText == endPageText && startPageText.length > 0)) {
       newFormatSection.content += `p. ${startPageText}`;
     }
-    if (endWithPeriod) {
-      newFormatSection.content += '(';
+    if (endWithParen) {
+      newFormatSection.content += ')';
     }
     if (endWithPeriod) {
       newFormatSection.content += '.';

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 import { ReferenceHelperService } from './reference-helper.service';
-//5 of 65
+//6 of 65
 @Injectable()
 export class ReferenceTypesService {
 
@@ -197,7 +197,7 @@ export class ReferenceTypesService {
       },
       referencesPage: citationInfoObj => {
         let formatSections = [];
-        let orgFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Organization'], true, false, true);
+        let orgFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Organization'], false, true, false, true);
         let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Year of Publication'], true, false, true);
         let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title'], true, false, false, false, false);
         let editionFormatSection = this.referenceHelperService.getEditionFormatSection(citationInfoObj['Edition'], true);
@@ -289,7 +289,7 @@ export class ReferenceTypesService {
           if (citationInfoObj['Section or Word Referenced'].length < 1) {
             // TODO: Throw error because there needs to be a title
           }
-          let sectWordFormatSection = this.referenceHelperService.getTextFormatSection(`${citationInfoObj['Section or Word Referenced']}. In`, false, false, true);
+          let sectWordFormatSection = this.referenceHelperService.getTextFormatSection(`${citationInfoObj['Section or Word Referenced']}. In`, false, false, false, true);
           if (citationInfoObj['Title of Encyclopedia or Dictionary'].length < 1) {
             // TODO: Throw error because there needs to be a title
           }
@@ -310,9 +310,9 @@ export class ReferenceTypesService {
           if (citationInfoObj['Section or Word Referenced'].length < 1) {
             // TODO: Throw error because there needs to be a title
           }
-          let sectWordFormatSection = this.referenceHelperService.getTextFormatSection(`${citationInfoObj['Section or Word Referenced']}`, true, false, true);
+          let sectWordFormatSection = this.referenceHelperService.getTextFormatSection(`${citationInfoObj['Section or Word Referenced']}`, false, true, false, true);
           let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Year of Publication'], true, false, true);
-          let inFormatSection = this.referenceHelperService.getTextFormatSection('In', false, false, true);
+          let inFormatSection = this.referenceHelperService.getTextFormatSection('In', false, false, false, true);
           if (citationInfoObj['Title of Encyclopedia or Dictionary'].length < 1) {
             // TODO: Throw error because there needs to be a title
           }
@@ -401,17 +401,17 @@ export class ReferenceTypesService {
         let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Year of Publication'], true, false, true);
         let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title'], true, false, false, false, true);
         let editionFormatSection = this.referenceHelperService.getEditionFormatSection(citationInfoObj['Edition'], true);
-        let openParenFormatSection = this.referenceHelperService.getTextFormatSection('(', false, false, false);
+        let openParenFormatSection = this.referenceHelperService.getTextFormatSection('(', false, false, false, false);
         if (citationInfoObj['Translator'].length < 1) {
           // TODO: Throw error because there needs to be an author
         }
         let translatorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Translator']);
-        let closeParenFormatSection = this.referenceHelperService.getTextFormatSection(', Trans.)', true, false, true);
+        let closeParenFormatSection = this.referenceHelperService.getTextFormatSection(', Trans.)', false, true, false, true);
         let publishFormatSection = this.referenceHelperService.getPublishInfoFormatSection(citationInfoObj['Publication Location'], citationInfoObj['Publisher Name'], false, true);
         if (citationInfoObj['Original Year of Publication'].length < 1) {
           // TODO: Throw error because there needs to be an Original Publication Date
         }
-        let orgPubDateFormatSection = this.referenceHelperService.getTextFormatSection(`(Original work published ${citationInfoObj['Original Year of Publication']})`, false, false, true);
+        let orgPubDateFormatSection = this.referenceHelperService.getTextFormatSection(`(Original work published ${citationInfoObj['Original Year of Publication']})`, false, false, false, true);
         formatSections.push(orgAuthorFormatSection);
         formatSections.push(dateFormatSection);
         formatSections.push(titleFormatSection);
@@ -495,7 +495,7 @@ export class ReferenceTypesService {
         let authorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Author']);
         let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Article Title'], false, true, true, false, false);
         let magNameFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Magazine Name'], true, false, false, false, false);
-        let commaFormatSection = this.referenceHelperService.getTextFormatSection(',', false, false, true);
+        let commaFormatSection = this.referenceHelperService.getTextFormatSection(',', false, false, false, true);
         let dateFormatSection = this.referenceHelperService.getNoParenDateFormatSection(citationInfoObj['Date of Publication'], citationInfoObj['Start Page'].length > 0, false, true);
         let pagesFormatSection = this.referenceHelperService.getPagesFormatSection(citationInfoObj['Start Page'], citationInfoObj['End Page'], false, true, false, true);
         formatSections.push(authorFormatSection);
@@ -571,7 +571,34 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        let formatSections = [];
+        let authorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Author']);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Publication'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Article Title'], false, false, true, false, true);
+        let magTitleFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Newspaper Name'], true, false, false, false);
+        let textToAdd = '';
+        if (citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0 || citationInfoObj['Start Page'].length > 0) {
+          textToAdd = ', ';
+        }
+        let commaFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, true, false, false, false);
+        let volFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Volume Number'], true, false, false, false);
+        let issueFormatSection = this.referenceHelperService.getTextFormatSection(`(${citationInfoObj['Issue Number']})`, false, false, false, false);
+        let textToAdd2 = '';
+        if ((citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0) && citationInfoObj['Start Page'].length > 0) {
+          textToAdd2 = ', ';
+        }
+        let comma2FormatSection = this.referenceHelperService.getTextFormatSection(textToAdd2, false, false, false, false);
+        let pagesFormatSection = this.referenceHelperService.getPagesFormatSection(citationInfoObj['Start Page'], citationInfoObj['End Page'], false, true, false, false);
+        formatSections.push(authorFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(magTitleFormatSection);
+        formatSections.push(commaFormatSection);
+        formatSections.push(volFormatSection);
+        formatSections.push(issueFormatSection);
+        formatSections.push(comma2FormatSection);
+        formatSections.push(pagesFormatSection);
+        return formatSections;
       }
     },
     {
@@ -637,7 +664,11 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
+        let formatSections = [];
 
+
+
+        return formatSections;
       }
     },
     {
