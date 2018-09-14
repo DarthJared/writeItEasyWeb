@@ -665,9 +665,32 @@ export class ReferenceTypesService {
       },
       referencesPage: citationInfoObj => {
         let formatSections = [];
-
-
-
+        let authorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Author']);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Year of Publication'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Article Title'], false, false, true, false, true);
+        let journalFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Journal Name'], true, false, false, false);
+        let textToAdd = '';
+        if (citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0 || citationInfoObj['Start Page'].length > 0) {
+          textToAdd = ', ';
+        }
+        let commaFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, true, false, false, false);
+        let volFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Volume Number'], true, false, false, false);
+        let issueFormatSection = this.referenceHelperService.getTextFormatSection(`(${citationInfoObj['Issue Number']})`, false, false, false, false);
+        let textToAdd2 = '';
+        if ((citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0) && citationInfoObj['Start Page'].length > 0) {
+          textToAdd2 = ', ';
+        }
+        let comma2FormatSection = this.referenceHelperService.getTextFormatSection(textToAdd2, false, false, false, false);
+        let pagesFormatSection = this.referenceHelperService.getPagesFormatSection(citationInfoObj['Start Page'], citationInfoObj['End Page'], false, false, false, true);
+        formatSections.push(authorFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(journalFormatSection);
+        formatSections.push(commaFormatSection);
+        formatSections.push(volFormatSection);
+        formatSections.push(issueFormatSection);
+        formatSections.push(comma2FormatSection);
+        formatSections.push(pagesFormatSection);
         return formatSections;
       }
     },
@@ -748,7 +771,13 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
+        let formatSections = [];
+        
 
+
+
+
+        return formatSections;
       }
     },
     {
