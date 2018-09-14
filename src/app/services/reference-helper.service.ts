@@ -244,19 +244,29 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
-  getOnlineRetrieved(doiTxt, retrievedTxt, spaceBefore, spaceAfter) {
+  getOnlineRetrievedFormatSection(doiTxt, retrievedTxt, spaceBefore, spaceAfter) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     if (spaceBefore) {
       newFormatSection.content += ' ';
     }
-
     if (doiTxt.length > 0) {
       newFormatSection.content += `doi:${doiTxt}`;
     }
     else if (retrievedTxt.length > 0) {
       newFormatSection.content += `Retrieved from ${retrievedTxt}`;
     }
+    if (spaceAfter) {
+      newFormatSection.content += ' ';
+    }
+    return newFormatSection;
+  }
 
+  getRetrievedFromFormatSection(retrievedTxt, spaceBefore, spaceAfter) {
+    let newFormatSection = _.cloneDeep(this.formatSectionObj);
+    if (spaceBefore) {
+      newFormatSection.content += ' ';
+    }
+    newFormatSection.content += `Retrieved from ${retrievedTxt}`;
     if (spaceAfter) {
       newFormatSection.content += ' ';
     }
