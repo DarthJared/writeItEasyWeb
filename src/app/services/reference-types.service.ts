@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 import { ReferenceHelperService } from './reference-helper.service';
 import { format } from 'util';
-//12 of 65
+//16 of 65
 @Injectable()
 export class ReferenceTypesService {
 
@@ -1068,7 +1068,18 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        let formatSections = [];
+        let authorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Author']);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Publication'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Book Title'], true, false, false, false, false);
+        let kindleFormatSection = this.referenceHelperService.getTextFormatSection('[Kindle DX Version]', false, true, true, true);
+        let retrievedFormatSection = this.referenceHelperService.getOnlineRetrievedFormatSection(citationInfoObj['DOI'], citationInfoObj['Retrieved From'], false, false);
+        formatSections.push(authorFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(kindleFormatSection);
+        formatSections.push(retrievedFormatSection);
+        return formatSections;
       }
     },
     {
@@ -1107,7 +1118,16 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        let formatSections = [];
+        let authorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Author']);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Publication'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Book Title'], true, false, true, false, true);
+        let retrievedFormatSection = this.referenceHelperService.getRetrievedFromFormatSection(citationInfoObj['Retrieved From'], false, false);
+        formatSections.push(authorFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(retrievedFormatSection);
+        return formatSections;
       }
     },
     {
@@ -1152,7 +1172,38 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        let formatSections = [];
+        let interviewerFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Interviewer']);
+        let textToAdd = '';
+        if (citationInfoObj['Interviewer'].length > 1) {
+          textToAdd = '(Interviewers) &';
+        }
+        else {
+          textToAdd = '(Interviewer) &';
+        } 
+        let interviewerTextFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, false, false, true);
+        let intervieweeFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Interviewee']);
+        let textToAdd2 = '';
+        if (citationInfoObj['Interviewee'].length > 1) {
+          textToAdd = '(Interviewees)';
+        }
+        else {
+          textToAdd = '(Interviewee)';
+        } 
+        let intervieweeTextFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd2, false, true, false, true);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Interview'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Interview Title'], true, false, false, false, false);
+        let transcriptFormatSection = this.referenceHelperService.getTextFormatSection('[Interview Transcript]', false, true, true, true);
+        let retrievedFormatSection = this.referenceHelperService.getRetrievedFromFormatSection(citationInfoObj['Retrieved From'], false, false);
+        formatSections.push(interviewerFormatSection);
+        formatSections.push(interviewerTextFormatSection);
+        formatSections.push(intervieweeFormatSection);
+        formatSections.push(intervieweeTextFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(transcriptFormatSection);
+        formatSections.push(retrievedFormatSection);
+        return formatSections;
       }
     },
     {
@@ -1187,7 +1238,24 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         }
-      ]
+      ],
+      inText: citationInfoObj => {
+        
+      },
+      referencesPage: citationInfoObj => {
+        let formatSections = [];
+        let sectionFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Section or Word Referenced'], false, true, false, true);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Publication'], true, false, true);
+        let inFormatSection = this.referenceHelperService.getTextFormatSection('In', false, false, false, true);
+        let titleFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Title of Encyclopedia or Dictionary'], true, true, false, true);
+        let retrievedFormatSection = this.referenceHelperService.getRetrievedFromFormatSection(citationInfoObj['Retrieved From'], false, false);
+        formatSections.push(sectionFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(inFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(retrievedFormatSection);
+        return formatSections;
+      }
     },
     {
       type: 'forumDiscussion',
@@ -1232,7 +1300,13 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
+        let formatSections = [];
+        
 
+
+
+
+        return formatSections;
       }
     },
     {
@@ -2260,6 +2334,10 @@ export class ReferenceTypesService {
       }
     }
   ]
+
+  ///////////////////////////////////////////////////
+  //////////////////      MLA      //////////////////
+  ///////////////////////////////////////////////////
 
   referencesFrameworkMLA = [
     {
