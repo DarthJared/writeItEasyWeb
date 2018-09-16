@@ -60,6 +60,25 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
+  getOneAuthorFormatSection(authorObj) {
+    let newFormatSection = _.cloneDeep(this.formatSectionObj);
+    if (authorObj.lastName.length > 0)
+      newFormatSection.content += authorObj.lastName;
+    if (authorObj.firstName.length > 0 || authorObj.middleName.length > 0) {
+      newFormatSection.content += ',';
+    }
+    newFormatSection.content += ' ';
+    if (authorObj.firstName.length > 0) {
+      newFormatSection.content += `${authorObj.firstName[0].toUpperCase()}.`;
+      if (authorObj.middleName.length < 1)
+        newFormatSection.content += ',';
+      newFormatSection.content += ' ';
+    }
+    if (authorObj.middleName.length > 0) 
+      newFormatSection.content += `${authorObj.middleName[0].toUpperCase()}. `     
+    return newFormatSection;
+  }
+
   getDateFormatSection(dateTxt, endWithPeriod, spaceBefore, spaceAfter) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     if (spaceBefore) {

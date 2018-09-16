@@ -1297,15 +1297,22 @@ export class ReferenceTypesService {
         }
       ],
       inText: citationInfoObj => {
-        
+
       },
       referencesPage: citationInfoObj => {
         let formatSections = [];
-        
-
-
-
-
+        let authorFormatSection = this.referenceHelperService.getOneAuthorFormatSection(citationInfoObj['Person Posting']);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date Posted'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title of Message'], false, false, false, false, false);
+        let numFormatSection = this.referenceHelperService.getTextFormatSection(` [Msg ${citationInfoObj['Message Number']}]`, false, false, false, false);
+        let postedFormatSection = this.referenceHelperService.getTextFormatSection('. Message posted to', false, false, false, true);
+        let retrievedFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Retrieved From'], false, false, false, false);
+        formatSections.push(authorFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(numFormatSection);
+        formatSections.push(postedFormatSection);
+        formatSections.push(retrievedFormatSection);
         return formatSections;
       }
     },
@@ -1387,7 +1394,32 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
+        let formatSections;
+        let authorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Author']);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Publication'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Review Title'], false, false, false, false, false);
+        let reviewOfFormatSection = this.referenceHelperService.getTextFormatSection('[Review of the book', false, false, true, true);
+        let reviewedTitleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title Being Reviewed'], true, false, false, false, false);
+        let closeFormatSection = this.referenceHelperService.getTextFormatSection(']', false, true, false, false);
+        // let textToAdd = '';
+        // if (citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0 || citationInfoObj['Start Page'].length > 0) {
+        //   textToAdd = ', ';
+        // }
+        // let commaFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, true, false, false, false);
+        // let volFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Volume Number'], true, false, false, false);
+        // let issueFormatSection = this.referenceHelperService.getTextFormatSection(`(${citationInfoObj['Issue Number']})`, false, false, false, false);
+        // let textToAdd2 = '';
+        // if ((citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0) && citationInfoObj['Start Page'].length > 0) {
+        //   textToAdd2 = ', ';
+        // }
+        // let comma2FormatSection = this.referenceHelperService.getTextFormatSection(textToAdd2, false, false, false, false);
+        // let pagesFormatSection = this.referenceHelperService.getPagesFormatSection(citationInfoObj['Start Page'], citationInfoObj['End Page'], false, true, false, true);
+        // let onlineFormatSection = this.referenceHelperService.getOnlineRetrievedFormatSection(citationInfoObj['DOI'], citationInfoObj['Retrieved From'], false, false);
+        
 
+
+
+        return formatSections;
       }
     },
     {
