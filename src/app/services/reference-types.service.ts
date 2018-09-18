@@ -1401,24 +1401,34 @@ export class ReferenceTypesService {
         let reviewOfFormatSection = this.referenceHelperService.getTextFormatSection('[Review of the book', false, false, true, true);
         let reviewedTitleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title Being Reviewed'], true, false, false, false, false);
         let closeFormatSection = this.referenceHelperService.getTextFormatSection(']', false, true, false, false);
-        // let textToAdd = '';
-        // if (citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0 || citationInfoObj['Start Page'].length > 0) {
-        //   textToAdd = ', ';
-        // }
-        // let commaFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, true, false, false, false);
-        // let volFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Volume Number'], true, false, false, false);
-        // let issueFormatSection = this.referenceHelperService.getTextFormatSection(`(${citationInfoObj['Issue Number']})`, false, false, false, false);
-        // let textToAdd2 = '';
-        // if ((citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0) && citationInfoObj['Start Page'].length > 0) {
-        //   textToAdd2 = ', ';
-        // }
-        // let comma2FormatSection = this.referenceHelperService.getTextFormatSection(textToAdd2, false, false, false, false);
-        // let pagesFormatSection = this.referenceHelperService.getPagesFormatSection(citationInfoObj['Start Page'], citationInfoObj['End Page'], false, true, false, true);
-        // let onlineFormatSection = this.referenceHelperService.getOnlineRetrievedFormatSection(citationInfoObj['DOI'], citationInfoObj['Retrieved From'], false, false);
-        
-
-
-
+        let sourceFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Source of Review'], true, false, false, true);
+        let textToAdd = '';
+        if (citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0 || citationInfoObj['Start Page'].length > 0) {
+          textToAdd = ', ';
+        }
+        let commaFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, true, false, false, false);
+        let volFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Volume Number'], true, false, false, false);
+        let issueFormatSection = this.referenceHelperService.getTextFormatSection(`(${citationInfoObj['Issue Number']})`, false, false, false, false);
+        let textToAdd2 = '';
+        if ((citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0) && citationInfoObj['Start Page'].length > 0) {
+          textToAdd2 = ', ';
+        }
+        let comma2FormatSection = this.referenceHelperService.getTextFormatSection(textToAdd2, false, false, false, false);
+        let pagesFormatSection = this.referenceHelperService.getPagesFormatSection(citationInfoObj['Start Page'], citationInfoObj['End Page'], false, true, false, true);
+        let onlineFormatSection = this.referenceHelperService.getOnlineRetrievedFormatSection(citationInfoObj['DOI'], citationInfoObj['Retrieved From'], false, false);
+        formatSections.push(authorFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(reviewOfFormatSection);
+        formatSections.push(reviewedTitleFormatSection);
+        formatSections.push(closeFormatSection);
+        formatSections.push(sourceFormatSection);
+        formatSections.push(commaFormatSection);
+        formatSections.push(volFormatSection);
+        formatSections.push(issueFormatSection);
+        formatSections.push(comma2FormatSection);
+        formatSections.push(pagesFormatSection);
+        formatSections.push(onlineFormatSection);
         return formatSections;
       }
     },
@@ -1446,13 +1456,13 @@ export class ReferenceTypesService {
           canAdd: false,
           required: true
         },
-        {
-          type: 'text',
-          display: 'Source of Reference',
-          placeholder: 'Source',
-          canAdd: false,
-          required: false
-        },
+        // {
+        //   type: 'text',
+        //   display: 'Source of Reference',
+        //   placeholder: 'Source',
+        //   canAdd: false,
+        //   required: false
+        // },
         {
           type: 'text',
           display: 'Retrieved From',
@@ -1465,7 +1475,18 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        let formatSections = [];
+        let posterFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Person Posting']);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date Posted'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title of Post'], false, false, false, false, false);
+        let formatFormatSection = this.referenceHelperService.getTextFormatSection('[web log comment]', false, true, true, true);
+        let onlineFormatSection = this.referenceHelperService.getRetrievedFromFormatSection(citationInfoObj['Retrieved From'], false, false);
+        formatSections.push(posterFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(formatFormatSection);
+        formatSections.push(onlineFormatSection);
+        return formatSections;
       }
     },
     {
