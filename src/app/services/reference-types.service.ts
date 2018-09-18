@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 import { ReferenceHelperService } from './reference-helper.service';
 import { format } from 'util';
-//16 of 65
+//21 of 65
 @Injectable()
 export class ReferenceTypesService {
 
@@ -1501,6 +1501,13 @@ export class ReferenceTypesService {
           required: true
         },
         {
+          type: 'date',
+          display: 'Date Published',
+          placeholder: 'YYYY, Mmmm DD or YYYY',
+          canAdd: false,
+          required: false
+        },
+        {
           type: 'text',
           display: 'Source of Reference',
           placeholder: 'Source',
@@ -1526,7 +1533,14 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        let formatSections = [];
+        let titleFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Title of Wiki'], false, true, false, true);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date Published'], true, false, true);
+        let retrievedFormatSection = this.referenceHelperService.getTextFormatSection(`Retrieved ${citationInfoObj['Date Retrieved']} from ${citationInfoObj['Retrieved From']}`, false, false, false, false);
+        formatSections.push(titleFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(retrievedFormatSection);
+        return formatSections;
       }
     },
     {
@@ -1572,7 +1586,16 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        let formatSections = [];
+        let authorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Author']);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Publication'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title'], true, false, true, false, true);
+        let retrievedFormatSection = this.referenceHelperService.getRetrievedFromFormatSection(citationInfoObj['Retrieved From'], false, false);
+        formatSections.push(authorFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(retrievedFormatSection);
+        return formatSections;
       }
     },
     {
@@ -1618,7 +1641,10 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
+        let formatSections = []
 
+
+        return formatSections;
       }
     },
     {
@@ -1663,7 +1689,10 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
+        let formatSections = []
 
+
+        return formatSections;
       }
     },
     {
