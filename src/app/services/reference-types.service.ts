@@ -1822,7 +1822,22 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        let formatSections = [];
+        let orgFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Organization Name'], false, true, false, true);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Year of Publication'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title'], true, false, false, false, false);
+        let textToAdd = '';
+        if (citationInfoObj['Publication Number'].length > 0) {
+          textToAdd = ` (Publication no. ${citationInfoObj['Publication Number']})`
+        }
+        let pubNoFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, true, false, true);
+        let publishFormatSection = this.referenceHelperService.getPublishInfoFormatSection(citationInfoObj['Publication Location'], citationInfoObj['Publisher'], false, false);
+        formatSections.push(orgFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(pubNoFormatSection);
+        formatSections.push(publishFormatSection);
+        return formatSections;
       }
     },
     {
