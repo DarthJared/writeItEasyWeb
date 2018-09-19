@@ -1623,13 +1623,6 @@ export class ReferenceTypesService {
           required: false
         },
         {
-          type: 'date',
-          display: 'Date Retrieved',
-          placeholder: 'YYYY, Mmmm DD or YYYY',
-          canAdd: false,
-          required: false
-        },
-        {
           type: 'text',
           display: 'Retrieved From',
           placeholder: 'ex. www.journals.com/journal',
@@ -1642,8 +1635,14 @@ export class ReferenceTypesService {
       },
       referencesPage: citationInfoObj => {
         let formatSections = []
-
-
+        let authorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Author']);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Publication'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title'], true, false, true, false, true);
+        let retrievedFormatSection = this.referenceHelperService.getRetrievedFromFormatSection(citationInfoObj['Retrieved From'], false, false);
+        formatSections.push(authorFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(retrievedFormatSection);
         return formatSections;
       }
     },
@@ -1679,6 +1678,13 @@ export class ReferenceTypesService {
         },
         {
           type: 'text',
+          display: 'Retrieved From',
+          placeholder: 'ex. www.journals.com/journal',
+          canAdd: false,
+          required: true
+        },
+        {
+          type: 'text',
           display: 'Accession/Order Number',
           placeholder: 'Number',
           canAdd: false,
@@ -1690,8 +1696,22 @@ export class ReferenceTypesService {
       },
       referencesPage: citationInfoObj => {
         let formatSections = []
-
-
+        let authorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Author']);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Year of Publication'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title'], true, false, false, false, false);
+        let docDisFormatSection = this.referenceHelperService.getTextFormatSection('(Doctoral dissertation)', false, true, true, true);
+        let retrievedFormatSection;
+        if (citationInfoObj['Retrieved From'].length > 0) {
+          retrievedFormatSection = this.referenceHelperService.getRetrievedFromFormatSection(citationInfoObj['Retrieved From'], false, true);
+        }
+        if (citationInfoObj['Accession/Order Number'].length > 0) {
+          retrievedFormatSection = this.referenceHelperService.getTextFormatSection(`(${citationInfoObj['Accession/Order Number']})`, false, false, false, false);
+        }
+        formatSections.push(authorFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(docDisFormatSection);
+        formatSections.push(retrievedFormatSection);
         return formatSections;
       }
     },
@@ -1738,7 +1758,18 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        let formatSections = [];
+        let authorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Author']);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Publication'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title'], true, false, false, false, false);
+        let unpubDisFormatSection = this.referenceHelperService.getTextFormatSection('(Unpublished dissertation)', false, true, true, true);
+        let locactionFormatSection = this.referenceHelperService.getTextFormatSection(`${citationInfoObj['Institution Name']}, ${citationInfoObj['Location']}`, false, true, false, false);
+        formatSections.push(authorFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(unpubDisFormatSection);
+        formatSections.push(locactionFormatSection);
+        return formatSections;
       }
     },
     {
