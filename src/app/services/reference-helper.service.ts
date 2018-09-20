@@ -60,6 +60,54 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
+  getReverseAuthorFormatSection(authorsObj) {
+    let newFormatSection = _.cloneDeep(this.formatSectionObj);
+    if (authorsObj.length < 1) {
+      // TODO: Throw error saying need to have author
+    }
+    let elipseAdded: boolean = false;
+    for (let i = 0; i < authorsObj.length; i++) {
+      let authorObj = authorsObj[i];
+      if (i < 6 && i != authorsObj.length - 1) {
+        if (authorObj.first.length > 0) {
+          newFormatSection.content += `${authorObj.firstName[0].toUpperCase()}. `;
+        }          
+        if (authorObj.middleName.length > 0) {
+          newFormatSection.content += `${authorObj.middleName[0].toUpperCase()}. `;
+        }
+        if (authorObj.lastName.length > 0) {
+          newFormatSection.content += `${authorObj.lastName}`;
+        }
+        if (authorsObj.length > 2) {
+          newFormatSection.content += ',';
+        }
+        newFormatSection.content += ' ';
+      }
+      else if (i == authorsObj.length - 1) {
+        if (!elipseAdded && i > 0)
+          newFormatSection.content += '& ';
+          if (authorObj.first.length > 0) {
+            newFormatSection.content += `${authorObj.firstName[0].toUpperCase()}. `;
+          }          
+          if (authorObj.middleName.length > 0) {
+            newFormatSection.content += `${authorObj.middleName[0].toUpperCase()}. `;
+          }
+          if (authorObj.lastName.length > 0) {
+            newFormatSection.content += `${authorObj.lastName}, `;
+          }
+      }
+      else {
+        if (!elipseAdded) {
+          elipseAdded = true;
+          newFormatSection.content += '... ';
+        }
+      }
+    }
+
+
+    return newFormatSection;
+  }
+
   getOneAuthorFormatSection(authorObj) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     if (authorObj.lastName.length > 0)

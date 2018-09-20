@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 import { ReferenceHelperService } from './reference-helper.service';
 import { format } from 'util';
-//27 of 65
+//25 of 65
 @Injectable()
 export class ReferenceTypesService {
 
@@ -406,7 +406,7 @@ export class ReferenceTypesService {
         if (citationInfoObj['Translator'].length < 1) {
           // TODO: Throw error because there needs to be an author
         }
-        let translatorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Translator']);
+        let translatorFormatSection = this.referenceHelperService.getReverseAuthorFormatSection(citationInfoObj['Translator']);
         let closeParenFormatSection = this.referenceHelperService.getTextFormatSection(', Trans.)', false, true, false, true);
         let publishFormatSection = this.referenceHelperService.getPublishInfoFormatSection(citationInfoObj['Publication Location'], citationInfoObj['Publisher Name'], false, true);
         if (citationInfoObj['Original Year of Publication'].length < 1) {
@@ -1864,10 +1864,11 @@ export class ReferenceTypesService {
           required: false
         },
         {
-          type: 'authorFML',
-          display: 'Original Author',
-          canAdd: true,
-          required: true
+          type: 'text',
+          display: 'Title of Work Reviewed',
+          placeholder: 'Title',
+          canAdd: false,
+          required: false
         },
         {
           type: 'text',
@@ -1916,7 +1917,29 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
+        let formatSections = [];
+        let reviewerFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Reviewer']);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Year of Publication'], true, false, true);
+        let reviewTitleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Review Title'], false, false, false, false, false);
+        let reviewOfFormatSection = this.referenceHelperService.getTextFormatSection('[Review of book', false, false, true, true);
+        let reviewedFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title of Work Reviewed'], true, false, false, false, false);
+        let closeFormatSection = this.referenceHelperService.getTextFormatSection(']', false, true, false, true);
+        let sourceFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Source of Review'], true, true, false, true);
+        let textToAdd = '';
+        if (citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0 || citationInfoObj['Start Page'].length > 0) {
+          textToAdd = ', ';
+        }
+        let commaFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, true, false, false, false);
+        let volFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Volume Number'], true, false, false, false);
+        let issueFormatSection = this.referenceHelperService.getTextFormatSection(`(${citationInfoObj['Issue Number']})`, false, false, false, false);
+        let textToAdd2 = '';
+        if ((citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0) && citationInfoObj['Start Page'].length > 0) {
+          textToAdd2 = ', ';
+        }
 
+
+
+        return formatSections;
       }
     },
     {
