@@ -1840,108 +1840,108 @@ export class ReferenceTypesService {
         return formatSections;
       }
     },
-    {
-      type: 'review',
-      display: 'Review',
-      fields: [
-        {
-          type: 'authorFML',
-          display: 'Reviewer',
-          canAdd: true,
-          required: true
-        },
-        {
-          type: 'dateY',
-          display: 'Year of Publication',
-          canAdd: false,
-          required: false
-        },
-        {
-          type: 'text',
-          display: 'Review Title',
-          placeholder: 'Title',
-          canAdd: false,
-          required: false
-        },
-        {
-          type: 'text',
-          display: 'Title of Work Reviewed',
-          placeholder: 'Title',
-          canAdd: false,
-          required: false
-        },
-        {
-          type: 'text',
-          display: 'Source of Review',
-          placeholder: 'Source',
-          canAdd: false,
-          required: false
-        },
-        {
-          type: 'text',
-          display: 'Volume Number',
-          placeholder: 'Volume',
-          canAdd: false,
-          required: false
-        },
-        {
-          type: 'text',
-          display: 'Issue Number',
-          placeholder: 'Issue',
-          canAdd: false,
-          required: false
-        },
-        {
-          type: 'text',
-          display: 'Start Page',
-          placeholder: 'Start Page',
-          canAdd: false,
-          required: false
-        },
-        {
-          type: 'text',
-          display: 'End Page',
-          placeholder: 'End Page',
-          canAdd: false,
-          required: false
-        },
-        {
-          type: 'text',
-          display: 'Retrieved From',
-          placeholder: 'ex. www.journals.com/journal',
-          canAdd: false,
-          required: true
-        }
-      ],
-      inText: citationInfoObj => {
+    // {
+    //   type: 'review',
+    //   display: 'Review',
+    //   fields: [
+    //     {
+    //       type: 'authorFML',
+    //       display: 'Reviewer',
+    //       canAdd: true,
+    //       required: true
+    //     },
+    //     {
+    //       type: 'dateY',
+    //       display: 'Year of Publication',
+    //       canAdd: false,
+    //       required: false
+    //     },
+    //     {
+    //       type: 'text',
+    //       display: 'Review Title',
+    //       placeholder: 'Title',
+    //       canAdd: false,
+    //       required: false
+    //     },
+    //     {
+    //       type: 'text',
+    //       display: 'Title of Work Reviewed',
+    //       placeholder: 'Title',
+    //       canAdd: false,
+    //       required: false
+    //     },
+    //     {
+    //       type: 'text',
+    //       display: 'Source of Review',
+    //       placeholder: 'Source',
+    //       canAdd: false,
+    //       required: false
+    //     },
+    //     {
+    //       type: 'text',
+    //       display: 'Volume Number',
+    //       placeholder: 'Volume',
+    //       canAdd: false,
+    //       required: false
+    //     },
+    //     {
+    //       type: 'text',
+    //       display: 'Issue Number',
+    //       placeholder: 'Issue',
+    //       canAdd: false,
+    //       required: false
+    //     },
+    //     {
+    //       type: 'text',
+    //       display: 'Start Page',
+    //       placeholder: 'Start Page',
+    //       canAdd: false,
+    //       required: false
+    //     },
+    //     {
+    //       type: 'text',
+    //       display: 'End Page',
+    //       placeholder: 'End Page',
+    //       canAdd: false,
+    //       required: false
+    //     },
+    //     {
+    //       type: 'text',
+    //       display: 'Retrieved From',
+    //       placeholder: 'ex. www.journals.com/journal',
+    //       canAdd: false,
+    //       required: true
+    //     }
+    //   ],
+    //   inText: citationInfoObj => {
         
-      },
-      referencesPage: citationInfoObj => {
-        let formatSections = [];
-        let reviewerFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Reviewer']);
-        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Year of Publication'], true, false, true);
-        let reviewTitleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Review Title'], false, false, false, false, false);
-        let reviewOfFormatSection = this.referenceHelperService.getTextFormatSection('[Review of book', false, false, true, true);
-        let reviewedFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title of Work Reviewed'], true, false, false, false, false);
-        let closeFormatSection = this.referenceHelperService.getTextFormatSection(']', false, true, false, true);
-        let sourceFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Source of Review'], true, true, false, true);
-        let textToAdd = '';
-        if (citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0 || citationInfoObj['Start Page'].length > 0) {
-          textToAdd = ', ';
-        }
-        let commaFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, true, false, false, false);
-        let volFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Volume Number'], true, false, false, false);
-        let issueFormatSection = this.referenceHelperService.getTextFormatSection(`(${citationInfoObj['Issue Number']})`, false, false, false, false);
-        let textToAdd2 = '';
-        if ((citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0) && citationInfoObj['Start Page'].length > 0) {
-          textToAdd2 = ', ';
-        }
+    //   },
+    //   referencesPage: citationInfoObj => {
+    //     let formatSections = [];
+    //     let reviewerFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Reviewer']);
+    //     let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Year of Publication'], true, false, true);
+    //     let reviewTitleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Review Title'], false, false, false, false, false);
+    //     let reviewOfFormatSection = this.referenceHelperService.getTextFormatSection('[Review of book', false, false, true, true);
+    //     let reviewedFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title of Work Reviewed'], true, false, false, false, false);
+    //     let closeFormatSection = this.referenceHelperService.getTextFormatSection(']', false, true, false, true);
+    //     let sourceFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Source of Review'], true, true, false, true);
+    //     let textToAdd = '';
+    //     if (citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0 || citationInfoObj['Start Page'].length > 0) {
+    //       textToAdd = ', ';
+    //     }
+    //     let commaFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, true, false, false, false);
+    //     let volFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Volume Number'], true, false, false, false);
+    //     let issueFormatSection = this.referenceHelperService.getTextFormatSection(`(${citationInfoObj['Issue Number']})`, false, false, false, false);
+    //     let textToAdd2 = '';
+    //     if ((citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0) && citationInfoObj['Start Page'].length > 0) {
+    //       textToAdd2 = ', ';
+    //     }
 
 
 
-        return formatSections;
-      }
-    },
+    //     return formatSections;
+    //   }
+    // },
     {
       type: 'lectureNotesSlides',
       display: 'Online Lecture Notes or Slides',
@@ -1952,13 +1952,13 @@ export class ReferenceTypesService {
           canAdd: true,
           required: true
         },
-        {
-          type: 'date',
-          display: 'Date of Publication',
-          placeholder: 'YYYY, Mmmm DD or YYYY',
-          canAdd: false,
-          required: false
-        },
+        // {
+        //   type: 'date',
+        //   display: 'Date of Publication',
+        //   placeholder: 'YYYY, Mmmm DD or YYYY',
+        //   canAdd: false,
+        //   required: false
+        // },
         {
           type: 'text',
           display: 'Presentation Title',
@@ -1985,7 +1985,16 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        let formatSections = [];
+        let authorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Presenter']);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Presentation Title'], true, false, false, false, false);
+        let formatFormatSection = this.referenceHelperService.getTextFormatSection(`[${citationInfoObj['File Format']}]`, false, true, true, true);
+        let retrievedFormatSection = this.referenceHelperService.getRetrievedFromFormatSection(citationInfoObj['Retrieved From'], false, false);
+        formatSections.push(authorFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(formatFormatSection);
+        formatSections.push(retrievedFormatSection);
+        return formatSections;
       }
     },
     {
@@ -2031,7 +2040,18 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        let formatSections = [];
+        let presenterFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Presenter']);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Publication'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title'], false, false, true, false, true);
+        let sourceFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Podcast Host'], true, true, false, true);
+        let retrievedFormatSection = this.referenceHelperService.getTextFormatSection(`Podcast retrieved from ${citationInfoObj['Retrieved From']}`, false, false, false, false);
+        formatSections.push(presenterFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(sourceFormatSection);
+        formatSections.push(retrievedFormatSection);
+        return formatSections;
       }
     },
     {
