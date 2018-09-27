@@ -2110,7 +2110,45 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
+        let formatSections = [];
+        let producerFormatSection;
+        let producerLabelFormatSection;
+        let directorFormatSection;
+        let directorLabelFormatSection;
+        if (citationInfoObj['Producer'] && 
+          citationInfoObj['Producer'].firstName.length > 0 && 
+          citationInfoObj['Producer'].middleName.length > 0 && 
+          citationInfoObj['Producer'].lastName.length > 0) {
+          producerFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Producer']);
+          let textToAdd = '(Producer)';
+          if (citationInfoObj['Director'] && 
+            citationInfoObj['Director'].firstName.length > 0 && 
+            citationInfoObj['Director'].middleName.length > 0 && 
+            citationInfoObj['Director'].lastName.length > 0) {
+            textToAdd += ', &';
+          }
+          else {
+            textToAdd += '.';
+          }
+          producerLabelFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, false, false, true);
+        }
+        else {
+          producerFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
+          producerLabelFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
+        }
+        if (citationInfoObj['Director'] && 
+            citationInfoObj['Director'].firstName.length > 0 && 
+            citationInfoObj['Director'].middleName.length > 0 && 
+            citationInfoObj['Director'].lastName.length > 0) {
+            
+          }
+        
+       
 
+
+
+
+        return formatSections;
       }
     },
     {
