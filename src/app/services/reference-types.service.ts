@@ -2087,7 +2087,7 @@ export class ReferenceTypesService {
         {
           type: 'text',
           display: 'Episode Number',
-          placeholder: 'Host',
+          placeholder: 'Episode',
           canAdd: false,
           required: false
         },
@@ -2140,14 +2140,31 @@ export class ReferenceTypesService {
             citationInfoObj['Director'].firstName.length > 0 && 
             citationInfoObj['Director'].middleName.length > 0 && 
             citationInfoObj['Director'].lastName.length > 0) {
-            
-          }
-        
-       
-
-
-
-
+          directorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Director']);
+          directorLabelFormatSection = this.referenceHelperService.getTextFormatSection('(Director)', false, true, false, true);
+        }
+        else {
+          directorFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
+          directorLabelFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
+        }
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Production'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title'], false, false, false, false, false);
+        let textToAdd = '';
+        if (citationInfoObj['Episode Number'].length > 0) {
+          textToAdd = ` [Episode ${citationInfoObj['Episode Number']}]`;
+        }
+        let episodeFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, true, false, true);
+        let sourceFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Podcast Source'], true, true, false, true);
+        let retrievedFormatSection = this.referenceHelperService.getTextFormatSection(`Podcast retrieved from ${citationInfoObj['Retrieved From']}`, false, false, false, false);
+        formatSections.push(producerFormatSection);
+        formatSections.push(producerLabelFormatSection);
+        formatSections.push(directorFormatSection);
+        formatSections.push(directorLabelFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(episodeFormatSection);
+        formatSections.push(sourceFormatSection);
+        formatSections.push(retrievedFormatSection);
         return formatSections;
       }
     },
