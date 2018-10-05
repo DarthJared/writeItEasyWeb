@@ -2115,16 +2115,18 @@ export class ReferenceTypesService {
         let producerLabelFormatSection;
         let directorFormatSection;
         let directorLabelFormatSection;
+        let dirProExist = false;
         if (citationInfoObj['Producer'] && 
-          citationInfoObj['Producer'].firstName.length > 0 && 
-          citationInfoObj['Producer'].middleName.length > 0 && 
-          citationInfoObj['Producer'].lastName.length > 0) {
+          (citationInfoObj['Producer'].firstName.length > 0 || 
+          citationInfoObj['Producer'].middleName.length > 0 || 
+          citationInfoObj['Producer'].lastName.length > 0)) {
+          dirProExist = true;
           producerFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Producer']);
           let textToAdd = '(Producer)';
           if (citationInfoObj['Director'] && 
-            citationInfoObj['Director'].firstName.length > 0 && 
-            citationInfoObj['Director'].middleName.length > 0 && 
-            citationInfoObj['Director'].lastName.length > 0) {
+            (citationInfoObj['Director'].firstName.length > 0 || 
+            citationInfoObj['Director'].middleName.length > 0 || 
+            citationInfoObj['Director'].lastName.length > 0)) {
             textToAdd += ', &';
           }
           else {
@@ -2137,9 +2139,10 @@ export class ReferenceTypesService {
           producerLabelFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
         }
         if (citationInfoObj['Director'] && 
-            citationInfoObj['Director'].firstName.length > 0 && 
-            citationInfoObj['Director'].middleName.length > 0 && 
-            citationInfoObj['Director'].lastName.length > 0) {
+            (citationInfoObj['Director'].firstName.length > 0 || 
+            citationInfoObj['Director'].middleName.length > 0 || 
+            citationInfoObj['Director'].lastName.length > 0)) {
+          dirProExist = true;
           directorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Director']);
           directorLabelFormatSection = this.referenceHelperService.getTextFormatSection('(Director)', false, true, false, true);
         }
@@ -2160,9 +2163,16 @@ export class ReferenceTypesService {
         formatSections.push(producerLabelFormatSection);
         formatSections.push(directorFormatSection);
         formatSections.push(directorLabelFormatSection);
-        formatSections.push(dateFormatSection);
-        formatSections.push(titleFormatSection);
-        formatSections.push(episodeFormatSection);
+        if (dirProExist) {
+          formatSections.push(dateFormatSection);
+          formatSections.push(titleFormatSection);
+          formatSections.push(episodeFormatSection);
+        }
+        else {
+          formatSections.push(titleFormatSection);
+          formatSections.push(episodeFormatSection);
+          formatSections.push(dateFormatSection);
+        }        
         formatSections.push(sourceFormatSection);
         formatSections.push(retrievedFormatSection);
         return formatSections;
@@ -2217,7 +2227,75 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        let formatSections = [];
+        let producerFormatSection;
+        let producerLabelFormatSection;
+        let directorFormatSection;
+        let directorLabelFormatSection;
+        let dirProExist = false;
+        if (citationInfoObj['Producer'] && 
+          (citationInfoObj['Producer'].firstName.length > 0 || 
+          citationInfoObj['Producer'].middleName.length > 0 || 
+          citationInfoObj['Producer'].lastName.length > 0)) {
+          dirProExist = true;
+          producerFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Producer']);
+          let textToAdd = '(Producer)';
+          if (citationInfoObj['Director'] && 
+            (citationInfoObj['Director'].firstName.length > 0 || 
+            citationInfoObj['Director'].middleName.length > 0 || 
+            citationInfoObj['Director'].lastName.length > 0)) {
+            textToAdd += ', &';
+          }
+          else {
+            textToAdd += '.';
+          }
+          producerLabelFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, false, false, true);
+        }
+        else {
+          producerFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
+          producerLabelFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
+        }
+        if (citationInfoObj['Director'] && 
+            (citationInfoObj['Director'].firstName.length > 0 || 
+            citationInfoObj['Director'].middleName.length > 0 || 
+            citationInfoObj['Director'].lastName.length > 0)) {
+          dirProExist = true;
+          directorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Director']);
+          directorLabelFormatSection = this.referenceHelperService.getTextFormatSection('(Director)', false, true, false, true);
+        }
+        else {
+          directorFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
+          directorLabelFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
+        }
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Production'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title'], true, false, false, false, true);
+        let motionPicFormatSection = this.referenceHelperService.getTextFormatSection('[Motion Picture]', false, true, false, true);
+        let textToAdd = citationInfoObj['Country of Origin'];
+        if (textToAdd && citationInfoObj['Studio or Distributor'].length > 0) {
+          textToAdd += ': ';
+        }
+        else if (textToAdd) {
+          textToAdd += '. ';
+        }
+        let locactionFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, false, false, false);
+        let studioFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Studio or Distributor'], false, true, false, false);
+        formatSections.push(producerFormatSection);
+        formatSections.push(producerLabelFormatSection);
+        formatSections.push(directorFormatSection);
+        formatSections.push(directorLabelFormatSection);
+        if (dirProExist) {
+          formatSections.push(dateFormatSection);
+          formatSections.push(titleFormatSection);
+          formatSections.push(motionPicFormatSection);
+        }
+        else {
+          formatSections.push(titleFormatSection);
+          formatSections.push(motionPicFormatSection);
+          formatSections.push(dateFormatSection);
+        }
+        formatSections.push(locactionFormatSection);
+        formatSections.push(studioFormatSection);
+        return formatSections;
       }
     },
     {
@@ -2269,7 +2347,75 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        let formatSections = [];
+        let producerFormatSection;
+        let producerLabelFormatSection;
+        let directorFormatSection;
+        let directorLabelFormatSection;
+        let dirProExist = false;
+        if (citationInfoObj['Producer'] && 
+          (citationInfoObj['Producer'].firstName.length > 0 || 
+          citationInfoObj['Producer'].middleName.length > 0 || 
+          citationInfoObj['Producer'].lastName.length > 0)) {
+          dirProExist = true;
+          producerFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Producer']);
+          let textToAdd = '(Producer)';
+          if (citationInfoObj['Director'] && 
+            (citationInfoObj['Director'].firstName.length > 0 || 
+            citationInfoObj['Director'].middleName.length > 0 || 
+            citationInfoObj['Director'].lastName.length > 0)) {
+            textToAdd += ', &';
+          }
+          else {
+            textToAdd += '.';
+          }
+          producerLabelFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, false, false, true);
+        }
+        else {
+          producerFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
+          producerLabelFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
+        }
+        if (citationInfoObj['Director'] && 
+            (citationInfoObj['Director'].firstName.length > 0 || 
+            citationInfoObj['Director'].middleName.length > 0 || 
+            citationInfoObj['Director'].lastName.length > 0)) {
+          dirProExist = true;
+          directorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Director']);
+          directorLabelFormatSection = this.referenceHelperService.getTextFormatSection('(Director)', false, true, false, true);
+        }
+        else {
+          directorFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
+          directorLabelFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
+        }
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Production'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title'], true, false, false, false, true);
+        let broadcastPicFormatSection = this.referenceHelperService.getTextFormatSection('[Television broadcast]', false, true, false, true);
+        let textToAdd = citationInfoObj['Location'];
+        if (textToAdd && citationInfoObj['Broadcaster'].length > 0) {
+          textToAdd += ': ';
+        }
+        else if (textToAdd) {
+          textToAdd += '. ';
+        }
+        let locactionFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, false, false, false);
+        let studioFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Broadcaster'], false, true, false, false);
+        formatSections.push(producerFormatSection);
+        formatSections.push(producerLabelFormatSection);
+        formatSections.push(directorFormatSection);
+        formatSections.push(directorLabelFormatSection);
+        if (dirProExist) {
+          formatSections.push(dateFormatSection);
+          formatSections.push(titleFormatSection);
+          formatSections.push(broadcastPicFormatSection);
+        }
+        else {
+          formatSections.push(titleFormatSection);
+          formatSections.push(broadcastPicFormatSection);
+          formatSections.push(dateFormatSection);
+        }
+        formatSections.push(locactionFormatSection);
+        formatSections.push(studioFormatSection);
+        return formatSections;
       }
     },
     {
@@ -2334,7 +2480,70 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
+        let formatSections = [];
+        let writerFormatSection;
+        let writerLabelFormatSection;
+        let directorFormatSection;
+        let directorLabelFormatSection;
+        let dirWriExist = false;
+        if (citationInfoObj['Writer'] && 
+          (citationInfoObj['Writer'].firstName.length > 0 || 
+          citationInfoObj['Writer'].middleName.length > 0 || 
+          citationInfoObj['Writer'].lastName.length > 0)) {
+          dirWriExist = true;
+          writerFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Producer']);
+          let textToAdd = '(Writer)';
+          if (citationInfoObj['Director'] && 
+            (citationInfoObj['Director'].firstName.length > 0 || 
+            citationInfoObj['Director'].middleName.length > 0 || 
+            citationInfoObj['Director'].lastName.length > 0)) {
+            textToAdd += ', &';
+          }
+          else {
+            textToAdd += '.';
+          }
+          writerLabelFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, false, false, true);
+        }
+        else {
+          writerFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
+          writerLabelFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
+        }
+        if (citationInfoObj['Director'] && 
+            (citationInfoObj['Director'].firstName.length > 0 || 
+            citationInfoObj['Director'].middleName.length > 0 || 
+            citationInfoObj['Director'].lastName.length > 0)) {
+          dirWriExist = true;
+          directorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Director']);
+          directorLabelFormatSection = this.referenceHelperService.getTextFormatSection('(Director)', false, true, false, true);
+        }
+        else {
+          directorFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
+          directorLabelFormatSection = this.referenceHelperService.getTextFormatSection('', false, false, false, false);
+        } 
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Production'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Episode Title'], true, false, false, false, true);
+        let seriesEpisodeFormatSection = this.referenceHelperService.getTextFormatSection('[Television series episode]', false, true, false, true);
+        let inFormatSection = this.referenceHelperService.getTextFormatSection('In', false, false, false, true);
+        let producerFormatSection = this.referenceHelperService.getReverseAuthorFormatSection(citationInfoObj['Producer']);
+        let producerLabelFormatSection = this.referenceHelperService.getTextFormatSection('(Producer),', false, false, false, true);
+        let seriesFormatSection = 
+        
+        let textToAdd = citationInfoObj['Location'];
+        if (textToAdd && citationInfoObj['Broadcaster'].length > 0) {
+          textToAdd += ': ';
+        }
+        else if (textToAdd) {
+          textToAdd += '. ';
+        }
+        let locactionFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, false, false, false);
+        let studioFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Broadcaster'], false, true, false, false);
+        
 
+
+
+
+
+        return formatSections;
       }
     },
     {
