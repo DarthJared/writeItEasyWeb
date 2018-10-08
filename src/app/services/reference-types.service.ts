@@ -2526,23 +2526,38 @@ export class ReferenceTypesService {
         let inFormatSection = this.referenceHelperService.getTextFormatSection('In', false, false, false, true);
         let producerFormatSection = this.referenceHelperService.getReverseAuthorFormatSection(citationInfoObj['Producer']);
         let producerLabelFormatSection = this.referenceHelperService.getTextFormatSection('(Producer),', false, false, false, true);
-        let seriesFormatSection = 
-        
-        let textToAdd = citationInfoObj['Location'];
-        if (textToAdd && citationInfoObj['Broadcaster'].length > 0) {
+        let seriesFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Series Title'], true, false, true, false, true);
+        let textToAdd = citationInfoObj['City, State of Origin'];
+        if (textToAdd && citationInfoObj['Studio or Distributor'].length > 0) {
           textToAdd += ': ';
         }
         else if (textToAdd) {
           textToAdd += '. ';
         }
         let locactionFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, false, false, false);
-        let studioFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Broadcaster'], false, true, false, false);
-        
-
-
-
-
-
+        let studioFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Studio or Distributor'], false, true, false, false);
+        formatSections.push(writerFormatSection);
+        formatSections.push(writerLabelFormatSection);
+        formatSections.push(directorFormatSection);
+        formatSections.push(directorLabelFormatSection);
+        if (dirWriExist) {
+          formatSections.push(dateFormatSection);
+          formatSections.push(titleFormatSection);
+          formatSections.push(seriesEpisodeFormatSection);
+        }
+        else {
+          formatSections.push(titleFormatSection);
+          formatSections.push(seriesEpisodeFormatSection);
+          formatSections.push(dateFormatSection);
+        }
+        if (producerFormatSection.content.length > 0) {
+          formatSections.push(inFormatSection);
+          formatSections.push(producerFormatSection);
+          formatSections.push(producerLabelFormatSection);
+        }
+        formatSections.push(seriesFormatSection);
+        formatSections.push(locactionFormatSection);
+        formatSections.push(studioFormatSection);
         return formatSections;
       }
     },
@@ -2571,7 +2586,7 @@ export class ReferenceTypesService {
           required: false
         },
         {
-          type: 'authorFML',
+          type: 'text',
           display: 'Artist',
           canAdd: false,
           required: true
@@ -2616,7 +2631,26 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
+        let formatSections = [];
+        let writerFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Songwriter']);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Copyright'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Song Title'], false, false, false, false, false);
+        let textToAdd = '. On';
+        if (citationInfoObj['Artist'].length > 0) {
+          textToAdd = ` [Recorded by ${citationInfoObj['Artist']}]. On`;
+        }
+        let artistFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, false, false, true);
+        let albumFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Album'], true, false, false, false, true);
+        let mediumFormatSection = this.referenceHelperService.getTextFormatSection(`[${citationInfoObj['Recording Medium']}]`, false, true, false, true);
+        let textToAdd2 = citationInfoObj['Recording Location'];
+        if (textToAdd2 && citationInfoObj['Label'].length > 0) {
+          textToAdd2 += ': ';
+        }
+        let locactionFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, false, false, false);
+        let studioFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Label'], false, true, false, false);
+         
 
+        return formatSections;
       }
     },
     {
