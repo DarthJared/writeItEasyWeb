@@ -2270,15 +2270,7 @@ export class ReferenceTypesService {
         let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Production'], true, false, true);
         let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title'], true, false, false, false, true);
         let motionPicFormatSection = this.referenceHelperService.getTextFormatSection('[Motion Picture]', false, true, false, true);
-        let textToAdd = citationInfoObj['Country of Origin'];
-        if (textToAdd && citationInfoObj['Studio or Distributor'].length > 0) {
-          textToAdd += ': ';
-        }
-        else if (textToAdd) {
-          textToAdd += '. ';
-        }
-        let locactionFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, false, false, false);
-        let studioFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Studio or Distributor'], false, true, false, false);
+        let locationStudioFormatSection = this.referenceHelperService.getLocationPlusFormatSection(citationInfoObj['Country of Origin'], citationInfoObj['Studio or Distributor'], false, false);
         formatSections.push(producerFormatSection);
         formatSections.push(producerLabelFormatSection);
         formatSections.push(directorFormatSection);
@@ -2293,8 +2285,7 @@ export class ReferenceTypesService {
           formatSections.push(motionPicFormatSection);
           formatSections.push(dateFormatSection);
         }
-        formatSections.push(locactionFormatSection);
-        formatSections.push(studioFormatSection);
+        formatSections.push(locationStudioFormatSection);
         return formatSections;
       }
     },
@@ -2390,15 +2381,7 @@ export class ReferenceTypesService {
         let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Production'], true, false, true);
         let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title'], true, false, false, false, true);
         let broadcastPicFormatSection = this.referenceHelperService.getTextFormatSection('[Television broadcast]', false, true, false, true);
-        let textToAdd = citationInfoObj['Location'];
-        if (textToAdd && citationInfoObj['Broadcaster'].length > 0) {
-          textToAdd += ': ';
-        }
-        else if (textToAdd) {
-          textToAdd += '. ';
-        }
-        let locactionFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, false, false, false);
-        let studioFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Broadcaster'], false, true, false, false);
+        let locationBroadcasterFormatSection = this.referenceHelperService.getLocationPlusFormatSection(citationInfoObj['Location'], citationInfoObj['Broadcaster'], false, false);
         formatSections.push(producerFormatSection);
         formatSections.push(producerLabelFormatSection);
         formatSections.push(directorFormatSection);
@@ -2413,8 +2396,7 @@ export class ReferenceTypesService {
           formatSections.push(broadcastPicFormatSection);
           formatSections.push(dateFormatSection);
         }
-        formatSections.push(locactionFormatSection);
-        formatSections.push(studioFormatSection);
+        formatSections.push(locationBroadcasterFormatSection);
         return formatSections;
       }
     },
@@ -2527,15 +2509,7 @@ export class ReferenceTypesService {
         let producerFormatSection = this.referenceHelperService.getReverseAuthorFormatSection(citationInfoObj['Producer']);
         let producerLabelFormatSection = this.referenceHelperService.getTextFormatSection('(Producer),', false, false, false, true);
         let seriesFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Series Title'], true, false, true, false, true);
-        let textToAdd = citationInfoObj['City, State of Origin'];
-        if (textToAdd && citationInfoObj['Studio or Distributor'].length > 0) {
-          textToAdd += ': ';
-        }
-        else if (textToAdd) {
-          textToAdd += '. ';
-        }
-        let locactionFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, false, false, false);
-        let studioFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Studio or Distributor'], false, true, false, false);
+        let locationStudioFormatSection = this.referenceHelperService.getLocationPlusFormatSection(citationInfoObj['City, State of Origin'], citationInfoObj['Studio or Distributor'], false, false);
         formatSections.push(writerFormatSection);
         formatSections.push(writerLabelFormatSection);
         formatSections.push(directorFormatSection);
@@ -2556,8 +2530,7 @@ export class ReferenceTypesService {
           formatSections.push(producerLabelFormatSection);
         }
         formatSections.push(seriesFormatSection);
-        formatSections.push(locactionFormatSection);
-        formatSections.push(studioFormatSection);
+        formatSections.push(locationStudioFormatSection);
         return formatSections;
       }
     },
@@ -2642,14 +2615,16 @@ export class ReferenceTypesService {
         let artistFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, false, false, true);
         let albumFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Album'], true, false, false, false, true);
         let mediumFormatSection = this.referenceHelperService.getTextFormatSection(`[${citationInfoObj['Recording Medium']}]`, false, true, false, true);
-        let textToAdd2 = citationInfoObj['Recording Location'];
-        if (textToAdd2 && citationInfoObj['Label'].length > 0) {
-          textToAdd2 += ': ';
-        }
-        let locactionFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, false, false, false, false);
-        let studioFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Label'], false, true, false, false);
-         
-
+        let locationStudioFormatSection = this.referenceHelperService.getLocationPlusFormatSection(citationInfoObj['Recording Location'], citationInfoObj['Label'], false, true);
+        formatSections.push(
+          writerFormatSection, 
+          dateFormatSection, 
+          titleFormatSection, 
+          artistFormatSection, 
+          albumFormatSection,
+          mediumFormatSection,
+          locationStudioFormatSection
+        );
         return formatSections;
       }
     },
@@ -2675,7 +2650,10 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        // This one should return empty because you do not cite personal
+        // communication in references page
+        let formatSections = [];
+        return formatSections;
       }
     },
     {
@@ -2700,7 +2678,10 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        // This one should return empty because you do not cite personal
+        // communication in references page
+        let formatSections = [];
+        return formatSections;
       }
     },
     {
@@ -2725,7 +2706,10 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
-
+        // This one should return empty because you do not cite personal
+        // communication in references page
+        let formatSections = [];
+        return formatSections;
       }
     },
     {
@@ -2799,7 +2783,16 @@ export class ReferenceTypesService {
         
       },
       referencesPage: citationInfoObj => {
+        let formatSections = [];
+        let authorFormatSection = this.referenceHelperService.getAuthorFormatSection(citationInfoObj['Author']);
+        let dateFormatSection = this.referenceHelperService.getDateFormatSection(citationInfoObj['Date of Publication'], true, false, true);
+        let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title'], false, false, false, false, true);
+        let letterLabelFormatSection = this.referenceHelperService.getTextFormatSection('[Letter to the editor]', false, true, false, true);
+        let sourceFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Work that Published the Letter'], true, false, false, false);
 
+
+
+        return formatSections;
       }
     }
   ]

@@ -340,4 +340,23 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
+  getLocationPlusFormatSection(locationTxt, plusTxt, spaceBefore, spaceAfter) {
+    let newFormatSection = _.cloneDeep(this.formatSectionObj);
+    if (spaceBefore) {
+      newFormatSection.content += ' ';
+    }
+    newFormatSection.content += locationTxt;
+    if (newFormatSection.content.length > 0 && plusTxt.length > 0) {
+      newFormatSection.content += ': ';
+    }
+    newFormatSection.content += plusTxt;
+    if (newFormatSection.content.length > 0) {
+      newFormatSection.content += '.';
+    }
+    if (spaceAfter) {
+      newFormatSection.content += ' ';
+    }
+    return newFormatSection;
+  }
+
 }
