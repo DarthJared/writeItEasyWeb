@@ -2789,9 +2789,31 @@ export class ReferenceTypesService {
         let titleFormatSection = this.referenceHelperService.getTitleFormatSection(citationInfoObj['Title'], false, false, false, false, true);
         let letterLabelFormatSection = this.referenceHelperService.getTextFormatSection('[Letter to the editor]', false, true, false, true);
         let sourceFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Work that Published the Letter'], true, false, false, false);
-
-
-
+        let textToAdd = '';
+        if (citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0 || citationInfoObj['Start Page'].length > 0) {
+          textToAdd = ', ';
+        }
+        let commaFormatSection = this.referenceHelperService.getTextFormatSection(textToAdd, true, false, false, false);
+        let volFormatSection = this.referenceHelperService.getTextFormatSection(citationInfoObj['Volume Number'], true, false, false, false);
+        let issueFormatSection = this.referenceHelperService.getTextFormatSection(`(${citationInfoObj['Issue Number']})`, false, false, false, false);
+        let textToAdd2 = '';
+        if ((citationInfoObj['Volume Number'].length > 0 || citationInfoObj['Issue Number'].length > 0) && citationInfoObj['Start Page'].length > 0) {
+          textToAdd2 = ', ';
+        }
+        let comma2FormatSection = this.referenceHelperService.getTextFormatSection(textToAdd2, false, false, false, false);
+        let pagesFormatSection = this.referenceHelperService.getPagesFormatSection(citationInfoObj['Start Page'], citationInfoObj['End Page'], false, true, false, true);
+        let retrievedFormatSection = this.referenceHelperService.getRetrievedFromFormatSection(citationInfoObj['Retrieved From'], false, false);
+        formatSections.push(authorFormatSection);
+        formatSections.push(dateFormatSection);
+        formatSections.push(titleFormatSection);
+        formatSections.push(letterLabelFormatSection);
+        formatSections.push(sourceFormatSection);
+        formatSections.push(commaFormatSection);
+        formatSections.push(volFormatSection);
+        formatSections.push(issueFormatSection);
+        formatSections.push(comma2FormatSection);
+        formatSections.push(pagesFormatSection);
+        formatSections.push(retrievedFormatSection);
         return formatSections;
       }
     }

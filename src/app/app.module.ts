@@ -42,6 +42,7 @@ import {
   MatTooltipModule,
 } from '@angular/material';
 import { QuotationDialogComponent } from './quotation-dialog/quotation-dialog.component';
+import { ReferenceHelperService } from './services/reference-helper.service';
 
 @NgModule({
   declarations: [
@@ -126,7 +127,8 @@ import { QuotationDialogComponent } from './quotation-dialog/quotation-dialog.co
     MatTooltipModule,
   ],
   providers: [
-    QuotationDialogComponent
+    QuotationDialogComponent,
+    ReferenceHelperService
   ],
   bootstrap: [AppComponent]
 })

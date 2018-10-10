@@ -60,7 +60,7 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
-  getReverseAuthorFormatSection(authorsObj) {
+  public getReverseAuthorFormatSection(authorsObj) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     if (authorsObj.length < 1) {
       // TODO: Throw error saying need to have author
@@ -108,7 +108,7 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
-  getOneAuthorFormatSection(authorObj) {
+  public getOneAuthorFormatSection(authorObj) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     if (authorObj.lastName.length > 0)
       newFormatSection.content += authorObj.lastName;
@@ -127,7 +127,7 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
-  getDateFormatSection(dateTxt, endWithPeriod, spaceBefore, spaceAfter) {
+  public getDateFormatSection(dateTxt, endWithPeriod, spaceBefore, spaceAfter) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     if (spaceBefore) {
       newFormatSection.content += ' ';
@@ -147,7 +147,7 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
-  getNoParenDateFormatSection(dateTxt, endWithComma, spaceBefore, spaceAfter) {
+  public getNoParenDateFormatSection(dateTxt, endWithComma, spaceBefore, spaceAfter) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     if (spaceBefore) {
       newFormatSection.content += ' ';
@@ -170,7 +170,7 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
-  getTitleFormatSection(titleTxt, italic, quote, endWithPeriod, spaceBefore, spaceAfter) {
+  public getTitleFormatSection(titleTxt, italic, quote, endWithPeriod, spaceBefore, spaceAfter) {
     if (titleTxt.length < 1) {
       // TODO: Throw error because there needs to be a title
     }
@@ -208,7 +208,7 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
-  getEditionFormatSection(editionTxt, spaceAfter) {
+  public getEditionFormatSection(editionTxt, spaceAfter) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     if (editionTxt.length > 0) {
       newFormatSection.content += ` (${editionTxt} ed.).`
@@ -222,7 +222,7 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
-  getPublishInfoFormatSection(publicationLocationTxt, publisherTxt, spaceBefore, spaceAfter) {
+  public getPublishInfoFormatSection(publicationLocationTxt, publisherTxt, spaceBefore, spaceAfter) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     if (spaceBefore) {
       newFormatSection.content += ' ';
@@ -244,7 +244,7 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
-  getTextFormatSection(text, italic, endWithPeriod, spaceBefore, spaceAfter) {
+  public getTextFormatSection(text, italic, endWithPeriod, spaceBefore, spaceAfter) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     newFormatSection.italic = italic;
     if (spaceBefore) {
@@ -260,7 +260,7 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
-  getVolumeFormatSection(volText, pagesExist, spaceBefore, spaceAfter) {
+  public getVolumeFormatSection(volText, pagesExist, spaceBefore, spaceAfter) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     if (spaceBefore) {
       newFormatSection.content += ' ';
@@ -283,7 +283,7 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
-  getPagesFormatSection(startPageText, endPageText, endWithParen, endWithPeriod, spaceBefore, spaceAfter) {
+  public getPagesFormatSection(startPageText, endPageText, endWithParen, endWithPeriod, spaceBefore, spaceAfter) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     if (spaceBefore) {
       newFormatSection.content += ' ';
@@ -311,7 +311,7 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
-  getOnlineRetrievedFormatSection(doiTxt, retrievedTxt, spaceBefore, spaceAfter) {
+  public getOnlineRetrievedFormatSection(doiTxt, retrievedTxt, spaceBefore, spaceAfter) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     if (spaceBefore) {
       newFormatSection.content += ' ';
@@ -340,7 +340,7 @@ export class ReferenceHelperService {
     return newFormatSection;
   }
 
-  getLocationPlusFormatSection(locationTxt, plusTxt, spaceBefore, spaceAfter) {
+  public getLocationPlusFormatSection(locationTxt, plusTxt, spaceBefore, spaceAfter) {
     let newFormatSection = _.cloneDeep(this.formatSectionObj);
     if (spaceBefore) {
       newFormatSection.content += ' ';
