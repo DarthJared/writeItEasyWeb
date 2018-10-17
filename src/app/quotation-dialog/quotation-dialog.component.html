@@ -48,10 +48,20 @@
                             </td>
                             <td class="midAlign">
                                 <ng-container [ngSwitch]="option.type">
-                                    <ng-container *ngSwitchCase="'authorFML'">
-                                        <input type="text" class="nameInput" placeholder="First" [(ngModel)]="referenceData.fieldData[option.display + 'First']">&nbsp;
-                                        <input type="text" class="nameInput" placeholder="Middle" [(ngModel)]="referenceData.fieldData[option.display + 'Middle']">&nbsp;
-                                        <input type="text" class="nameInput" placeholder="Last" [(ngModel)]="referenceData.fieldData[option.display + 'Last']">
+                                    <ng-container *ngSwitchCase="'authorFML'">                                        
+                                        <ng-container *ngFor="let author of option.authors; let authorIndex = index">
+                                            <div *ngIf="option.canAdd && authorIndex == 0" class="authorAdderButton" (click)="addAuthor(option.display)">
+                                                +
+                                            </div>
+                                            <div *ngIf="option.canAdd && authorIndex > 0" class="authorAdderButton" (click)="removeAuthor(option.display, author.ind)">
+                                                -
+                                            </div>
+                                            {{authorIndex}}
+                                            <input type="text" class="nameInput" placeholder="First" [(ngModel)]="referenceData.fieldData[option.display][authorIndex].first">&nbsp;
+                                            <input type="text" class="nameInput" placeholder="Middle" [(ngModel)]="referenceData.fieldData[option.display][authorIndex].middle">&nbsp;
+                                            <input type="text" class="nameInput" placeholder="Last" [(ngModel)]="referenceData.fieldData[option.display][authorIndex].last">
+                                            <br>
+                                        </ng-container>
                                     </ng-container>
                                     <ng-container *ngSwitchCase="'dateY'">
                                         <input type="text" class="shortTextInput" placeholder="YYYY" [(ngModel)]="referenceData.fieldData[option.display]">

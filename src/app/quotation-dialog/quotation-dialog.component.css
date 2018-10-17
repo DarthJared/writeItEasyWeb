@@ -14,7 +14,7 @@
     top: 100px;
     left: 50%;
     margin-left: -450px;
-    width: 900px;
+    width: 950px;
     background-color: #F7F6F6;
     z-index: 9999999999999;
     border-radius: 3px;
@@ -163,6 +163,27 @@ hr {
 
 .existOption {
 
+}
+
+.authorAdderButton {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-color: #6E6E6E;
+    color: #FFFFFF;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+    margin-right: 3px;
+    cursor: pointer;
+}
+
+.authorAdderButton:hover {
+    background-color: #555555;
+}
+
+.authorAdderButton:active {
+    background-color: #333333;
 }
 
 ::-webkit-scrollbar {

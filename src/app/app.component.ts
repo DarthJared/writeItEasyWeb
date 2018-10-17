@@ -32,6 +32,7 @@ export class AppComponent {
 
   addReference(refData) {
     // TODO: Actually store the reference based off of refData
+    console.log(refData);
     this.dialogAdderOpen = false;
   }
 
