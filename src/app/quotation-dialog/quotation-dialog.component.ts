@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, group } from '@angular/core';
 import { ReferenceTypesService } from './../services/reference-types.service';
 import * as _ from 'lodash';
 
@@ -21,12 +21,12 @@ export class QuotationDialogComponent implements OnInit {
     fieldData: {}
   };
   referenceTypeOptions;
-  fieldsToEnter: any;
+  fieldsGroupsToEnter: any;
   previousRefs: any;
 
   constructor(private refTypeService: ReferenceTypesService) { 
     this.referenceTypeOptions = this.isApa ? refTypeService.getAPAReferenceTypes() : refTypeService.getMLAReferenceTypes();
-    this.fieldsToEnter = [];
+    this.fieldsGroupsToEnter = [];
     this.previousRefs = [];
   }
 
@@ -42,15 +42,16 @@ export class QuotationDialogComponent implements OnInit {
   }
 
   updateFields() {
+    let groupIndex = 0;
     this.referenceData.fieldData = {};
     let referenceOptions = _.cloneDeep(this.referenceTypeOptions);
-    this.fieldsToEnter = _(referenceOptions)
+    this.fieldsGroupsToEnter = _(referenceOptions)
       .filter(
         option => option.type == this.referenceData.selectedRefType
       )
       .map(option => option.fields)
       .map(fields => {
-        let fixedFields = _.map(fields, (field) => {
+        let fixedFields = _(fields).map((field) => {
           if (field.type == 'authorFML') {
             this.referenceData.fieldData[field.display] = [
               {
@@ -68,17 +69,23 @@ export class QuotationDialogComponent implements OnInit {
             }]);
           }
           return field;
-        })
+        }).map((field) => {
+          _.set(field, 'groupingIndex', groupIndex);
+          groupIndex++;
+          return field;
+        }).groupBy((field) => {
+          return Math.floor(field.groupingIndex/3);
+        }).toArray().value();
         return fixedFields;
       })
       .head();
   }
 
-  addAuthor(display) {
-    this.fieldsToEnter = _.map(this.fieldsToEnter, (field) => {
-      let newField = _.cloneDeep(field);
-      if (newField.display == display) {
-        let last = _(this.fieldsToEnter).last();
+  addAuthor(display, groupInd) {
+    this.fieldsGroupsToEnter[groupInd] = _.map(this.fieldsGroupsToEnter[groupInd], (field) => {      
+      if (field.display == display) {
+        let newField = _.cloneDeep(field);
+        let last = _.last(newField.authors);
         let newInd = _.get(last, 'ind') + 1;
         this.referenceData.fieldData[display].push({
           first: '',
@@ -92,13 +99,15 @@ export class QuotationDialogComponent implements OnInit {
           last: '',
           ind: newInd
         });
+        return newField;
       }
-      return newField;
-    })
+      return field;
+    });
   }
 
-  removeAuthor(display, authorIndex) {
-    this.fieldsToEnter[display] = _.map(this.fieldsToEnter[display], (author) => {
+  removeAuthor(display, groupIndex, authorIndex) {
+    let newRefData = _.cloneDeep(this.referenceData.fieldData[display]);
+    this.referenceData.fieldData[display] = _.map(newRefData, (author) => {
       if (author.ind == authorIndex) {
         return null;
       }
@@ -106,6 +115,22 @@ export class QuotationDialogComponent implements OnInit {
     }).filter((author) => {
       return author != null;
     });
+    let newFieldsGroupToEnter = _.cloneDeep(this.fieldsGroupsToEnter[groupIndex]);
+    this.fieldsGroupsToEnter[groupIndex] = _.map(newFieldsGroupToEnter, (field) => {
+      if (field.display == display) {
+        let newAuthors = _.cloneDeep(field.authors);
+        field.authors = _.map(newAuthors, (author) => {
+          if (author.ind == authorIndex) {
+            return null;
+          }
+          return author;
+        }).filter(author => {
+          return author != null;
+        });
+      }
+      return field;
+    });
+    console.log(this.fieldsGroupsToEnter[display]);
   }
 
 }

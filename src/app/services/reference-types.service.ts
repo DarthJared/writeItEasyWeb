@@ -17,6 +17,19 @@ export class ReferenceTypesService {
     return this.referencesFrameworkMLA;
   }
 
+  public getReferenceFormats(refObj, apa: boolean) {
+    if (apa) {
+      return _.filter(this.referencesFrameworkAPA, (refType) => {
+        return refType.type == refObj.selectedRefType;
+      }).referencesPage(refObj);
+    }
+    else {
+      return _.filter(this.referencesFrameworkMLA, (refType) => {
+        return refType.type == refObj.selectedRefType;
+      }).referencesPage(refObj);
+    }
+  }
+
   formatSectionObj = {
     content: '',
     bold: false,

@@ -67,9 +67,11 @@
 }
 
 .quoteDiv {
-    width: calc(100% - 20px);
-    padding: 10px;
+    width: calc(100% - 25px);
+    padding-top: 10px;
     padding-bottom: 0px;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
 .quoteEnter {
@@ -106,6 +108,10 @@ hr {
 .scrollableBox {
     height: 200px;
     overflow-y: auto;
+    margin-left: 15px;
+    margin-right: 15px;
+    background-color: white;
+    border: solid 0.5px #bcbcbc;
 }
 
 .nameInput {
@@ -122,8 +128,7 @@ hr {
 
 .fieldInput {
     display: inline-block;
-    width: 33%;
-    height: 45px;
+    width: 100%;
 }
 
 .fieldInput td:last-child {
@@ -135,9 +140,13 @@ hr {
     width: 100%;
 }
 
-.midAlign {
-    vertical-align: middle;
-    height: 45px;
+.topAlign {
+    vertical-align: top;
+    width: 33%;
+}
+
+.tableGroup {
+    width: 100%;
 }
 
 .existDetailBack {
@@ -161,8 +170,16 @@ hr {
     border-color: #CCCCCC;
 }
 
-.existOption {
+.fieldContainer {
+    max-height: 155px;
+    margin-bottom: 3px;
+    overflow: auto;
+    background-color: white;
+    border: solid 0.5px #bcbcbc;
+}
 
+.authorRow {
+    margin-bottom: 2px;
 }
 
 .authorAdderButton {

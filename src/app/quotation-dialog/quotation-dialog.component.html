@@ -37,50 +37,53 @@
                     <hr>
                 </div>
             </div>
-            <div *ngIf="isNewRef && fieldsToEnter.length > 0" class="paddedBox">
+            <div *ngIf="isNewRef && fieldsGroupsToEnter.length > 0" class="paddedBox">
                 Provide the source information here:
-                <br>
-                <ng-container *ngFor="let option of fieldsToEnter; let index = index">
-                    <table class="fieldInput">
-                        <tr>
-                            <td class="midAlign">
-                                {{option.display}}:
-                            </td>
-                            <td class="midAlign">
-                                <ng-container [ngSwitch]="option.type">
-                                    <ng-container *ngSwitchCase="'authorFML'">                                        
-                                        <ng-container *ngFor="let author of option.authors; let authorIndex = index">
-                                            <div *ngIf="option.canAdd && authorIndex == 0" class="authorAdderButton" (click)="addAuthor(option.display)">
-                                                +
-                                            </div>
-                                            <div *ngIf="option.canAdd && authorIndex > 0" class="authorAdderButton" (click)="removeAuthor(option.display, author.ind)">
-                                                -
-                                            </div>
-                                            {{authorIndex}}
-                                            <input type="text" class="nameInput" placeholder="First" [(ngModel)]="referenceData.fieldData[option.display][authorIndex].first">&nbsp;
-                                            <input type="text" class="nameInput" placeholder="Middle" [(ngModel)]="referenceData.fieldData[option.display][authorIndex].middle">&nbsp;
-                                            <input type="text" class="nameInput" placeholder="Last" [(ngModel)]="referenceData.fieldData[option.display][authorIndex].last">
-                                            <br>
-                                        </ng-container>
-                                    </ng-container>
-                                    <ng-container *ngSwitchCase="'dateY'">
-                                        <input type="text" class="shortTextInput" placeholder="YYYY" [(ngModel)]="referenceData.fieldData[option.display]">
-                                    </ng-container>
-                                    <ng-container *ngSwitchCase="'text'">
-                                        <input type="text" class="textInput" [placeholder]="option.placeholder" [(ngModel)]="referenceData.fieldData[option.display]">
-                                    </ng-container>
-                                    <ng-container *ngSwitchCase="'date'">
-                                        <input type="text" class="textInput" [placeholder]="option.placeholder" [(ngModel)]="referenceData.fieldData[option.display]">
-                                    </ng-container>
-                                </ng-container>
+                <div class="fieldContainer">
+                    <table class="tableGroup">
+                        <tr *ngFor="let group of fieldsGroupsToEnter">
+                            <td *ngFor="let option of group; let groupInd = index;" class="topAlign">
+                                <table class="fieldInput">
+                                    <tr>
+                                        <td class="topAlign">
+                                            {{option.display}}:
+                                        </td>
+                                        <td class="topAlign">
+                                            <ng-container [ngSwitch]="option.type">
+                                                <ng-container *ngSwitchCase="'authorFML'">                                        
+                                                    <ng-container *ngFor="let author of option.authors; let authorIndex = index">
+                                                        <div class="authorRow">
+                                                            <div *ngIf="option.canAdd && authorIndex == 0" class="authorAdderButton" (click)="addAuthor(option.display, groupInd)">
+                                                                +
+                                                            </div>
+                                                            <div *ngIf="option.canAdd && authorIndex > 0" class="authorAdderButton" (click)="removeAuthor(option.display, groupInd, author.ind)">
+                                                                -
+                                                            </div>
+                                                            <!-- {{authorIndex}} -->
+                                                            <input type="text" class="nameInput" placeholder="First" [(ngModel)]="referenceData.fieldData[option.display][authorIndex].first">&nbsp;
+                                                            <input type="text" class="nameInput" placeholder="Middle" [(ngModel)]="referenceData.fieldData[option.display][authorIndex].middle">&nbsp;
+                                                            <input type="text" class="nameInput" placeholder="Last" [(ngModel)]="referenceData.fieldData[option.display][authorIndex].last">
+                                                            <br>
+                                                        </div>
+                                                    </ng-container>
+                                                </ng-container>
+                                                <ng-container *ngSwitchCase="'dateY'">
+                                                    <input type="text" class="shortTextInput" placeholder="YYYY" [(ngModel)]="referenceData.fieldData[option.display]">
+                                                </ng-container>
+                                                <ng-container *ngSwitchCase="'text'">
+                                                    <input type="text" class="textInput" [placeholder]="option.placeholder" [(ngModel)]="referenceData.fieldData[option.display]">
+                                                </ng-container>
+                                                <ng-container *ngSwitchCase="'date'">
+                                                    <input type="text" class="textInput" [placeholder]="option.placeholder" [(ngModel)]="referenceData.fieldData[option.display]">
+                                                </ng-container>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
                     </table>
-                    <ng-container *ngIf="index % 3 == 2">
-                        <br>
-                    </ng-container>
-                </ng-container>
-
+                </div>
                 <hr>
             </div>
             <div *ngIf="!isNewRef" class="paddedBox">

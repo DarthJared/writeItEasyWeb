@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ReferenceTypesService } from './services/reference-types.service';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,8 @@ export class AppComponent {
   paperContent = {};
   dialogAdderOpen = false;
   isApa: boolean = true;
+
+  constructor(private refTypeService: ReferenceTypesService) {}
   
   updateConfig(configObj) {
     this.configOptions = configObj;
@@ -31,9 +34,9 @@ export class AppComponent {
   }
 
   addReference(refData) {
-    // TODO: Actually store the reference based off of refData
     console.log(refData);
     this.dialogAdderOpen = false;
+    let newRefFormats = this.refTypeService.getReferenceFormats(refData, this.isApa);
   }
 
   openReferenceDialog(openMsg) {
